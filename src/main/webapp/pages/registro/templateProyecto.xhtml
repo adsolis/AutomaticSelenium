@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:j="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+            		<h:panelGrid columns="4" width="100%"> 
+            			<h:outputLabel value="Nombre Proyecto: *" for="nombre"/>
+            			<p:inputText id="nombre" value="#{proyectoBean.proyectoDTO.nombre}" required="true" />
+            			
+            			<h:outputLabel value="Fecha Creacion *" for="primerApellido"/>
+            			<p:inputText id="primerApellido" value="#{proyectoBean.proyectoDTO.fechaCreacion}" required="true"/>
+            			
+            			<h:outputLabel value="Estimacion"
+							for="estimacionProyecto" />
+						<p:inputText id="estimacionProyecto"
+							value="#{proyectoBean.proyectoDTO.fechaCreacion}" required="true" />
+
+						<h:outputLabel value="Estrategia" for="estrategiaProyecto" />
+						<p:inputTextarea id="estrategiaProyecto"
+							value="#{proyectoBean.proyectoDTO.fechaCreacion}" required="true" />
+
+            		</h:panelGrid>
+            		
+            		<p:separator></p:separator>
+            		
+            		<p:dataTable>
+						<p:column headerText="ID Caso">
+							<h:outputText value="1" />
+						</p:column>
+						<p:column headerText="Nombre de caso">
+							<h:outputText value="prueba" />
+						</p:column>
+
+					</p:dataTable>
+            		<p:separator/>
+</h:body>
+</html>

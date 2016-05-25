@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Automatizacion de Pruebas</title>
+    	<h:outputStylesheet library="bootstrap" name="css/bootstrap.css"  />
+    	<h:outputStylesheet library="bootstrap" name="css/bootstrap-theme.css"  />
+        <h:outputStylesheet library="css" name="style.css"  />
+
+        <link rel="shortcut icon"  type="image/x-icon" href="#{resource['images:favicon.png']}"/>
+        <script type="text/javascript">
+            PrimeFaces.locales['es'] = {
+                    closeText: 'Cerrar',
+                    prevText: 'Anterior',
+                    nextText: 'Siguiente',
+                    monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                    monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                    dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                    dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                    dayNamesMin: ['D','L','M','M','J','V','S'],
+                    weekHeader: 'Semana',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: '',
+                    timeText: 'Tiempo',
+                    hourText: 'Hora',
+                    minuteText: 'Minuto',
+                    secondText: 'Segundo',
+                    currentText: 'Fecha actual',
+                    ampm: false,
+                    month: 'Mes',
+                    week: 'Semana',
+                    day: 'Día',
+                    allDayText : 'Todo el día'
+                };
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                $(document).keypress(function(e){
+                    if(e == 13){
+                        return false;
+                    }
+                });
+
+                $(document).keypress(function(e){
+                    if(e.which == 13){
+                        return false;
+                    }
+                });
+
+            });
+        </script>
+
+    </h:head>
+ 
+    <h:body>
+        <!-- Scripts que deben ser parseados despues de los de Primefaces -->
+        <h:outputScript library="bootstrap" name="js/bootstrap.js" target="head"/>
+
+        <div id="page">
+            <div id="header">
+	                <ui:insert name="header" >
+	                    <ui:include src="/templates/header.xhtml" />	                    
+	                </ui:insert>
+            </div>
+ 
+            <div id="container">
+                        <div id="menu">
+                            <ui:insert name="menu">
+                                <ui:include src="/templates/menu.xhtml"></ui:include>
+                            </ui:insert>
+                        </div>
+                <div id="content">
+	                <ui:insert name="content" >
+	                    <ui:include src="/templates/content.xhtml" />
+	                </ui:insert>
+                </div>
+            </div>
+        </div>
+        <div id="footer">
+            <ui:insert name="footer" >
+                <ui:include src="/templates/footer.xhtml" />
+            </ui:insert>
+        </div>
+    </h:body>
+</html>
