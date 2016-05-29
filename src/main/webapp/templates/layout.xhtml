@@ -8,9 +8,13 @@
     xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Automatizacion de Pruebas</title>
-    	<h:outputStylesheet library="bootstrap" name="css/bootstrap.css"  />
-    	<h:outputStylesheet library="bootstrap" name="css/bootstrap-theme.css"  />
-        <h:outputStylesheet library="css" name="style.css"  />
+    	<f:facet name="middle">
+            <h:outputStylesheet name="bootstrap/css/bootstrap.css" />
+            <h:outputStylesheet library="css" name="style.css"  />
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" />
+            
+            <h:outputScript name="bootstrap/js/bootstrap.js" />
+        </f:facet>
 
         <link rel="shortcut icon"  type="image/x-icon" href="#{resource['images:favicon.png']}"/>
         <script type="text/javascript">

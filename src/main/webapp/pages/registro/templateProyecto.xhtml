@@ -8,35 +8,65 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
-            		<h:panelGrid columns="4" width="100%"> 
-            			<h:outputLabel value="Nombre Proyecto: *" for="nombre"/>
-            			<p:inputText id="nombre" value="#{proyectoBean.proyectoDTO.nombre}" required="true" />
-            			
-            			<h:outputLabel value="Fecha Creacion *" for="primerApellido"/>
-            			<p:inputText id="primerApellido" value="#{proyectoBean.proyectoDTO.fechaCreacion}" required="true"/>
-            			
-            			<h:outputLabel value="Estimacion"
-							for="estimacionProyecto" />
-						<p:inputText id="estimacionProyecto"
-							value="#{proyectoBean.proyectoDTO.fechaCreacion}" required="true" />
+<script type="text/javascript" >
+    function showModal() {
+        $('#myModal').modal('show');
+    }
+</script>
+	<h:panelGrid columns="4" width="100%">
+		<h:outputLabel value="Nombre Proyecto: *" for="nombre" />
+		<p:inputText id="nombre" value="#{proyectoBean.proyectoDTO.nombre}"
+			required="true" />
 
-						<h:outputLabel value="Estrategia" for="estrategiaProyecto" />
-						<p:inputTextarea id="estrategiaProyecto"
-							value="#{proyectoBean.proyectoDTO.fechaCreacion}" required="true" />
+		<h:outputLabel value="Fecha Creacion *" for="primerApellido" />
+		<p:inputText id="primerApellido"
+			value="prueba" required="true" />
 
-            		</h:panelGrid>
-            		
-            		<p:separator></p:separator>
-            		
-            		<p:dataTable>
-						<p:column headerText="ID Caso">
-							<h:outputText value="1" />
-						</p:column>
-						<p:column headerText="Nombre de caso">
-							<h:outputText value="prueba" />
-						</p:column>
+		<h:outputLabel value="Estimacion" for="estimacionProyecto" />
+		<p:inputText id="estimacionProyecto"
+			value="prueba" required="true" />
 
-					</p:dataTable>
-            		<p:separator/>
+		<h:outputLabel value="Estrategia" for="estrategiaProyecto" />
+		<p:inputTextarea id="estrategiaProyecto"
+			value="prueba" required="true" />
+
+	</h:panelGrid>
+
+	<p:separator></p:separator>
+
+	<p:dataTable>
+		<p:column headerText="ID Caso">
+			<h:outputText value="1" />
+		</p:column>
+		<p:column headerText="Nombre de caso">
+			<h:outputText value="prueba" />
+		</p:column>
+
+	</p:dataTable>
+	<p:separator />
+	
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Agregar caso de prueba
+</button>    
+    
+    <!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <ui:include src="/pages/casos_prueba/templateCasoPrueba.xhtml"></ui:include>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </h:body>
 </html>
