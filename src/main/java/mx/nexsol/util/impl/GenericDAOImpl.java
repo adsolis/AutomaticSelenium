@@ -15,6 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import mx.nexsol.util.GenericDAO;
 
+/**
+ * Clase generica de la capa de persistencia que contiene los metodos de CRUD
+ * @author Alejandro Diaz Solis
+ *
+ * @param <T>
+ */
 public class GenericDAOImpl<T> implements GenericDAO<T> {
 	
 	private Class<T> persistentClass;
