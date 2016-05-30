@@ -10,34 +10,25 @@
 <h:body>
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="content">
-			<h2>Lista de Personas</h2>
-			<p:dataTable value="#{personaBean.listaPersonas}" 
-						 rows="5"
-						 style="text-align:center;"
-						 var="persona" 
-						 paginator="true"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
+			<h2>Proyectos</h2>
+			<a href="http://localhost:8080/AutomaticSelenium/pages/registro/registro.xhtml">Nuevo</a>
+			<p:dataTable value="" rows="5" style="text-align:center;"
+				var="proyecto" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
                          					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="5,10,15">
-				<p:column headerText="Nombre">
-					<h:outputText value="#{persona.nombre}" />
+				rowsPerPageTemplate="5,10,15">
+				<p:column headerText="Nombre Proyecto">
+
 				</p:column>
 
-				<p:column headerText="Primer Apellido">
-					<h:outputText value="#{persona.primerApellido}" />
+				<p:column headerText="Fecha de creaci&oacute;n">
+
 				</p:column>
 
-				<p:column headerText="Segundo Apellido">
-					<h:outputText value="#{persona.segundoApellido}" />
+				<p:column headerText="Estatus">
+
 				</p:column>
 
-				<p:column headerText="Pais">
-					<h:outputText value="#{persona.direccion.pais}" />
-				</p:column>
-				
-				<p:column headerText="Estado">
-					<h:outputText value="#{persona.direccion.estado}" />
-				</p:column>
 			</p:dataTable>
 		</ui:define>
 	</ui:composition>

@@ -1,19 +1,16 @@
 package mx.nexsol.bean.proyectos;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import mx.nexsol.dto.proyecto.PasoCasoPruebaDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
@@ -38,16 +35,41 @@ public class ProyectoBean implements Serializable {
 		proyectoDTO.setId(1);
 		proyectoDTO.setNombre("Proyecto de Prueba");
 		proyectoDTO.setFechaCreacion(new Date());
+		/**try {
+			System.out.println("va a intentar ejecutar el jar");
+			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");
+			System.out.println("se supone que ya");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 	
-	public List<PasoCasoPruebaDTO> generarListaPasos(String descripcion, String resultadoEsperado) {
-		List<PasoCasoPruebaDTO> temporal = null;
+	public List<PasoCasoPruebaDTO> generarListaPasos(HttpServletRequest request, String descripcion, String resultadoEsperado) {
+		PasoCasoPruebaDTO paso = new PasoCasoPruebaDTO();
+		HttpSession session = request.getSession();
+		pasosCaso = (List<PasoCasoPruebaDTO>) session.getAttribute("listaPasos");
 		if(pasosCaso!=null)
 			pasosCaso = new ArrayList<PasoCasoPruebaDTO>();
+		paso.setNumeroDePaso(pasosCaso.size()+1);
+		paso.setDescripcionPaso(descripcion);
+		paso.setResultadoEsperado(resultadoEsperado);
+		pasosCaso.add(paso);
+		session.setAttribute("listaPasos", pasosCaso);
 		
+		return pasosCaso;
+	}
+	
+	public List<PasoCasoPruebaDTO> quitarPaso(HttpServletRequest request, int numeroPaso) {
+		HttpSession session = request.getSession();
+		pasosCaso = (List<PasoCasoPruebaDTO>) session.getAttribute("listaPasos");
+		pasosCaso.remove(numeroPaso);
 		
+		for(PasoCasoPruebaDTO paso: pasosCaso) {
+			paso.setNumeroDePaso(paso.getNumeroDePaso()-1);
+		}
 		
-		return null;
+		return pasosCaso;
 	}
 
 	public ProyectoDTO getProyectoDTO() {
