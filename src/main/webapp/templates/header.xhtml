@@ -10,7 +10,11 @@
     <div id="top-nav">
         <div id="top-menu">
             <div class="logout">
-                
+                <ui:fragment rendered="#{loginBean.usuarioLogueado != 'anonymousUser'}">
+                    <h:form>
+                        <p:commandLink id="logout" action="#{loginBean.logout}" value="Cerrar Sesión"></p:commandLink>
+                    </h:form>
+                </ui:fragment>
             </div>
         </div>
     </div>

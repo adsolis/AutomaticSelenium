@@ -19,5 +19,6 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
     </bean>
+    <import resource="applicationContext-security.xml"/>
     <import resource="daoContext.xml"/>
 </beans> 
