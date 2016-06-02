@@ -6,15 +6,14 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import mx.nexsol.entity.comun.SequenceGenerator;
+
 @Entity
 @Table(name = "PROYECTO")
-public class Proyecto implements Serializable {
+public class Proyecto extends SequenceGenerator implements Serializable {
 	
 	/**
 	 * PROPIEDAD PARA MANTENER EL ESTADO DEL OBJETO1
@@ -25,9 +24,6 @@ public class Proyecto implements Serializable {
 		
 	}
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
 	
 	@Column(name = "NOMBRE", nullable = false)
 	private String nombre;
@@ -45,15 +41,6 @@ public class Proyecto implements Serializable {
 	@JoinColumn(name = "CASOS_PRUEBA")
 	private List<CasoPrueba> casosPrueba;
 	
-	
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getNombre() {
 		return nombre;
