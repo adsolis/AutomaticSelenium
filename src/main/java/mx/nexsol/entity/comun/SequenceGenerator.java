@@ -40,7 +40,7 @@ public abstract class SequenceGenerator {
     @JoinColumn(name = "USUARIO_BORRA", nullable = true)
     private Usuario usuarioBorra;*/
 
-    @Column(name="VERSION", nullable = false)
+    @Column(name="VERSION", nullable = true)
     private Long version;
 
     public SequenceGenerator(){}

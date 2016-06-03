@@ -20,32 +20,40 @@ public class ProyectoServiceImpl implements ProyectoService {
 	//TODO revisar viabilidad de manejar mapeo o enviar el objeto entity directamente hasta la vista para no afectar el performance
 	@Override
 	public List<ProyectoDTO> consultarListaProyectos() {
-		List<ProyectoDTO> proyectosDTO = null;
+		List<Proyecto> proyectosEntity = null;
+		List<ProyectoDTO> proyectos = null;
 		try {
-			List<Proyecto> proyectosEntity = proyectoDAO.listarRegistros();
-			if(proyectosEntity!=null && !proyectosEntity.isEmpty()) {
-				proyectosDTO = new ArrayList<ProyectoDTO>();
+			proyectosEntity = proyectoDAO.listarRegistros();
+			
+			if(proyectosEntity != null && !proyectosEntity.isEmpty()) {
+				proyectos = new ArrayList<ProyectoDTO>();
 				for(Proyecto proyecto: proyectosEntity) {
-					proyectosDTO.add(mapearProyectoENtityADto(proyecto));
+					proyectos.add(mapearProyectoENtityADto(proyecto));
 				}
+				proyectosEntity = null;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		
-		return proyectosDTO;
+		return proyectos;
 	}
 
 	@Override
-	public ProyectoDTO guardarProyecto(ProyectoDTO proyecto) {
-		// TODO Auto-generated method stub
-		return null;
+	public ProyectoDTO guardarProyecto(ProyectoDTO proyectoDTO) {
+		Proyecto proyecto = null;
+		try {
+			proyecto = mapearDTOaEntity(proyectoDTO);
+			proyecto = proyectoDAO.guardarRegistro(proyecto);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return proyectoDTO;
 	}
 
 	@Override
-	public ProyectoDTO editarProyecto(ProyectoDTO proyecto) {
+	public ProyectoDTO editarProyecto(ProyectoDTO proyectoDTO) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -63,6 +71,14 @@ public class ProyectoServiceImpl implements ProyectoService {
 		proyectoDTO.setNombre(proyecto.getNombre());
 		
 		return proyectoDTO;
+	}
+	
+	private Proyecto mapearDTOaEntity(ProyectoDTO proyectoDTO) {
+		Proyecto proyecto = new Proyecto();
+		proyecto.setNombre(proyecto.getNombre());
+		proyecto.setDetalle(proyecto.getDetalle());
+		proyecto.setFechaCreacion(proyectoDTO.getFechaCreacion());
+		return proyecto;
 	}
 
 	public ProyectoDAO getProyectoDAO() {

@@ -3,7 +3,13 @@ package mx.nexsol.dto.proyecto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Scope;
+import org.springframework.beans.factory.config.BeanDefinition;
 
+
+@Component
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 public class ProyectoDTO implements Serializable {
 	
 	/**
@@ -18,6 +24,8 @@ public class ProyectoDTO implements Serializable {
 	private Date fechaCreacion;
 	
 	private List<CasoPruebaDTO> casosPrueba;
+	
+	private String estrategia;
 
 	public long getId() {
 		return id;
@@ -49,6 +57,14 @@ public class ProyectoDTO implements Serializable {
 
 	public void setCasosPrueba(List<CasoPruebaDTO> casosPrueba) {
 		this.casosPrueba = casosPrueba;
+	}
+
+	public String getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
 	}
 	
 	

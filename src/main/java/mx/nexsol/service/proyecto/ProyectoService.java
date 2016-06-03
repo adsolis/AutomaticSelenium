@@ -1,6 +1,7 @@
 package mx.nexsol.service.proyecto;
 
 import java.util.List;
+
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 
 public interface ProyectoService {

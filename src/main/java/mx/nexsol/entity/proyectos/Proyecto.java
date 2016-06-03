@@ -38,7 +38,7 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	private String detalle;
 	
 	@OneToMany
-	@JoinColumn(name = "CASOS_PRUEBA")
+	@JoinColumn(name = "CASOS_PRUEBA", nullable = true)
 	private List<CasoPrueba> casosPrueba;
 	
 

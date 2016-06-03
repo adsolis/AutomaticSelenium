@@ -8,15 +8,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import mx.nexsol.dto.proyecto.PasoCasoPruebaDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
+import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
 
-@ViewScoped
+@Controller
 @ManagedBean(name = "proyectoBean")
+@Scope(value = "request")
 public class ProyectoBean implements Serializable {
 	
 	/**
@@ -24,17 +27,25 @@ public class ProyectoBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -2630444134154506428L;
 	
+	@Autowired
 	@ManagedProperty(value="#{proyectoDTO}")
 	private ProyectoDTO proyectoDTO;
 	
 	@ManagedProperty(value="#{pasosCaso}")
 	private List<PasoCasoPruebaDTO> pasosCaso;
 	
+	@ManagedProperty(value = "#{desabilitar}")
+	private String desabilitar;
+	
+	@Autowired
+	private ProyectoServiceImpl proyectoService;
+	
 	@PostConstruct
 	public void init() {
-		proyectoDTO.setId(1);
+		proyectoDTO.setId(1L);
 		proyectoDTO.setNombre("Proyecto de Prueba");
 		proyectoDTO.setFechaCreacion(new Date());
+		desabilitar = "";
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
 			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");
@@ -43,6 +54,14 @@ public class ProyectoBean implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
+	}
+	
+	public void guardarProyecto() throws Exception {
+		try {
+			proyectoDTO = proyectoService.guardarProyecto(proyectoDTO);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<PasoCasoPruebaDTO> generarListaPasos(HttpServletRequest request, String descripcion, String resultadoEsperado) {
@@ -86,6 +105,22 @@ public class ProyectoBean implements Serializable {
 
 	public void setPasosCaso(List<PasoCasoPruebaDTO> pasosCaso) {
 		this.pasosCaso = pasosCaso;
+	}
+
+	public ProyectoServiceImpl getProyectoService() {
+		return proyectoService;
+	}
+
+	public void setProyectoService(ProyectoServiceImpl proyectoService) {
+		this.proyectoService = proyectoService;
+	}
+
+	public String getDesabilitar() {
+		return desabilitar;
+	}
+
+	public void setDesabilitar(String desabilitar) {
+		this.desabilitar = desabilitar;
 	}
 	
 	
