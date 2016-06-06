@@ -1,4 +1,4 @@
-package mx.nexsol.util;
+package mx.nexsol.dao.comun;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package mx.nexsol.util.impl;
+package mx.nexsol.dao.comun.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
-import mx.nexsol.util.GenericDAO;
+import mx.nexsol.dao.comun.GenericDAO;
 
 /**
  * Clase generica de la capa de persistencia que contiene los metodos de CRUD

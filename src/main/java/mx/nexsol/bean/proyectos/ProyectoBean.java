@@ -1,6 +1,5 @@
 package mx.nexsol.bean.proyectos;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +15,11 @@ import org.springframework.stereotype.Controller;
 import mx.nexsol.dto.proyecto.PasoCasoPruebaDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
+import mx.nexsol.util.ConstantesComunes;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage;
+import org.primefaces.context.RequestContext;
 
 @Controller
 @ManagedBean(name = "proyectoBean")
@@ -34,18 +38,11 @@ public class ProyectoBean implements Serializable {
 	@ManagedProperty(value="#{pasosCaso}")
 	private List<PasoCasoPruebaDTO> pasosCaso;
 	
-	@ManagedProperty(value = "#{desabilitar}")
-	private String desabilitar;
-	
 	@Autowired
 	private ProyectoServiceImpl proyectoService;
 	
 	@PostConstruct
 	public void init() {
-		proyectoDTO.setId(1L);
-		proyectoDTO.setNombre("Proyecto de Prueba");
-		proyectoDTO.setFechaCreacion(new Date());
-		desabilitar = "";
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
 			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");
@@ -59,6 +56,25 @@ public class ProyectoBean implements Serializable {
 	public void guardarProyecto() throws Exception {
 		try {
 			proyectoDTO = proyectoService.guardarProyecto(proyectoDTO);
+			if(proyectoDTO.getResultado()==ConstantesComunes.EXITO) {
+				FacesContext context = FacesContext.getCurrentInstance();
+	            context.getExternalContext().getFlash().setKeepMessages(true);
+
+	            FacesContext.getCurrentInstance().addMessage
+	                    (null, new FacesMessage
+	                            (FacesMessage.SEVERITY_INFO,"Exito", "Se ha guardado el proyecto"));
+
+	            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+	            externalContext.redirect(externalContext.getRequestContextPath()
+	                    .concat(ConstantesComunes.DETALLE_PROYECTO));
+			}
+			else {
+				FacesContext.getCurrentInstance().addMessage
+                (null, new FacesMessage
+                        (FacesMessage.SEVERITY_ERROR,"Error", "Ocurrio un problema al generar el acta de nacimiento"));
+        RequestContext.getCurrentInstance().execute("errorDialog.show()");
+			}
+			
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -114,15 +130,5 @@ public class ProyectoBean implements Serializable {
 	public void setProyectoService(ProyectoServiceImpl proyectoService) {
 		this.proyectoService = proyectoService;
 	}
-
-	public String getDesabilitar() {
-		return desabilitar;
-	}
-
-	public void setDesabilitar(String desabilitar) {
-		this.desabilitar = desabilitar;
-	}
-	
-	
 
 }

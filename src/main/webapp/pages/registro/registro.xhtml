@@ -15,16 +15,7 @@
 			<h2>Proyecto:</h2>
             <h:form>
             	<p:messages autoUpdate="true" closable="true" showDetail="false"/>
-            	<p:panel header="Registro de Proyecto" style="width: 100%;">
-            	<p:tabView>
-            	<p:tab title="Proyecto">
-            	<ui:include src="/pages/registro/templateProyecto.xhtml"></ui:include>
-            	</p:tab>
-            	<p:tab title="Planificador de tareas">
-            	<ui:include src="/pages/planificador_tareas/planificador.xhtml"/>
-            	</p:tab>
-            	</p:tabView>
-            	</p:panel>
+            	<ui:include src="/pages/registro/templateProyecto.xhtml"/>
             </h:form>
 		</ui:define>
 	</ui:composition>

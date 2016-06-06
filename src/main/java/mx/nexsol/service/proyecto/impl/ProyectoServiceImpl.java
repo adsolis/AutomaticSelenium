@@ -10,6 +10,7 @@ import mx.nexsol.dao.proyecto.ProyectoDAO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.ProyectoService;
+import mx.nexsol.util.ConstantesComunes;
 
 @Service
 public class ProyectoServiceImpl implements ProyectoService {
@@ -28,15 +29,13 @@ public class ProyectoServiceImpl implements ProyectoService {
 			if(proyectosEntity != null && !proyectosEntity.isEmpty()) {
 				proyectos = new ArrayList<ProyectoDTO>();
 				for(Proyecto proyecto: proyectosEntity) {
-					proyectos.add(mapearProyectoENtityADto(proyecto));
+					proyectos.add(mapearProyectoEntityADto(proyecto));
 				}
 				proyectosEntity = null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return proyectos;
 	}
 
@@ -46,8 +45,11 @@ public class ProyectoServiceImpl implements ProyectoService {
 		try {
 			proyecto = mapearDTOaEntity(proyectoDTO);
 			proyecto = proyectoDAO.guardarRegistro(proyecto);
+			proyectoDTO = mapearProyectoEntityADto(proyecto);
+			proyectoDTO.setResultado(ConstantesComunes.EXITO);
 		}catch(Exception e) {
 			e.printStackTrace();
+			proyectoDTO.setResultado(ConstantesComunes.ERROR_GUARDADO);
 		}
 		return proyectoDTO;
 	}
@@ -64,7 +66,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 		return 0;
 	}
 	
-	private ProyectoDTO mapearProyectoENtityADto(Proyecto proyecto) {
+	private ProyectoDTO mapearProyectoEntityADto(Proyecto proyecto) {
 		ProyectoDTO proyectoDTO = new ProyectoDTO();
 		
 		proyectoDTO.setId(proyecto.getId());
@@ -75,8 +77,8 @@ public class ProyectoServiceImpl implements ProyectoService {
 	
 	private Proyecto mapearDTOaEntity(ProyectoDTO proyectoDTO) {
 		Proyecto proyecto = new Proyecto();
-		proyecto.setNombre(proyecto.getNombre());
-		proyecto.setDetalle(proyecto.getDetalle());
+		proyecto.setNombre(proyectoDTO.getNombre());
+		proyecto.setEstrategia(proyectoDTO.getEstrategia());
 		proyecto.setFechaCreacion(proyectoDTO.getFechaCreacion());
 		return proyecto;
 	}

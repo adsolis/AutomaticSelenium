@@ -37,6 +37,10 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	@Column(name = "DETALLE", nullable = true)
 	private String detalle;
 	
+	@Column(name = "ESTRATEGIA")
+	private String estrategia;
+	
+	
 	@OneToMany
 	@JoinColumn(name = "CASOS_PRUEBA", nullable = true)
 	private List<CasoPrueba> casosPrueba;
@@ -80,6 +84,14 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 
 	public void setCasosPrueba(List<CasoPrueba> casosPrueba) {
 		this.casosPrueba = casosPrueba;
+	}
+
+	public String getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
 	}
 
 }

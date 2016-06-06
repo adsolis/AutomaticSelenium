@@ -26,6 +26,8 @@ public class ProyectoDTO implements Serializable {
 	private List<CasoPruebaDTO> casosPrueba;
 	
 	private String estrategia;
+	
+	private int resultado;
 
 	public long getId() {
 		return id;
@@ -65,6 +67,14 @@ public class ProyectoDTO implements Serializable {
 
 	public void setEstrategia(String estrategia) {
 		this.estrategia = estrategia;
+	}
+
+	public int getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(int resultado) {
+		this.resultado = resultado;
 	}
 	
 	
