@@ -44,6 +44,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 		Proyecto proyecto = null;
 		try {
 			proyecto = mapearDTOaEntity(proyectoDTO);
+			proyecto.setEstatus(ConstantesComunes.CODIGO_ESTATUS_PROYECTO_PENDIENTE);
 			proyecto = proyectoDAO.guardarRegistro(proyecto);
 			proyectoDTO = mapearProyectoEntityADto(proyecto);
 			proyectoDTO.setResultado(ConstantesComunes.EXITO);
@@ -71,6 +72,14 @@ public class ProyectoServiceImpl implements ProyectoService {
 		
 		proyectoDTO.setId(proyecto.getId());
 		proyectoDTO.setNombre(proyecto.getNombre());
+		proyectoDTO.setFechaCreacion(proyecto.getFechaCreacion());
+		
+		if(proyecto.getEstatus()==ConstantesComunes.CODIGO_ESTATUS_PROYECTO_PENDIENTE)
+			proyectoDTO.setEstatus(ConstantesComunes.ESTATUS_PROYECTO_PENDIENTE);
+		else if(proyecto.getEstatus()==ConstantesComunes.CODIGO_ESTATUS_PROYECTO_EN_CURSO)
+			proyectoDTO.setEstatus(ConstantesComunes.ESTATUS_PROYECTO_EN_CURSO);
+		else if(proyecto.getEstatus()==ConstantesComunes.CODIGO_ESTATUS_PROYECTO_FINALIZADO)
+			proyectoDTO.setEstatus(ConstantesComunes.ESTATUS_PROYECTO_FINALIZADO);
 		
 		return proyectoDTO;
 	}

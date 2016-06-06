@@ -19,7 +19,7 @@
         <!-- Imprime en salida estandar las sentencias SQL efectuadas por Hibernate -->
         <property name="show_sql">true</property>
 
-        <property name="hbm2ddl.auto">create-drop</property>
+        <property name="hbm2ddl.auto">update</property>
 
         <!-- Mapeos de Entitys -->
         <mapping class="mx.nexsol.entity.proyectos.Proyecto"/>

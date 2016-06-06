@@ -32,6 +32,7 @@ public class ProyectosBean implements Serializable{
 	@PostConstruct
 	public void init() {
 		proyectos = proyectoService.consultarListaProyectos();
+		//System.out.println("proyectos: " + proyectos.size());
 	}
 
 	public List<ProyectoDTO> getProyectos() {

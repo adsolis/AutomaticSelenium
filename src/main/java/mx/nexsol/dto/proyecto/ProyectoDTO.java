@@ -28,6 +28,8 @@ public class ProyectoDTO implements Serializable {
 	private String estrategia;
 	
 	private int resultado;
+	
+	private String estatus;
 
 	public long getId() {
 		return id;
@@ -75,6 +77,14 @@ public class ProyectoDTO implements Serializable {
 
 	public void setResultado(int resultado) {
 		this.resultado = resultado;
+	}
+
+	public String getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
 	}
 	
 	
