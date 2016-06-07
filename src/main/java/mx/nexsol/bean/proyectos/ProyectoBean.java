@@ -43,7 +43,7 @@ public class ProyectoBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		
+		proyectoDTO.setNombre("este es un nombre de prueba");
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		Long idProyecto = Long.getLong(request.getParameter("id"));
 		if(idProyecto!=null) {
