@@ -43,6 +43,13 @@ public class ProyectoBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
+		
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		Long idProyecto = Long.getLong(request.getParameter("id"));
+		if(idProyecto!=null) {
+			proyectoDTO = proyectoService.consultarProyecto(idProyecto);
+		}
+		
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
 			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");

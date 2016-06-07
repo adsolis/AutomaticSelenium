@@ -26,6 +26,9 @@ public class ProyectosBean implements Serializable{
 	
 	@Autowired
 	private ProyectoServiceImpl proyectoService;
+	
+	@ManagedProperty(value="#{contexto}")
+	private String contexto;
 
 	@PostConstruct
 	public void init() {
@@ -39,6 +42,14 @@ public class ProyectosBean implements Serializable{
 
 	public void setProyectos(List<ProyectoDTO> proyectos) {
 		this.proyectos = proyectos;
+	}
+
+	public ProyectoServiceImpl getProyectoService() {
+		return proyectoService;
+	}
+
+	public void setProyectoService(ProyectoServiceImpl proyectoService) {
+		this.proyectoService = proyectoService;
 	}
 
 }

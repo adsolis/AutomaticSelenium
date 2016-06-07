@@ -15,21 +15,19 @@
 			<h2>Proyecto:</h2>
 			<h:form>
 				<p:messages autoUpdate="true" closable="true" showDetail="false" />
-				<h:panelGrid columns="4" width="100%">
-				
-				<h:inputHidden id="idProyecto" value="#{proyectoBean.proyectoDTO.id}"/>
+				<h:panelGrid columns="2" width="100%">
 
-					<h:outputLabel value="Nombre Proyecto: *" for="nombre" />
+					<h:outputLabel value="Nombre Proyecto:" for="nombre" />
 					<h:outputLabel value="#{proyectoBean.proyectoDTO.nombre}"/>	
 
-					<h:outputLabel value="Fecha Creacion *" for="fechaCreacionProyecto" />
+					<h:outputLabel value="Fecha Creacion:" for="fechaCreacionProyecto" />
 					<p:calendar id="fechaCreacionProyecto" readonlyInput="true"
 						label="Fecha Nacimiento" required="true" navigator="true"
 						pattern="dd/MM/yyyy" yearRange="1900:c"
 						value="#{proyectoBean.proyectoDTO.fechaCreacion}" />
 					<p:message for="fechaCreacionProyecto" />
 
-					<h:outputLabel value="Estrategia" for="estrategiaProyecto" />
+					<h:outputLabel value="Estrategia:" for="estrategiaProyecto" />
 					<p:inputTextarea id="estrategiaProyecto"
 						value="#{proyectoBean.proyectoDTO.estrategia}" required="true" disabled="disabled"/>
 
@@ -45,7 +43,6 @@
 
 				</h:panelGrid>
 
-				<j:if test="#{proyecto.id != null}">
 					<p:separator></p:separator>
 
 					<h5>Funcionalidad</h5>
@@ -107,9 +104,6 @@
 							</div>
 						</div>
 					</div>
-				</j:if>
-
-
 
 			</h:form>
 		</ui:define>
