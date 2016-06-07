@@ -54,6 +54,20 @@ public class ProyectoServiceImpl implements ProyectoService {
 		}
 		return proyectoDTO;
 	}
+	
+	@Override
+	public ProyectoDTO consultarProyecto(long id) {
+		ProyectoDTO proyecto = null;
+		try {
+			proyecto = mapearProyectoEntityADto(proyectoDAO.recuperarRegistro(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+			proyecto = new ProyectoDTO();
+			proyecto.setResultado(ConstantesComunes.ERROR_GUARDADO);
+		}
+		return proyecto;
+	}
+	
 
 	@Override
 	public ProyectoDTO editarProyecto(ProyectoDTO proyectoDTO) {
@@ -99,7 +113,6 @@ public class ProyectoServiceImpl implements ProyectoService {
 	public void setProyectoDAO(ProyectoDAO proyectoDAO) {
 		this.proyectoDAO = proyectoDAO;
 	}
-	
 	
 
 }

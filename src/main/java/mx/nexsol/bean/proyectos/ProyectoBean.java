@@ -1,8 +1,8 @@
 package mx.nexsol.bean.proyectos;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -76,6 +76,17 @@ public class ProyectoBean implements Serializable {
 			}
 			
 		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void consultarProyecto(ProyectoDTO proyecto) {
+		proyectoDTO = proyecto;
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        try {
+        	externalContext.redirect(externalContext.getRequestContextPath()
+                    .concat(ConstantesComunes.DETALLE_PROYECTO));
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

@@ -57,6 +57,23 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         return entity;
 	}
+	
+	@Override
+	public T recuperarRegistro(long id) throws Exception {
+		T entity = null;
+		Session session = getSession();
+		session.get(persistentClass, id);
+		session.refresh(entity);
+		try {
+			session.getTransaction().begin();
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            throw e;
+		}
+		return entity;
+	}
 
 	@Override
 	@Transactional
@@ -118,4 +135,5 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	public void setPersistentClass(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
 	}
+
 }

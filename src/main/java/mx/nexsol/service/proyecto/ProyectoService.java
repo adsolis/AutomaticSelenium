@@ -14,5 +14,7 @@ public interface ProyectoService {
 	
 	int eliminarProyectoDTO(long idProyecto);
 	
+	ProyectoDTO consultarProyecto(long id);
+	
 
 }

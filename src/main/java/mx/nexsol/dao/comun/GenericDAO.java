@@ -7,4 +7,5 @@ public interface GenericDAO<T> {
     T editarRegistro(T entity) throws Exception;
     T borrarRegistro(T entity) throws Exception;    
     List <T> listarRegistros() throws  Exception;
+    T recuperarRegistro (long id) throws Exception;
 }

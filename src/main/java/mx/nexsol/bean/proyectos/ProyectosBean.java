@@ -2,12 +2,10 @@ package mx.nexsol.bean.proyectos;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;

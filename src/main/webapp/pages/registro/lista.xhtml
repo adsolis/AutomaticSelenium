@@ -12,21 +12,22 @@
 		<ui:define name="content">
 			<h2>Proyectos</h2>
 			<a href="http://localhost:8080/AutomaticSelenium/pages/registro/registro.xhtml">Nuevo</a>
-			<p:dataTable value="#{proyectosBean.proyectos}" rows="5" style="text-align:center;"
-				var="proyecto" paginator="true"
+			<p:dataTable value="#{proyectosBean.proyectos}" rows="5"
+				style="text-align:center;" var="proyecto" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
                          					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
 				<p:column headerText="Nombre Proyecto">
-				<p:outputLabel value="#{proyecto.nombre}"/>
+					<p:commandLink value="#{proyecto.nombre}"
+                                                       actionListener="#{proyectoBean.consultarProyecto(proyecto)}"/>
 				</p:column>
 
 				<p:column headerText="Fecha de creaci&oacute;n">
-				<p:outputLabel value="#{proyecto.fechaCreacion}"/>
+					<p:outputLabel value="#{proyecto.fechaCreacion}" />
 				</p:column>
 
 				<p:column headerText="Estatus">
-				<p:outputLabel value="#{proyecto.estatus}"/>
+					<p:outputLabel value="#{proyecto.estatus}" />
 				</p:column>
 
 			</p:dataTable>
