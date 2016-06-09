@@ -11,17 +11,15 @@
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="content">
 			<h2>Proyectos</h2>
-			<a
-				href="http://localhost:8080/AutomaticSelenium/pages/registro/registro.xhtml">Nuevo</a>
+			<h:link value="Nuevo" outcome="/pages/registro/registro.xhtml" />
 			<p:dataTable value="#{proyectosBean.proyectos}" rows="5"
 				style="text-align:center;" var="proyecto" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
                          					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
 				<p:column headerText="Nombre Proyecto">
-					<h:link value="#{proyecto.nombre}" outcome="/pages/registro/detalle_proyecto">
-						<f:param name="id" value="#{proyecto.id}" />
-					</h:link>
+					<p:commandLink value="#{proyecto.nombre}"
+                                   actionListener="#{proyectoBean.consultarProyecto(proyecto)}"/>
 				</p:column>
 
 				<p:column headerText="Fecha de creaci&oacute;n">

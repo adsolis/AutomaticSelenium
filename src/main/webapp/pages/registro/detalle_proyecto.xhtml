@@ -18,7 +18,7 @@
 				<h:panelGrid columns="2" width="100%">
 
 					<h:outputLabel value="Nombre Proyecto:" for="nombre" />
-					<h:outputLabel value="#{proyectoBean.proyectoDTO.nombre}"/>	
+					<h:outputLabel id="nombre" value="#{proyectoBean.proyectoDTO.nombre}"/>	
 
 					<h:outputLabel value="Fecha Creacion:" for="fechaCreacionProyecto" />
 					<p:calendar id="fechaCreacionProyecto" readonlyInput="true"
@@ -42,6 +42,11 @@
 
 
 				</h:panelGrid>
+				
+				<h:link value="Editar"
+						outcome="/pages/registro/registro.xhtml">
+						<f:param name="id" value="#{proyecto.id}" />
+					</h:link>
 
 					<p:separator></p:separator>
 

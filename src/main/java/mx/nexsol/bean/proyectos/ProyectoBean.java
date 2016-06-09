@@ -43,9 +43,9 @@ public class ProyectoBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		proyectoDTO.setNombre("este es un nombre de prueba");
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		Long idProyecto = Long.getLong(request.getParameter("id"));
+		System.out.println(request.getParameter("id"));
 		if(idProyecto!=null) {
 			proyectoDTO = proyectoService.consultarProyecto(idProyecto);
 		}
@@ -96,6 +96,7 @@ public class ProyectoBean implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+        System.out.println("esto es " + proyectoDTO.getEstatus());
 	}
 	
 	public List<PasoCasoPruebaDTO> generarListaPasos(HttpServletRequest request, String descripcion, String resultadoEsperado) {
