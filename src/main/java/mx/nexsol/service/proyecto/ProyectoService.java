@@ -2,6 +2,7 @@ package mx.nexsol.service.proyecto;
 
 import java.util.List;
 
+import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 
 public interface ProyectoService {
@@ -15,6 +16,9 @@ public interface ProyectoService {
 	int eliminarProyectoDTO(long idProyecto);
 	
 	ProyectoDTO consultarProyecto(long id);
+	
+	ProyectoDTO agregarFuncionalidades(List<FuncionalidadDTO> funcionalidades, 
+			ProyectoDTO proyecto) throws Exception;
 	
 
 }

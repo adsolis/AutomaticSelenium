@@ -23,7 +23,7 @@ public class ProyectoDTO implements Serializable {
 	
 	private Date fechaCreacion;
 	
-	private List<CasoPruebaDTO> casosPrueba;
+	private List<FuncionalidadDTO> funcionalidades;
 	
 	private String estrategia;
 	
@@ -55,12 +55,12 @@ public class ProyectoDTO implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public List<CasoPruebaDTO> getCasosPrueba() {
-		return casosPrueba;
+	public List<FuncionalidadDTO> getFuncionalidades() {
+		return funcionalidades;
 	}
 
-	public void setCasosPrueba(List<CasoPruebaDTO> casosPrueba) {
-		this.casosPrueba = casosPrueba;
+	public void setFuncionalidades(List<FuncionalidadDTO> funcionalidades) {
+		this.funcionalidades = funcionalidades;
 	}
 
 	public String getEstrategia() {

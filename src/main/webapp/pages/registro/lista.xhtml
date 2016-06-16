@@ -18,8 +18,10 @@
                          					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="5,10,15">
 				<p:column headerText="Nombre Proyecto">
-					<p:commandLink value="#{proyecto.nombre}"
-                                   actionListener="#{proyectoBean.consultarProyecto(proyecto)}"/>
+					<h:link value="#{proyecto.nombre}" outcome="/pages/registro/detalle_proyecto.xhtml">
+						<f:param name="id" value="#{proyecto.id}" />
+						<f:param name="detalle" value="true"/>
+					</h:link>
 				</p:column>
 
 				<p:column headerText="Fecha de creaci&oacute;n">

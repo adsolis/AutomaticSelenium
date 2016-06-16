@@ -45,7 +45,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		Session session = getSession();
         try {
             session.getTransaction().begin();
-            session.saveOrUpdate(entity);
+            session.save(entity);
             session.flush();
             session.refresh(entity);
             session.getTransaction().commit();
@@ -55,6 +55,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
             session.getTransaction().rollback();
             throw e;
         }
+        finally {
+			session.clear();
+			session.close();
+		}
         return entity;
 	}
 	
@@ -62,15 +66,18 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 	public T recuperarRegistro(long id) throws Exception {
 		T entity = null;
 		Session session = getSession();
-		session.get(persistentClass, id);
-		session.refresh(entity);
 		try {
 			session.getTransaction().begin();
+			entity = (T) session.get(persistentClass, id);
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
             e.printStackTrace();
             session.getTransaction().rollback();
             throw e;
+		}
+		finally {
+			session.clear();
+			session.close();
 		}
 		return entity;
 	}
@@ -91,6 +98,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
             session.getTransaction().rollback();
             throw e;
         }
+        finally {
+			session.clear();
+			session.close();
+		}
         return entity;
 	}
 
@@ -108,6 +119,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
             session.getTransaction().rollback();
             throw e;
         }
+        finally {
+			session.clear();
+			session.close();
+		}
         return entity;
 	}
 
@@ -128,6 +143,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
             e.printStackTrace();
             throw e;
         }
+        finally {
+			session.clear();
+			session.close();
+		}
         return list;
 	}
 

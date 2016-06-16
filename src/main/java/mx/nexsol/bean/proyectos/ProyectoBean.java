@@ -7,13 +7,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import mx.nexsol.dto.catalogos.CatComplejidadDTO;
+import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.PasoCasoPruebaDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
+import mx.nexsol.service.catalogos.impl.CatComplejidadServiceImpl;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
 import mx.nexsol.util.ConstantesComunes;
 import javax.faces.context.ExternalContext;
@@ -24,6 +29,7 @@ import org.primefaces.context.RequestContext;
 @Controller
 @ManagedBean(name = "proyectoBean")
 @Scope(value = "request")
+@ViewScoped
 public class ProyectoBean implements Serializable {
 	
 	/**
@@ -35,20 +41,39 @@ public class ProyectoBean implements Serializable {
 	@ManagedProperty(value="#{proyectoDTO}")
 	private ProyectoDTO proyectoDTO;
 	
-	@ManagedProperty(value="#{pasosCaso}")
-	private List<PasoCasoPruebaDTO> pasosCaso;
+	
+	@ManagedProperty(value="#{funcionalidadesDTO}")
+	private List<FuncionalidadDTO> funcionalidadesDTO;
+	
+	@Autowired
+	@ManagedProperty(value = "#{funcionalidadDTO}")
+	private FuncionalidadDTO funcionalidadDTO;
+	
+	private List<CatComplejidadDTO> listaCatalogoComplejidad;
 	
 	@Autowired
 	private ProyectoServiceImpl proyectoService;
 	
+	@Autowired
+	private CatComplejidadServiceImpl catComplejidadService;
+	
 	@PostConstruct
 	public void init() {
 		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-		Long idProyecto = Long.getLong(request.getParameter("id"));
-		System.out.println(request.getParameter("id"));
-		if(idProyecto!=null) {
-			proyectoDTO = proyectoService.consultarProyecto(idProyecto);
+		HttpSession session = request.getSession();
+		if(request.getParameter("id")!=null) {
+			Long idProyecto = Long.parseLong(request.getParameter("id"));
+			System.out.println(request.getParameter("id"));
+			if(idProyecto!=null) {
+				proyectoDTO = proyectoService.consultarProyecto(idProyecto);
+			}
+			if(request.getParameter("detalle")!=null) {
+				listaCatalogoComplejidad = catComplejidadService.listarCatalogoComplejidad();
+				listaCatalogoComplejidad = (List<CatComplejidadDTO>) session.getAttribute("listaCatalogoComplejidad");
+				session.setAttribute("listaCatalogoComplejidad", listaCatalogoComplejidad);
+			}
 		}
+		
 		
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
@@ -96,34 +121,43 @@ public class ProyectoBean implements Serializable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        System.out.println("esto es " + proyectoDTO.getEstatus());
 	}
 	
-	public List<PasoCasoPruebaDTO> generarListaPasos(HttpServletRequest request, String descripcion, String resultadoEsperado) {
-		PasoCasoPruebaDTO paso = new PasoCasoPruebaDTO();
+	public void guardarFuncionalidades(HttpServletRequest request) {
 		HttpSession session = request.getSession();
-		pasosCaso = (List<PasoCasoPruebaDTO>) session.getAttribute("listaPasos");
-		if(pasosCaso!=null)
-			pasosCaso = new ArrayList<PasoCasoPruebaDTO>();
-		paso.setNumeroDePaso(pasosCaso.size()+1);
-		paso.setDescripcionPaso(descripcion);
-		paso.setResultadoEsperado(resultadoEsperado);
-		pasosCaso.add(paso);
-		session.setAttribute("listaPasos", pasosCaso);
-		
-		return pasosCaso;
-	}
-	
-	public List<PasoCasoPruebaDTO> quitarPaso(HttpServletRequest request, int numeroPaso) {
-		HttpSession session = request.getSession();
-		pasosCaso = (List<PasoCasoPruebaDTO>) session.getAttribute("listaPasos");
-		pasosCaso.remove(numeroPaso);
-		
-		for(PasoCasoPruebaDTO paso: pasosCaso) {
-			paso.setNumeroDePaso(paso.getNumeroDePaso()-1);
+		List<FuncionalidadDTO> funcionalidades = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
+		try {
+			proyectoDTO = proyectoService.agregarFuncionalidades(funcionalidades, proyectoDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+	}
+	
+	public void generarListaFuncionalidades() {
+		HttpServletRequest request = 
+				(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session = request.getSession();
+		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
+		listaCatalogoComplejidad = (List<CatComplejidadDTO>) session.getAttribute("listaCatalogoComplejidad");
+		if(funcionalidadesDTO==null)
+			funcionalidadesDTO = new ArrayList<FuncionalidadDTO>();
+		/*for(CatComplejidadDTO complejidad: listaCatalogoComplejidad) {
+			if(complejidad.getId() == Long.parseLong(idComplejidad)) {
+				funcionalidad.setComplejidad(complejidad);
+			}
+		}*/
+		funcionalidadesDTO.add(funcionalidadDTO);
+		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
+
+	}
+	
+	public List<FuncionalidadDTO> quitarFuncionalidad(HttpServletRequest request, int numeroPaso) {
+		HttpSession session = request.getSession();
+		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaPasos");
+		funcionalidadesDTO.remove(funcionalidadesDTO);
 		
-		return pasosCaso;
+		return funcionalidadesDTO;
 	}
 
 	public ProyectoDTO getProyectoDTO() {
@@ -134,12 +168,12 @@ public class ProyectoBean implements Serializable {
 		this.proyectoDTO = proyectoDTO;
 	}
 
-	public List<PasoCasoPruebaDTO> getPasosCaso() {
-		return pasosCaso;
+	public List<FuncionalidadDTO> getFuncionalidadesDTO() {
+		return funcionalidadesDTO;
 	}
 
-	public void setPasosCaso(List<PasoCasoPruebaDTO> pasosCaso) {
-		this.pasosCaso = pasosCaso;
+	public void setFuncionalidadesDTO(List<FuncionalidadDTO> funcionalidadesDTO) {
+		this.funcionalidadesDTO = funcionalidadesDTO;
 	}
 
 	public ProyectoServiceImpl getProyectoService() {
@@ -148,6 +182,32 @@ public class ProyectoBean implements Serializable {
 
 	public void setProyectoService(ProyectoServiceImpl proyectoService) {
 		this.proyectoService = proyectoService;
+	}
+
+	public List<CatComplejidadDTO> getListaCatalogoComplejidad() {
+		return listaCatalogoComplejidad;
+	}
+
+	public void setListaCatalogoComplejidad(
+			List<CatComplejidadDTO> listaCatalogoComplejidad) {
+		this.listaCatalogoComplejidad = listaCatalogoComplejidad;
+	}
+
+	public CatComplejidadServiceImpl getCatComplejidadService() {
+		return catComplejidadService;
+	}
+
+	public void setCatComplejidadService(
+			CatComplejidadServiceImpl catComplejidadService) {
+		this.catComplejidadService = catComplejidadService;
+	}
+
+	public FuncionalidadDTO getFuncionalidadDTO() {
+		return funcionalidadDTO;
+	}
+
+	public void setFuncionalidadDTO(FuncionalidadDTO funcionalidadDTO) {
+		this.funcionalidadDTO = funcionalidadDTO;
 	}
 
 }

@@ -42,8 +42,8 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	
 	
 	@OneToMany
-	@JoinColumn(name = "CASOS_PRUEBA", nullable = true)
-	private List<CasoPrueba> casosPrueba;
+	@JoinColumn(name = "PROYECTO_ID", nullable = true)
+	private List<Funcionalidad> funcionalidad;
 	
 
 	public String getNombre() {
@@ -78,12 +78,12 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 		this.detalle = detalle;
 	}
 
-	public List<CasoPrueba> getCasosPrueba() {
-		return casosPrueba;
+	public List<Funcionalidad> getFuncionalidad() {
+		return funcionalidad;
 	}
 
-	public void setCasosPrueba(List<CasoPrueba> casosPrueba) {
-		this.casosPrueba = casosPrueba;
+	public void setFuncionalidad(List<Funcionalidad> funcionalidad) {
+		this.funcionalidad = funcionalidad;
 	}
 
 	public String getEstrategia() {

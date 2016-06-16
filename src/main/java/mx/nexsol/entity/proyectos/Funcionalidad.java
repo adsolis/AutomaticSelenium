@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,7 +15,7 @@ import mx.nexsol.entity.catalogos.CatComplejidad;
 import mx.nexsol.entity.comun.SequenceGenerator;
 
 @Entity
-@Table(name = "Funcionalidad")
+@Table(name = "FUNCIONALIDAD")
 public class Funcionalidad extends SequenceGenerator implements Serializable {
 
 	/**
@@ -29,8 +31,11 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	private String identificador;
 	
 	@Column(name = "COMPLEJIDAD_ID")
-	@OneToOne
 	private CatComplejidad complejidad;
+	
+	@ManyToOne
+	@JoinColumn(name = "PROYECTO_FK")
+	private Proyecto proyecto;
 
 	public String getNombre() {
 		return nombre;
@@ -54,6 +59,14 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 
 	public void setComplejidad(CatComplejidad complejidad) {
 		this.complejidad = complejidad;
+	}
+
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
 	}
 	
 	

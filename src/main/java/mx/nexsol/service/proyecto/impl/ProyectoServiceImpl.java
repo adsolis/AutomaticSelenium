@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import mx.nexsol.dao.proyecto.ProyectoDAO;
+import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
+import mx.nexsol.entity.proyectos.Funcionalidad;
 import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.ProyectoService;
 import mx.nexsol.util.ConstantesComunes;
@@ -17,6 +19,10 @@ public class ProyectoServiceImpl implements ProyectoService {
 	
 	@Autowired
 	private ProyectoDAO proyectoDAO;
+	
+	@Autowired
+	private FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl;
+	
 
 	//TODO revisar viabilidad de manejar mapeo o enviar el objeto entity directamente hasta la vista para no afectar el performance
 	@Override
@@ -81,6 +87,30 @@ public class ProyectoServiceImpl implements ProyectoService {
 		return 0;
 	}
 	
+	@Override
+	public ProyectoDTO agregarFuncionalidades(
+			List<FuncionalidadDTO> funcionalidadesDTO, ProyectoDTO proyectoDTO)
+			throws Exception {
+		List<Funcionalidad> funcionalidades = null;
+		Proyecto proyecto = mapearDTOaEntity(proyectoDTO);
+		try {
+			funcionalidades = 
+					proyectoFuncionalidadServiceImpl.guardarFuncionalidades(funcionalidadesDTO, proyecto);
+			proyecto.setFuncionalidad(funcionalidades);
+			proyecto = proyectoDAO.editarRegistro(proyecto);
+			proyectoDTO = mapearProyectoEntityADto(proyecto);
+			funcionalidadesDTO.clear();
+			for(Funcionalidad funcionalidad: funcionalidades) {
+				proyectoDTO.getFuncionalidades()
+				.add(proyectoFuncionalidadServiceImpl.mapearEntityADto(funcionalidad));
+			}
+		} catch(Exception e) {
+			
+		}
+		
+		return proyectoDTO;
+	}
+	
 	private ProyectoDTO mapearProyectoEntityADto(Proyecto proyecto) {
 		ProyectoDTO proyectoDTO = new ProyectoDTO();
 		
@@ -100,6 +130,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 	
 	private Proyecto mapearDTOaEntity(ProyectoDTO proyectoDTO) {
 		Proyecto proyecto = new Proyecto();
+		proyecto.setId(proyectoDTO.getId());
 		proyecto.setNombre(proyectoDTO.getNombre());
 		proyecto.setEstrategia(proyectoDTO.getEstrategia());
 		proyecto.setFechaCreacion(proyectoDTO.getFechaCreacion());
@@ -113,6 +144,6 @@ public class ProyectoServiceImpl implements ProyectoService {
 	public void setProyectoDAO(ProyectoDAO proyectoDAO) {
 		this.proyectoDAO = proyectoDAO;
 	}
-	
+
 
 }
