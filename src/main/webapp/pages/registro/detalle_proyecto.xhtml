@@ -66,6 +66,9 @@
 					<p:column headerText="Ver">
 						<p:commandButton 
 							icon="ui-icon-search" value="Ver" />
+						<p:commandButton actionListener="#{proyectoBean.quitarFuncionalidad(funcionalidad.nombreFuncionalidad)}"
+							 value="Quitar" update=":panelListaFuncionalidades"/>
+							
 					</p:column>
 
 				</p:dataTable>
@@ -94,8 +97,8 @@
 											itemValue="#{complejidad}" />
 									</p:selectOneMenu>
 								</h:panelGrid>
-							<button type="button" class="btn btn-default"
-								data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-default" onclick="PF('funcionalidadDlg').hide();">
+							Cancelar</button>
 
 							<p:commandButton value="Agregar"
 								update="dialogFuncionalidad,:panelListaFuncionalidades"

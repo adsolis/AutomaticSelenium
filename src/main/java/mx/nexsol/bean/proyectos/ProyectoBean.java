@@ -152,12 +152,22 @@ public class ProyectoBean implements Serializable {
 
 	}
 	
-	public List<FuncionalidadDTO> quitarFuncionalidad(HttpServletRequest request, int numeroPaso) {
+	public void quitarFuncionalidad(String nombre) {
+		HttpServletRequest request = 
+				(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		HttpSession session = request.getSession();
-		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaPasos");
-		funcionalidadesDTO.remove(funcionalidadesDTO);
-		
-		return funcionalidadesDTO;
+		FuncionalidadDTO fun = null;
+		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
+		for(FuncionalidadDTO funcionalidad: funcionalidadesDTO) {
+			if(funcionalidad.getNombreFuncionalidad().equals(nombre)) {
+				fun = funcionalidad;
+				break;
+			}
+		}
+		funcionalidadesDTO.remove(fun);
+		fun = null;
+		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
+
 	}
 
 	public ProyectoDTO getProyectoDTO() {
