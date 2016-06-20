@@ -27,7 +27,7 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	@Column(name = "NOMBRE", nullable = false)
 	private String nombre;
 	
-	@Column(name = "IDENTIFICADOR", nullable = false)
+	@Column(name = "IDENTIFICADOR", nullable = true)
 	private String identificador;
 	
 	@Column(name = "COMPLEJIDAD_ID")

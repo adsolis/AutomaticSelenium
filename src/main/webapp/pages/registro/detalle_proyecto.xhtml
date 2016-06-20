@@ -16,8 +16,6 @@
 			<p:messages autoUpdate="true" closable="true" showDetail="false" />
 			<h:panelGrid columns="2" width="100%">
 
-				<h:inputHidden id="id" value="#{proyectoBean.proyectoDTO.id}" />
-
 				<h:outputLabel value="Nombre Proyecto:" for="nombre" />
 				<h:outputLabel id="nombre"
 					value="#{proyectoBean.proyectoDTO.nombre}" />
@@ -54,7 +52,26 @@
 			<h5>Funcionalidad</h5>
 
 			<p:commandButton value="Agregar funcionalidad" type="button" onclick="PF('funcionalidadDlg').show();" />
+			<p:commandButton id="btnGuardarFunc" value="Guardar funcionalidades" type="button" onclick="PF('guardarFuncionalidadDlg').show();"/>
 
+			<p:dialog id="dialogConfirmacion" header="Guardar funcionalidades" widgetVar="guardarFuncionalidadDlg" modal="true" styleClass="dialog dialog2"
+					  draggable="false" resizable="false" showEffect="fade"
+					  hideEffect="fade">
+				<h:form>
+				<h:panelGrid columns="4" width="100%">
+					<h:outputLabel value="¿Est&aacute; seguro de guardar las funcionalidades?"/>
+					<h:inputHidden id="id" value="#{proyectoBean.proyectoDTO.id}" />
+				</h:panelGrid>
+				<button type="button" class="btn btn-default" onclick="PF('guardarFuncionalidadDlg').hide();">
+					Cancelar</button>
+
+				<p:commandButton value="Aceptar"
+								 oncomplete="PF('guardarFuncionalidadDlg').hide();"
+								 actionListener="#{proyectoBean.guardarFuncionalidades}"
+								 icon="ui-icon-check" styleClass="btn btn-primary"/>
+				</h:form>
+			</p:dialog>
+			<h:form>
 			<p:panel id="panelListaFuncionalidades">
 				<p:dataTable id="tableFuncionalidades" value="#{proyectoBean.funcionalidadesDTO}" var="funcionalidad">
 					<p:column headerText="Funcionalidad">
@@ -67,14 +84,14 @@
 						<p:commandButton 
 							icon="ui-icon-search" value="Ver" />
 						<p:commandButton actionListener="#{proyectoBean.quitarFuncionalidad(funcionalidad.nombreFuncionalidad)}"
-							 value="Quitar" update=":panelListaFuncionalidades"/>
+							 value="Quitar" update="tableFuncionalidades"/>
 							
 					</p:column>
 
 				</p:dataTable>
 			</p:panel>	
 			<p:separator />
-			<h:form>
+
 			 <p:dialog id="dialogFuncionalidad" header="Funcionalidad" widgetVar="funcionalidadDlg" modal="true" styleClass="dialog dialog2"
                 draggable="false" resizable="false" showEffect="fade"
                 hideEffect="fade">
@@ -101,7 +118,7 @@
 							Cancelar</button>
 
 							<p:commandButton value="Agregar"
-								update="dialogFuncionalidad,:panelListaFuncionalidades"
+								update="dialogFuncionalidad,panelListaFuncionalidades"
 								oncomplete="PF('funcionalidadDlg').hide();"
 								actionListener="#{proyectoBean.generarListaFuncionalidades}"
 								icon="ui-icon-check" styleClass="btn btn-primary"/>

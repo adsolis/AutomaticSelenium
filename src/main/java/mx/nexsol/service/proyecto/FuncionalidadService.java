@@ -10,7 +10,7 @@ public interface FuncionalidadService {
 	
 	List<FuncionalidadDTO> listarFuncionalidades();
 	
-	List<Funcionalidad> guardarFuncionalidades(List<FuncionalidadDTO> funcionalidades, 
+	List<Funcionalidad> guardarFuncionalidades(List<FuncionalidadDTO> funcionalidades,
 			Proyecto proyecto) throws Exception;
 	
 	FuncionalidadDTO editarFuncionalidad(FuncionalidadDTO funcionalidad);

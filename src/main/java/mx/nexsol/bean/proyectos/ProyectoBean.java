@@ -123,8 +123,9 @@ public class ProyectoBean implements Serializable {
 		}
 	}
 	
-	public void guardarFuncionalidades(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public void guardarFuncionalidades() {
+		HttpSession session = 
+				((HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest()).getSession();
 		List<FuncionalidadDTO> funcionalidades = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
 		try {
 			proyectoDTO = proyectoService.agregarFuncionalidades(funcionalidades, proyectoDTO);

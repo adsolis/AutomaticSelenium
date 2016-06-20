@@ -25,7 +25,7 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 	}
 
 	@Override
-	public List<Funcionalidad> guardarFuncionalidades(List<FuncionalidadDTO> funcionalidadesDTO, 
+	public List<Funcionalidad> guardarFuncionalidades(List<FuncionalidadDTO> funcionalidadesDTO,
 			Proyecto proyecto) throws Exception {
 		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 		for(FuncionalidadDTO funcionalidadDTO: funcionalidadesDTO) {

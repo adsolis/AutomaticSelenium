@@ -17,7 +17,7 @@ public interface ProyectoService {
 	
 	ProyectoDTO consultarProyecto(long id);
 	
-	ProyectoDTO agregarFuncionalidades(List<FuncionalidadDTO> funcionalidades, 
+	ProyectoDTO agregarFuncionalidades(List<FuncionalidadDTO> funcionalidades,
 			ProyectoDTO proyecto) throws Exception;
 	
 

@@ -92,9 +92,9 @@ public class ProyectoServiceImpl implements ProyectoService {
 			List<FuncionalidadDTO> funcionalidadesDTO, ProyectoDTO proyectoDTO)
 			throws Exception {
 		List<Funcionalidad> funcionalidades = null;
-		Proyecto proyecto = mapearDTOaEntity(proyectoDTO);
+		Proyecto proyecto = proyectoDAO.recuperarRegistro(proyectoDTO.getId());
 		try {
-			funcionalidades = 
+			funcionalidades =
 					proyectoFuncionalidadServiceImpl.guardarFuncionalidades(funcionalidadesDTO, proyecto);
 			proyecto.setFuncionalidad(funcionalidades);
 			proyecto = proyectoDAO.editarRegistro(proyecto);
