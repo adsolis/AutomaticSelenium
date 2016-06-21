@@ -66,6 +66,7 @@ public class ProyectoBean implements Serializable {
 			System.out.println(request.getParameter("id"));
 			if(idProyecto!=null) {
 				proyectoDTO = proyectoService.consultarProyecto(idProyecto);
+				funcionalidadesDTO = proyectoDTO.getFuncionalidades();
 			}
 			if(request.getParameter("detalle")!=null) {
 				listaCatalogoComplejidad = catComplejidadService.listarCatalogoComplejidad();

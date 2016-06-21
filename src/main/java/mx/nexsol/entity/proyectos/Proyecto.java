@@ -3,11 +3,7 @@ package mx.nexsol.entity.proyectos;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import mx.nexsol.entity.comun.SequenceGenerator;
 
@@ -41,7 +37,7 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	private String estrategia;
 	
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PROYECTO_ID", nullable = true)
 	private List<Funcionalidad> funcionalidad;
 	

@@ -124,6 +124,13 @@ public class ProyectoServiceImpl implements ProyectoService {
 			proyectoDTO.setEstatus(ConstantesComunes.ESTATUS_PROYECTO_EN_CURSO);
 		else if(proyecto.getEstatus()==ConstantesComunes.CODIGO_ESTATUS_PROYECTO_FINALIZADO)
 			proyectoDTO.setEstatus(ConstantesComunes.ESTATUS_PROYECTO_FINALIZADO);
+
+		if(proyecto.getFuncionalidad()!=null && !proyecto.getFuncionalidad().isEmpty()) {
+			proyectoDTO.setFuncionalidades(new ArrayList<FuncionalidadDTO>());
+			for(Funcionalidad funcionalidad: proyecto.getFuncionalidad()) {
+				proyectoDTO.getFuncionalidades().add(proyectoFuncionalidadServiceImpl.mapearEntityADto(funcionalidad));
+			}
+		}
 		
 		return proyectoDTO;
 	}
