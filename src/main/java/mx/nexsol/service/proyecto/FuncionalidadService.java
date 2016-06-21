@@ -17,4 +17,6 @@ public interface FuncionalidadService {
 	
 	int eliminarFuncionalidad(long idFuncionalidad);
 
+	FuncionalidadDTO recuperarFuncionalidad(long id) throws Exception;
+
 }

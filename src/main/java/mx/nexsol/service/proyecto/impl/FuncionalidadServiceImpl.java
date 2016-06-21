@@ -45,6 +45,15 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 	}
 
 	@Override
+	public FuncionalidadDTO recuperarFuncionalidad(long id) throws Exception {
+		FuncionalidadDTO funcionalidadDTO = null;
+
+		funcionalidadDTO = mapearEntityADto(funcionalidadDAO.recuperarRegistro(id));
+
+		return funcionalidadDTO;
+	}
+
+	@Override
 	public FuncionalidadDTO editarFuncionalidad(FuncionalidadDTO funcionalidad) {
 		// TODO Auto-generated method stub
 		return null;
@@ -65,9 +74,11 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 	
 	public FuncionalidadDTO mapearEntityADto(Funcionalidad funcionalidad) {
 		FuncionalidadDTO funcionalidadDTO = new FuncionalidadDTO();
-		
+
+		funcionalidadDTO.setId(funcionalidad.getId());
 		funcionalidadDTO.setNombreFuncionalidad(funcionalidad.getNombre());
 		funcionalidadDTO.setIdentificador(funcionalidad.getIdentificador());
+		funcionalidad = null;
 		
 		return funcionalidadDTO;
 	}

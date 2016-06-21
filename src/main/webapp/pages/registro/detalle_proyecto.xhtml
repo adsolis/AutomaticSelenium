@@ -75,7 +75,10 @@
 			<p:panel id="panelListaFuncionalidades">
 				<p:dataTable id="tableFuncionalidades" value="#{proyectoBean.funcionalidadesDTO}" var="funcionalidad">
 					<p:column headerText="Funcionalidad">
-						<h:outputText value="#{funcionalidad.nombreFuncionalidad}" />
+						<h:link value="#{funcionalidad.nombreFuncionalidad}" outcome="/pages/funcionalidad/template_funcionalidad.xhtml">
+							<f:param name="id" value="#{funcionalidad.id}" />
+							<f:param name="detalle" value="true"/>
+						</h:link>
 					</p:column>
 					<p:column headerText="N&uuml;mero de CP">
 						<h:outputText value="prueba" />

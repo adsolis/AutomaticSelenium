@@ -63,11 +63,8 @@ public class ProyectoBean implements Serializable {
 		HttpSession session = request.getSession();
 		if(request.getParameter("id")!=null) {
 			Long idProyecto = Long.parseLong(request.getParameter("id"));
-			System.out.println(request.getParameter("id"));
-			if(idProyecto!=null) {
-				proyectoDTO = proyectoService.consultarProyecto(idProyecto);
-				funcionalidadesDTO = proyectoDTO.getFuncionalidades();
-			}
+			proyectoDTO = proyectoService.consultarProyecto(idProyecto);
+			funcionalidadesDTO = proyectoDTO.getFuncionalidades();
 			if(request.getParameter("detalle")!=null) {
 				listaCatalogoComplejidad = catComplejidadService.listarCatalogoComplejidad();
 				listaCatalogoComplejidad = (List<CatComplejidadDTO>) session.getAttribute("listaCatalogoComplejidad");

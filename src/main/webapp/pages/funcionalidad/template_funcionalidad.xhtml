@@ -1,76 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:j="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:j="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions">
 <h:body>
-	<h:panelGrid columns="4" width="100%">
-		<h:outputLabel value="Nombre de Funcionalidad *"
-			for="nombreFuncionalidad" />
-		<p:inputText id="nombreFuncionalidad" value="" disabled="disabled" />
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="content">
+            <h:panelGrid columns="4" width="100%">
+                <h:outputLabel value="Nombre de Funcionalidad *"
+                               for="nombreFuncionalidad"/>
+                <p:inputText id="nombreFuncionalidad" value="#{funcionalidadBean.funcionalidadDTO.nombreFuncionalidad}"
+                             disabled="disabled"/>
 
-		<h:outputLabel value="Complejidad *" for="complejidad" />
-		<p:selectOneMenu id="complejidad" value="" style="width:125px"
-			disabled="disabled">
-			<f:selectItem itemLabel="Seleccionar" itemValue="" />
-			<f:selectItem itemLabel="Alta" itemValue="1" />
-			<f:selectItem itemLabel="Media" itemValue="2" />
-			<f:selectItem itemLabel="Baja" itemValue="3" />
-		</p:selectOneMenu>
+                <h:outputLabel value="Complejidad *" for="complejidad"/>
+                <p:selectOneMenu id="complejidad" value="" style="width:125px"
+                                 disabled="disabled">
+                    <f:selectItem itemLabel="Seleccionar" itemValue=""/>
+                    <f:selectItem itemLabel="Alta" itemValue="1"/>
+                    <f:selectItem itemLabel="Media" itemValue="2"/>
+                    <f:selectItem itemLabel="Baja" itemValue="3"/>
+                </p:selectOneMenu>
 
 
-	</h:panelGrid>
+            </h:panelGrid>
 
-	<p:separator></p:separator>
+            <p:separator></p:separator>
 
-	<h5>Casos de Prueba</h5>
+            <h5>Casos de Prueba</h5>
 
-	<button type="button" class="btn btn-primary btn-lg"
-		data-toggle="modal" data-target="#modalCasoPrueba">Agregar caso de
-		prueba</button>
+            <p:commandButton value="Agregar funcionalidad" type="button" onclick="PF('dialogCasoPrueba').show();" />
 
-	<!-- Modal -->
-	<div class="modal fade" id="modalCasoPrueba" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">Caso de Prueba</h4>
-				</div>
-				<div class="modal-body">
-					<ui:include src="/pages/casos_prueba/templateCasoPrueba.xhtml"></ui:include>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-					<button type="button" class="btn btn-primary">Guardar</button>
-				</div>
-			</div>
-		</div>
-	</div>
+            <p:dialog id="dialogCasoPrueba" header="Agregar Caso de Prueba"
+                      widgetVar="dialogCasoPrueba" modal="true"
+                      styleClass="dialog dialog2"
+                      draggable="false" resizable="false" showEffect="fade"
+                      hideEffect="fade">
+                <h:form>
+                    <ui:include
+                            src="/pages/casos_prueba/templateCasoPrueba.xhtml"></ui:include>
+                    <button type="button" class="btn btn-default"
+                            onclick="PF('dialogCasoPrueba').hide();">
+                        Cancelar
+                    </button>
 
-	<p:dataTable>
-		<p:column headerText="ID Caso">
-			<h:outputText value="1" />
-		</p:column>
-		<p:column headerText="Nombre de caso">
-			<h:outputText value="prueba" />
-		</p:column>
-		<p:column headerText="Precondiciones">
-			<h:outputText />
-		</p:column>
-		<p:column headerText="Postcondiciones">
-		</p:column>
-		<p:column headerText="Pasos">
-		</p:column>
-	</p:dataTable>
+                    <p:commandButton value="Aceptar"
+                                     oncomplete="PF('dialogCasoPrueba').hide();"
+                                     actionListener="#{proyectoBean.guardarFuncionalidades}"
+                                     icon="ui-icon-check"
+                                     styleClass="btn btn-primary"/>
+                </h:form>
+            </p:dialog>
+
+            <!-- Modal -->
+            <!--<div class="modal fade" id="modalCasoPrueba" tabindex="-1" role="dialog"
+                aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"
+                                aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Caso de Prueba</h4>
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <p:dataTable>
+                <p:column headerText="ID Caso">
+                    <h:outputText value="1"/>
+                </p:column>
+                <p:column headerText="Nombre de caso">
+                    <h:outputText value="prueba"/>
+                </p:column>
+                <p:column headerText="Precondiciones">
+                    <h:outputText/>
+                </p:column>
+                <p:column headerText="Postcondiciones">
+                </p:column>
+                <p:column headerText="Pasos">
+                </p:column>
+            </p:dataTable>
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>
