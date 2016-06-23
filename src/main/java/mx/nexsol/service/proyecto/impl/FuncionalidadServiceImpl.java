@@ -3,6 +3,8 @@ package mx.nexsol.service.proyecto.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.nexsol.dto.proyecto.CasoPruebaDTO;
+import mx.nexsol.entity.proyectos.CasoPrueba;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 	@Autowired
 	ProyectoServiceImpl proyectoService;
 
+	@Autowired
+	private CasoPruebaServiceImpl casoPruebaService;
+
 	@Override
 	public List<FuncionalidadDTO> listarFuncionalidades() {
 		// TODO Auto-generated method stub
@@ -37,7 +42,6 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 		funcionalidadesDTO.clear();
 		for(Funcionalidad funcionalidad: funcionalidades) {
 			try {
-				funcionalidad.setProyecto(proyecto);
 				funcionalidad = funcionalidadDAO.guardarRegistro(funcionalidad);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -52,6 +56,21 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 		FuncionalidadDTO funcionalidadDTO = null;
 
 		funcionalidadDTO = mapearEntityADto(funcionalidadDAO.recuperarRegistro(id));
+
+		return funcionalidadDTO;
+	}
+
+	public FuncionalidadDTO guardarCasosPrueba(List<CasoPruebaDTO> casosPruebaDTO, FuncionalidadDTO funcionalidadDTO) {
+		List<CasoPrueba> casosPrueba = null;
+		try {
+			Funcionalidad funcionalidad = funcionalidadDAO.recuperarRegistro(funcionalidadDTO.getId());
+			casosPrueba = casoPruebaService.guardarCasoPrueba(casosPruebaDTO);
+			funcionalidad.setCasosPrueba(casosPrueba);
+			funcionalidad = funcionalidadDAO.editarRegistro(funcionalidad);
+			funcionalidadDTO = mapearEntityADto(funcionalidad);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return funcionalidadDTO;
 	}
@@ -102,5 +121,13 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 
 	public void setProyectoService(ProyectoServiceImpl proyectoService) {
 		this.proyectoService = proyectoService;
+	}
+
+	public CasoPruebaServiceImpl getCasoPruebaService() {
+		return casoPruebaService;
+	}
+
+	public void setCasoPruebaService(CasoPruebaServiceImpl casoPruebaService) {
+		this.casoPruebaService = casoPruebaService;
 	}
 }

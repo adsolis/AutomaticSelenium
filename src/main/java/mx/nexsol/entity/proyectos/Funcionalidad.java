@@ -3,13 +3,7 @@ package mx.nexsol.entity.proyectos;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import mx.nexsol.entity.catalogos.CatComplejidad;
 import mx.nexsol.entity.comun.SequenceGenerator;
@@ -32,10 +26,10 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	
 	@Column(name = "COMPLEJIDAD_ID")
 	private CatComplejidad complejidad;
-	
-	@ManyToOne
-	@JoinColumn(name = "PROYECTO_FK")
-	private Proyecto proyecto;
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FUNCIONALIDAD_ID", nullable = true)
+	private List<CasoPrueba> casosPrueba;
 
 	public String getNombre() {
 		return nombre;
@@ -61,15 +55,11 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 		this.complejidad = complejidad;
 	}
 
-	public Proyecto getProyecto() {
-		return proyecto;
+	public List<CasoPrueba> getCasosPrueba() {
+		return casosPrueba;
 	}
 
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
+	public void setCasosPrueba(List<CasoPrueba> casosPrueba) {
+		this.casosPrueba = casosPrueba;
 	}
-	
-	
-	
-
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
+import mx.nexsol.service.proyecto.impl.CasoPruebaServiceImpl;
 import mx.nexsol.service.proyecto.impl.FuncionalidadServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -29,6 +30,7 @@ import java.io.Serializable;
 @ViewScoped
 public class FuncionalidadBean implements Serializable {
 
+    @Autowired
     @ManagedProperty(value = "funcionalidadDTO")
     private FuncionalidadDTO funcionalidadDTO;
 
@@ -41,6 +43,9 @@ public class FuncionalidadBean implements Serializable {
 
     @Autowired
     private FuncionalidadServiceImpl funcionalidadService;
+
+    @Autowired
+    private CasoPruebaServiceImpl casoPruebaService;
 
     @ManagedProperty(value = "idProyecto")
     private long idProyecto;
@@ -78,6 +83,14 @@ public class FuncionalidadBean implements Serializable {
         session.setAttribute("listaCasosPrueba", casosPruebaDTO);
     }
 
+    public void guardarCasosPrueba() {
+        HttpServletRequest request =
+                (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession session = request.getSession();
+        casosPruebaDTO = (List<CasoPruebaDTO>)session.getAttribute("listaCasosPrueba");
+        funcionalidadDTO = funcionalidadService.guardarCasosPrueba(casosPruebaDTO, funcionalidadDTO);
+    }
+
     public FuncionalidadDTO getFuncionalidadDTO() {
         return funcionalidadDTO;
     }
@@ -92,6 +105,14 @@ public class FuncionalidadBean implements Serializable {
 
     public void setFuncionalidadService(FuncionalidadServiceImpl funcionalidadService) {
         this.funcionalidadService = funcionalidadService;
+    }
+
+    public CasoPruebaServiceImpl getCasoPruebaService() {
+        return casoPruebaService;
+    }
+
+    public void setCasoPruebaService(CasoPruebaServiceImpl casoPruebaService) {
+        this.casoPruebaService = casoPruebaService;
     }
 
     public List<CasoPruebaDTO> getCasosPruebaDTO() {
