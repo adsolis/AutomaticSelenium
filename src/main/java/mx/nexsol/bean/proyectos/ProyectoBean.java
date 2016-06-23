@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 
 import mx.nexsol.dto.catalogos.CatComplejidadDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
-import mx.nexsol.dto.proyecto.PasoCasoPruebaDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.service.catalogos.impl.CatComplejidadServiceImpl;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;

@@ -25,6 +25,8 @@ public class FuncionalidadDTO implements Serializable {
 	
 	private CatComplejidadDTO complejidad;
 
+	private ProyectoDTO proyectoDTO;
+
 	public long getId() {
 		return id;
 	}
@@ -57,6 +59,11 @@ public class FuncionalidadDTO implements Serializable {
 		this.complejidad = complejidad;
 	}
 
-	
-	
+	public ProyectoDTO getProyectoDTO() {
+		return proyectoDTO;
+	}
+
+	public void setProyectoDTO(ProyectoDTO proyectoDTO) {
+		this.proyectoDTO = proyectoDTO;
+	}
 }

@@ -111,7 +111,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 		return proyectoDTO;
 	}
 	
-	private ProyectoDTO mapearProyectoEntityADto(Proyecto proyecto) {
+	public ProyectoDTO mapearProyectoEntityADto(Proyecto proyecto) {
 		ProyectoDTO proyectoDTO = new ProyectoDTO();
 		
 		proyectoDTO.setId(proyecto.getId());

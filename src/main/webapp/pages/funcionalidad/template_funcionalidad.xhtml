@@ -11,21 +11,16 @@
 <h:body>
     <ui:composition template="/templates/layout.xhtml">
         <ui:define name="content">
+            <h:link styleClass="btn btn-link" value="#{funcionalidadBean.nombreProyecto}"
+                    outcome="/pages/registro/detalle_proyecto.xhtml">
+                <f:param name="id" value="#{funcionalidadBean.idProyecto}"/>
+                <f:param name="detalle" value="true"/>
+            </h:link>
             <h:panelGrid columns="4" width="100%">
                 <h:outputLabel value="Nombre de Funcionalidad *"
                                for="nombreFuncionalidad"/>
                 <p:inputText id="nombreFuncionalidad" value="#{funcionalidadBean.funcionalidadDTO.nombreFuncionalidad}"
                              disabled="disabled"/>
-
-                <h:outputLabel value="Complejidad *" for="complejidad"/>
-                <p:selectOneMenu id="complejidad" value="" style="width:125px"
-                                 disabled="disabled">
-                    <f:selectItem itemLabel="Seleccionar" itemValue=""/>
-                    <f:selectItem itemLabel="Alta" itemValue="1"/>
-                    <f:selectItem itemLabel="Media" itemValue="2"/>
-                    <f:selectItem itemLabel="Baja" itemValue="3"/>
-                </p:selectOneMenu>
-
 
             </h:panelGrid>
 
@@ -33,7 +28,8 @@
 
             <h5>Casos de Prueba</h5>
 
-            <p:commandButton value="Agregar funcionalidad" type="button" onclick="PF('dialogCasoPrueba').show();" />
+            <p:commandButton value="Agregar caso de prueba" type="button" onclick="PF('dialogCasoPrueba').show();" />
+
 
             <p:dialog id="dialogCasoPrueba" header="Agregar Caso de Prueba"
                       widgetVar="dialogCasoPrueba" modal="true"
@@ -41,20 +37,28 @@
                       draggable="false" resizable="false" showEffect="fade"
                       hideEffect="fade">
                 <h:form>
-                    <ui:include
-                            src="/pages/casos_prueba/templateCasoPrueba.xhtml"></ui:include>
-                    <button type="button" class="btn btn-default"
-                            onclick="PF('dialogCasoPrueba').hide();">
-                        Cancelar
-                    </button>
+                    <h:panelGrid columns="4" width="100%">
+                        <h:outputLabel value="Nombre del Caso de Prueba *"
+                                       for="nombreFuncionalidad" />
+                        <p:inputText id="nombreCasoPrueba" value="#{funcionalidadBean.casoPruebaDTO.nombreCasoPrueba}"
+                                     required="true" />
 
-                    <p:commandButton value="Aceptar"
+                        <h:outputLabel value="ID *" for="idCasoPrueba" />
+                        <p:inputText id="idCasoPrueba" value="#{funcionalidadBean.casoPruebaDTO.identificador}"
+                                     required="true" />
+                    </h:panelGrid>
+                    <button type="button" class="btn btn-default" onclick="PF('dialogCasoPrueba').hide();">
+                        Cancelar</button>
+
+                    <p:commandButton value="Agregar"
+                                     update=":panelCasosPrueba"
                                      oncomplete="PF('dialogCasoPrueba').hide();"
-                                     actionListener="#{proyectoBean.guardarFuncionalidades}"
+                                     action="#{funcionalidadBean.generarListaCasosPrueba}"
                                      icon="ui-icon-check"
                                      styleClass="btn btn-primary"/>
-                </h:form>
+            </h:form>
             </p:dialog>
+
 
             <!-- Modal -->
             <!--<div class="modal fade" id="modalCasoPrueba" tabindex="-1" role="dialog"
@@ -79,12 +83,13 @@
                 </div>
             </div>-->
 
-            <p:dataTable>
+            <p:panel id="panelCasosPrueba">
+            <p:dataTable id="tableCasosPrueba" value="#{funcionalidadBean.casosPruebaDTO}" var="casoPrueba">
                 <p:column headerText="ID Caso">
-                    <h:outputText value="1"/>
+                    <h:outputText value="#{casoPrueba.identificador}"/>
                 </p:column>
                 <p:column headerText="Nombre de caso">
-                    <h:outputText value="prueba"/>
+                    <h:outputText value="#{casoPrueba.nombreCasoPrueba}"/>
                 </p:column>
                 <p:column headerText="Precondiciones">
                     <h:outputText/>
@@ -94,6 +99,7 @@
                 <p:column headerText="Pasos">
                 </p:column>
             </p:dataTable>
+            </p:panel>
         </ui:define>
     </ui:composition>
 </h:body>

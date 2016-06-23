@@ -1,7 +1,9 @@
 package mx.nexsol.bean.funcionalidades;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.service.proyecto.impl.FuncionalidadServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,15 +29,24 @@ import java.io.Serializable;
 @ViewScoped
 public class FuncionalidadBean implements Serializable {
 
-
-    @ManagedProperty(value="#{funcionalidadesDTO}")
-    private List<FuncionalidadDTO> funcionalidadesDTO;
-
     @ManagedProperty(value = "funcionalidadDTO")
     private FuncionalidadDTO funcionalidadDTO;
 
+    @ManagedProperty(value = "casosPruebaDTO")
+    private List<CasoPruebaDTO> casosPruebaDTO;
+
+    @Autowired
+    @ManagedProperty(value = "casoPruebaDTO")
+    private CasoPruebaDTO casoPruebaDTO;
+
     @Autowired
     private FuncionalidadServiceImpl funcionalidadService;
+
+    @ManagedProperty(value = "idProyecto")
+    private long idProyecto;
+
+    @ManagedProperty(value = "nombreProyecto")
+    private String nombreProyecto;
 
     @PostConstruct
     public void init() {
@@ -46,18 +57,25 @@ public class FuncionalidadBean implements Serializable {
             Long id = Long.parseLong(request.getParameter("id"));
             try {
                 funcionalidadDTO = funcionalidadService.recuperarFuncionalidad(id);
+                idProyecto = Long.parseLong(request.getParameter("idProyecto"));
+                nombreProyecto = request.getParameter("nombreProyecto");
             }catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public List<FuncionalidadDTO> getFuncionalidadesDTO() {
-        return funcionalidadesDTO;
-    }
+    public void generarListaCasosPrueba() {
+        HttpServletRequest request =
+                (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        HttpSession session = request.getSession();
+        casosPruebaDTO = (List<CasoPruebaDTO>)session.getAttribute("listaCasosPrueba");
 
-    public void setFuncionalidadesDTO(List<FuncionalidadDTO> funcionalidadesDTO) {
-        this.funcionalidadesDTO = funcionalidadesDTO;
+        if(casosPruebaDTO==null)
+            casosPruebaDTO = new ArrayList<CasoPruebaDTO>();
+
+        casosPruebaDTO.add(casoPruebaDTO);
+        session.setAttribute("listaCasosPrueba", casosPruebaDTO);
     }
 
     public FuncionalidadDTO getFuncionalidadDTO() {
@@ -76,4 +94,35 @@ public class FuncionalidadBean implements Serializable {
         this.funcionalidadService = funcionalidadService;
     }
 
+    public List<CasoPruebaDTO> getCasosPruebaDTO() {
+        return casosPruebaDTO;
+    }
+
+    public void setCasosPruebaDTO(List<CasoPruebaDTO> casosPruebaDTO) {
+        this.casosPruebaDTO = casosPruebaDTO;
+    }
+
+    public CasoPruebaDTO getCasoPruebaDTO() {
+        return casoPruebaDTO;
+    }
+
+    public void setCasoPruebaDTO(CasoPruebaDTO casoPruebaDTO) {
+        this.casoPruebaDTO = casoPruebaDTO;
+    }
+
+    public long getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(long idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
+    }
 }

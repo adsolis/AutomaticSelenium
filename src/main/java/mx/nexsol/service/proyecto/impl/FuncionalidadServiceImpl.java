@@ -18,6 +18,9 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 	@Autowired
 	FuncionalidadDAO funcionalidadDAO;
 
+	@Autowired
+	ProyectoServiceImpl proyectoService;
+
 	@Override
 	public List<FuncionalidadDTO> listarFuncionalidades() {
 		// TODO Auto-generated method stub
@@ -78,9 +81,26 @@ public class FuncionalidadServiceImpl implements FuncionalidadService {
 		funcionalidadDTO.setId(funcionalidad.getId());
 		funcionalidadDTO.setNombreFuncionalidad(funcionalidad.getNombre());
 		funcionalidadDTO.setIdentificador(funcionalidad.getIdentificador());
+		//funcionalidadDTO.setProyectoDTO(proyectoService.mapearProyectoEntityADto(funcionalidad.getProyecto()));
+
 		funcionalidad = null;
 		
 		return funcionalidadDTO;
 	}
-	
+
+	public FuncionalidadDAO getFuncionalidadDAO() {
+		return funcionalidadDAO;
+	}
+
+	public void setFuncionalidadDAO(FuncionalidadDAO funcionalidadDAO) {
+		this.funcionalidadDAO = funcionalidadDAO;
+	}
+
+	public ProyectoServiceImpl getProyectoService() {
+		return proyectoService;
+	}
+
+	public void setProyectoService(ProyectoServiceImpl proyectoService) {
+		this.proyectoService = proyectoService;
+	}
 }
