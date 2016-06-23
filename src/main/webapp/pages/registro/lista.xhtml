@@ -12,7 +12,7 @@
 		<ui:define name="content">
 			<h2>Proyectos</h2>
 			<h:link styleClass="btn btn-primary" value="Nuevo" outcome="/pages/registro/registro.xhtml" />
-			<p:dataTable value="#{proyectosBean.proyectos}" rows="5"
+			<p:dataTable styleClass="table" value="#{proyectosBean.proyectos}" rows="5"
 				style="text-align:center;" var="proyecto" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 
                          					{PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
