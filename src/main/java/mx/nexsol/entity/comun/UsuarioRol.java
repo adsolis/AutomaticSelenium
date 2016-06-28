@@ -12,7 +12,7 @@ public class UsuarioRol extends SequenceGenerator {
 	private String rol;
 	
 	@Column(name = "usuario")
-	private Usuario usuario;
+	private String usuario;
 
 	public String getRol() {
 		return rol;
@@ -22,14 +22,13 @@ public class UsuarioRol extends SequenceGenerator {
 		this.rol = rol;
 	}
 
-	public Usuario getUsuario() {
+	public String getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-	
 	
 
 }

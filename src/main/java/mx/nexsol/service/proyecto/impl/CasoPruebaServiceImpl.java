@@ -46,7 +46,7 @@ public class CasoPruebaServiceImpl implements CasoPruebaService  {
         return casoPrueba;
     }
 
-    private CasoPruebaDTO mapearEntityADto(CasoPrueba casoPrueba) {
+    public CasoPruebaDTO mapearEntityADto(CasoPrueba casoPrueba) {
         CasoPruebaDTO casoPruebaDTO = new CasoPruebaDTO();
 
         casoPruebaDTO.setId(casoPrueba.getId());

@@ -27,5 +27,7 @@
         <mapping class="mx.nexsol.entity.proyectos.PasoCasoPrueba"/>
         <mapping class="mx.nexsol.entity.proyectos.Funcionalidad"/>
         <mapping class="mx.nexsol.entity.catalogos.CatComplejidad"/>
+        <mapping class="mx.nexsol.entity.comun.Usuario"/>
+        <mapping class="mx.nexsol.entity.comun.UsuarioRol"/>
     </session-factory>
 </hibernate-configuration>

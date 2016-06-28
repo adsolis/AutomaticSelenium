@@ -33,7 +33,7 @@ public class Login {
     private String contrasenia;
     
     @ManagedProperty(value = "#{authenticationManager}")
-    private AuthenticationManager authenticationManager = null;
+    private AuthenticationManager authenticationManager;
 	
 	/**
     *

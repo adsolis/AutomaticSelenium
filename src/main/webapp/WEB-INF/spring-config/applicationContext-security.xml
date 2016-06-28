@@ -17,10 +17,20 @@
 
  <authentication-manager alias="authenticationManager">
   <authentication-provider>
-   <user-service>
-    <user name="usuario_prueba" password="123456" authorities="ROLE_USER" />
-   </user-service>
+
+      <jdbc-user-service data-source-ref="dataSource"
+                         users-by-username-query=
+                                 "select username,password, enabled from usuario where username=?"
+                         authorities-by-username-query=
+                                 "select usuario, rol from usuario_rol where usuario =?  " />
   </authentication-provider>
  </authentication-manager>
+
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <beans:property name="url" value="jdbc:mysql://localhost:3306/spring"/>
+        <beans:property name="username" value="root"/>
+        <beans:property name="password" value=""/>
+    </beans:bean>
 
 </beans:beans>
