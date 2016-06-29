@@ -100,7 +100,7 @@ public class ProyectoBean implements Serializable {
 			else {
 				FacesContext.getCurrentInstance().addMessage
                 (null, new FacesMessage
-                        (FacesMessage.SEVERITY_ERROR,"Error", "Ocurrio un problema al generar el acta de nacimiento"));
+                        (FacesMessage.SEVERITY_ERROR,"Error", "Ocurrio un problema al guardar el proyecto"));
         RequestContext.getCurrentInstance().execute("errorDialog.show()");
 			}
 			

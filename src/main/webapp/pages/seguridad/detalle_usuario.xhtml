@@ -1,12 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-    <title></title>
-</head>
-<body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
-</body>
+<h:body>
+
+    <ui:composition template="/templates/layout.xhtml">
+        <ui:define name="content">
+            <h2>Usuario:</h2>
+            <h:form>
+                <p:messages autoUpdate="true" closable="true" showDetail="false"/>
+                <h:panelGrid columns="4" width="100%">
+
+                    <h:outputLabel value="Nombre: *" for="nombre" />
+                    <p:inputText id="nombre" value="#{usuarioBean.usuarioDTO.nombre}"
+                                 disabled="true"/>
+
+                    <h:outputLabel value="Apellido Paterno: *" for="apellidoPaterno" />
+                    <p:inputText id="apellidoPaterno" value="#{usuarioBean.usuarioDTO.apellidoPaterno}"
+                                 disabled="true"/>
+
+                    <h:outputLabel value="Apellido Materno: " for="apellidoMaterno" />
+                    <p:inputText id="apellidoMaterno" value="#{usuarioBean.usuarioDTO.apellidoMaterno}" disabled="true"/>
+
+                    <h:outputLabel value="Correo Electr&oacute;nico: *" for="correoElectronico" />
+                    <p:inputText id="correoElectronico" value="#{usuarioBean.usuarioDTO.correoElectronico}"
+                                 disabled="true"/>
+
+                    <h:outputLabel value="N&uacute;mero Telef&oacute;nico: " for="numeroTelefonico" />
+                    <p:inputText id="numeroTelefonico" value="#{usuarioBean.usuarioDTO.numeroTelefonico}" disabled="true"/>
+
+
+                    <h:outputLabel value="Fecha de Nacimiento: *" for="fechaNacimiento" />
+                    <p:calendar id="fechaNacimiento"
+                                readonlyInput="true"
+                                required="true"
+                                navigator="true"
+                                pattern="dd/MM/yyyy"
+                                disabled="true"
+                                yearRange="1900:c"
+                                value="#{usuarioBean.usuarioDTO.fechaNacimiento}" />
+                    <p:message for="fechaNacimiento" />
+
+                    <h:outputLabel value="Usuario: *" for="username" />
+                    <p:inputText id="username" value="#{usuarioBean.usuarioDTO.username}"
+                                     disabled="true" />
+
+                    <h:outputLabel value="Estatus: *" for="estatus" />
+                    <p:inputText id="estatus" value="#{usuarioBean.usuarioDTO.habilitado}"
+                                 disabled="true" />
+
+
+                </h:panelGrid>
+
+                <p:commandButton value="Guardar" id="botonGuardar" actionListener="#{usuarioBean.guardarUsuario}" ajax="false"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

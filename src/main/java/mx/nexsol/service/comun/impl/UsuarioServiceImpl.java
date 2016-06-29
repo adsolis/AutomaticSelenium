@@ -67,6 +67,22 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRespuestaDTO;
     }
 
+    public UsuarioRespuestaDTO recuperarUsuario(long id) {
+        UsuarioRespuestaDTO usuarioRespuestaDTO = new UsuarioRespuestaDTO();
+        try {
+            Usuario usuario = usuarioDAO.recuperarRegistro(id);
+            usuarioRespuestaDTO.usuarioDTO = mapearEntityADto(usuario);
+            usuarioRespuestaDTO.codigoRespuesta = ConstantesComunes.CODIGO_EXITO;
+            usuarioRespuestaDTO.mensajeRespuesta = ConstantesComunes.MENSAJE_EXITO;
+            usuario = null;
+        } catch (Exception e) {
+            usuarioRespuestaDTO.excepcion = e;
+            usuarioRespuestaDTO.codigoRespuesta = ConstantesComunes.CODIGO_ERROR;
+            usuarioRespuestaDTO.mensajeRespuesta = ConstantesComunes.MENSAJE_ERROR;
+        }
+        return usuarioRespuestaDTO;
+    }
+
     public UsuarioRespuestaDTO editarUsuario(UsuarioDTO usuarioDTO) {
         return null;
     }
@@ -86,6 +102,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     private UsuarioDTO mapearEntityADto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
+        usuarioDTO.setId(usuario.getId());
         usuarioDTO.setUsername(usuario.getUsername());
         usuarioDTO.setContrasena(usuario.getContrasenia());
         usuarioDTO.setHabilitado(usuario.isEnabled());

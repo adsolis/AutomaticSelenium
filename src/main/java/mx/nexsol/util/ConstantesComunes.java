@@ -7,6 +7,8 @@ public class ConstantesComunes {
 	public static final String REGISTRO_PROYECTO = "/pages/registro/registro.xhtml";
 	
 	public static final String DETALLE_PROYECTO = "/pages/registro/detalle_proyecto.xhtml";
+
+	public static final String DETALLE_USUARIO = "/pages/seguridad/detalle_usuario.xhtml";
 	
 	
 	//Estatus de proyecto

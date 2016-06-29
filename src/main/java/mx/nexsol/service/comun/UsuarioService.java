@@ -17,6 +17,8 @@ public interface UsuarioService {
 
     UsuarioRespuestaDTO guardarUsuario(UsuarioDTO usuarioDTO);
 
+    UsuarioRespuestaDTO recuperarUsuario(long id);
+
     UsuarioRespuestaDTO editarUsuario(UsuarioDTO usuarioDTO);
 
     UsuarioRespuestaDTO eliminarUsuario(long id);
