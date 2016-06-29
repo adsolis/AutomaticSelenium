@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:body>
+
+    <h:form id="usuarioForm">
+        <h:panelGrid columns="4" width="100%">
+
+            <h:outputLabel value="Nombre: *" for="nombre" />
+            <p:inputText id="nombre" value="#{usuarioBean.usuarioDTO.nombre}"
+                         required="true"/>
+
+            <h:outputLabel value="Apellido Paterno: *" for="apellidoPaterno" />
+            <p:inputText id="apellidoPaterno" value="#{usuarioBean.usuarioDTO.apellidoPaterno}"
+                         required="true"/>
+
+            <h:outputLabel value="Apellido Materno: " for="apellidoMaterno" />
+            <p:inputText id="apellidoMaterno" value="#{usuarioBean.usuarioDTO.apellidoMaterno}"/>
+
+            <h:outputLabel value="Correo Electr&oacute;nico: *" for="correoElectronico" />
+            <p:inputText id="correoElectronico" value="#{usuarioBean.usuarioDTO.correoElectronico}"
+                         required="true"/>
+
+            <h:outputLabel value="N&uacute;mero Telef&oacute;nico: " for="numeroTelefonico" />
+            <p:inputText id="numeroTelefonico" value="#{usuarioBean.usuarioDTO.numeroTelefonico}"/>
+
+
+            <h:outputLabel value="Fecha de Nacimiento: *" for="fechaNacimiento" />
+            <p:calendar id="fechaNacimiento"
+                        readonlyInput="true"
+                        required="true"
+                        navigator="true"
+                        pattern="dd/MM/yyyy"
+                        yearRange="1900:c"
+                        value="#{usuarioBean.usuarioDTO.fechaNacimiento}" />
+            <p:message for="fechaNacimiento" />
+
+            <h:outputLabel value="Usuario: *" for="username" />
+            <p:inputTextarea id="username" value="#{usuarioBean.usuarioDTO.username}"
+                             required="true" />
+
+            <h:outputLabel value="Contrase&ntilde;a" for="contrasena" />
+            <p:inputTextarea id="contrasena" value="#{usuarioBean.usuarioDTO.contrasena}"
+                             required="true" />
+
+
+        </h:panelGrid>
+
+        <p:commandButton value="Guardar" id="botonGuardar" actionListener="#{usuarioBean.guardarUsuario}" ajax="false"/>
+
+    </h:form>
+</h:body>
+</html>

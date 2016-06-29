@@ -2,7 +2,6 @@ package mx.nexsol.entity.comun;
 
 import java.util.Date;
 import javax.persistence.*;
-import org.hibernate.annotations.*;
 
 @MappedSuperclass
 public abstract class SequenceGenerator {

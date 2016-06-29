@@ -29,5 +29,7 @@
         <mapping class="mx.nexsol.entity.catalogos.CatComplejidad"/>
         <mapping class="mx.nexsol.entity.comun.Usuario"/>
         <mapping class="mx.nexsol.entity.comun.UsuarioRol"/>
+        <mapping class="mx.nexsol.entity.catalogos.CatPais" />
+        <mapping class="mx.nexsol.entity.catalogos.Empresa"/>
     </session-factory>
 </hibernate-configuration>

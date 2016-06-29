@@ -85,7 +85,7 @@ public class ProyectoBean implements Serializable {
 	public void guardarProyecto() throws Exception {
 		try {
 			proyectoDTO = proyectoService.guardarProyecto(proyectoDTO);
-			if(proyectoDTO.getResultado()==ConstantesComunes.EXITO) {
+			if(proyectoDTO.getResultado()==ConstantesComunes.CODIGO_EXITO) {
 				FacesContext context = FacesContext.getCurrentInstance();
 	            context.getExternalContext().getFlash().setKeepMessages(true);
 

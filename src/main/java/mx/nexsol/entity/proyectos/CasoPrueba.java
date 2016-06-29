@@ -4,9 +4,7 @@ import mx.nexsol.entity.comun.SequenceGenerator;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "CASO_PRUEBA")
@@ -25,6 +23,10 @@ public class CasoPrueba extends SequenceGenerator implements Serializable {
 
 	@Column(name = "ID_CASO")
 	private String idCasoPrueba;
+
+	@ManyToOne
+	@JoinColumn(name = "FUNCIONALIDAD")
+	private Funcionalidad funcionalidad;
 
 	public String getNombre() {
 		return nombre;

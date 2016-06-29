@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import mx.nexsol.entity.comun.SequenceGenerator;
+import mx.nexsol.entity.comun.Usuario;
 
 @Entity
 @Table(name = "PROYECTO")
@@ -35,10 +36,12 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	
 	@Column(name = "ESTRATEGIA")
 	private String estrategia;
+
+	@OneToOne
+	@JoinColumn(name = "USUARIO")
+	private Usuario usuario;
 	
-	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "PROYECTO_ID", nullable = true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proyecto")
 	private List<Funcionalidad> funcionalidad;
 	
 

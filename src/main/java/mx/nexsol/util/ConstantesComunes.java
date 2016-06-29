@@ -23,10 +23,16 @@ public class ConstantesComunes {
 	
 	public static final String ESTATUS_PROYECTO_FINALIZADO = "Finalizado";
 	
-	//Constantes para codigos de error
+	//Constantes para codigos de error y exito
 	
-	public static final int EXITO = 0;
+	public static final int CODIGO_EXITO = 0;
 	
-	public static final int ERROR_GUARDADO = 1;
+	public static final int CODIGO_ERROR = 1;
+
+	//Constantes para mensajes de error y exito
+
+	public static final String MENSAJE_EXITO = "El registro se guardo con exito";
+
+	public static final String MENSAJE_ERROR = "Ha ocurrido un error, favor de contactar al administrador del sistema";
 
 }

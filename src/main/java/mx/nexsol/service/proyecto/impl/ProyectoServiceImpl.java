@@ -53,10 +53,10 @@ public class ProyectoServiceImpl implements ProyectoService {
 			proyecto.setEstatus(ConstantesComunes.CODIGO_ESTATUS_PROYECTO_PENDIENTE);
 			proyecto = proyectoDAO.guardarRegistro(proyecto);
 			proyectoDTO = mapearProyectoEntityADto(proyecto);
-			proyectoDTO.setResultado(ConstantesComunes.EXITO);
+			proyectoDTO.setResultado(ConstantesComunes.CODIGO_EXITO);
 		}catch(Exception e) {
 			e.printStackTrace();
-			proyectoDTO.setResultado(ConstantesComunes.ERROR_GUARDADO);
+			proyectoDTO.setResultado(ConstantesComunes.CODIGO_ERROR);
 		}
 		return proyectoDTO;
 	}
@@ -69,7 +69,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			proyecto = new ProyectoDTO();
-			proyecto.setResultado(ConstantesComunes.ERROR_GUARDADO);
+			proyecto.setResultado(ConstantesComunes.CODIGO_ERROR);
 		}
 		return proyecto;
 	}

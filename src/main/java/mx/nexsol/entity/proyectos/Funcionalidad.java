@@ -27,8 +27,11 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	@Column(name = "COMPLEJIDAD_ID")
 	private CatComplejidad complejidad;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FUNCIONALIDAD_ID", nullable = true)
+	@ManyToOne
+	@JoinColumn(name = "PROYECTO")
+	private Proyecto proyecto;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionalidad")
 	private List<CasoPrueba> casosPrueba;
 
 	public String getNombre() {

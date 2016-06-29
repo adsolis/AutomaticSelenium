@@ -1,57 +1,127 @@
 package mx.nexsol.entity.comun;
 
-import mx.nexsol.entity.showcase.Persona;
+import mx.nexsol.entity.catalogos.Empresa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "USUARIO")
 public class Usuario extends SequenceGenerator {
-	
 
-	@Column(name = "username", nullable = false)
-	private String username;
-	
-	@Column(name = "password", nullable = false)
-	private String contrasenia;
+    public Usuario() {
 
-	@Column(name = "enabled")
-	private boolean enabled;
+    }
 
-	@Column(name = "PERSONA", nullable = true)
-	private Persona persona;
 
-	public String getUsername() {
-		return username;
-	}
+    @Column(name = "username", nullable = false)
+    private String username;
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    @Column(name = "password", nullable = false)
+    private String contrasenia;
 
-	public String getContrasenia() {
-		return contrasenia;
-	}
+    @Column(name = "enabled")
+    private boolean enabled;
 
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
+    @Column(name = "NOMBRE", nullable = false)
+    private String nombre;
 
-	public boolean isEnabled() {
-		return enabled;
-	}
+    @Column(name = "APELLIDO_PATERNO", nullable = false)
+    private String apellidoPaterno;
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    @Column(name = "APELLIDO_MATERNO", nullable = true)
+    private String apellidoMaterno;
 
-	public Persona getPersona() {
-		return persona;
-	}
+    @Column(name = "CORREO_ELECTRONICO", nullable = false)
+    private String correoElectronico;
 
-	public void setPersona(Persona persona) {
-		this.persona = persona;
-	}
+    @Column(name = "NUMERO_TELEFONICO", nullable = true)
+    private String numeroTelefonico;
+
+    @Column(name = "FECHA_NACIMIENTO", nullable = true)
+    private Date fechaNacimiento;
+
+    @OneToOne
+    @JoinColumn(name = "EMPRESA", nullable = true)
+    private Empresa empresa;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getCorreoElectronico() {
+        return correoElectronico;
+    }
+
+    public void setCorreoElectronico(String correoElectronico) {
+        this.correoElectronico = correoElectronico;
+    }
+
+    public String getNumeroTelefonico() {
+        return numeroTelefonico;
+    }
+
+    public void setNumeroTelefonico(String numeroTelefonico) {
+        this.numeroTelefonico = numeroTelefonico;
+    }
+
+    public Date getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(Date fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
 }
