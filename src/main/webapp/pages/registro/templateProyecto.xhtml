@@ -35,13 +35,14 @@
 
 		<h:outputLabel value="Lider de automatizaci&oacute;n *" for="lider" />
 		<p:selectOneMenu id="lider"
-						 value="#{proyectoBean.proyectoDTO.usuarioDTO.id}"
+						 value="#{proyectoBean.proyectoDTO.usuarioDTO}"
+						 converter="#{usuarioConverter}"
 						 style="width:125px">
 			<f:selectItems
 					value="#{proyectoBean.usuarioDTOs}"
 					var="usuario"
 					itemLabel="#{usuario.nombre}"
-					itemValue="#{usuario.id}"/>
+					itemValue="#{usuario}"/>
 		</p:selectOneMenu>
 
 

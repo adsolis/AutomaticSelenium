@@ -37,11 +37,11 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	@Column(name = "ESTRATEGIA")
 	private String estrategia;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	@JoinColumn(name = "USUARIO")
 	private Usuario usuario;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "proyecto")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "proyecto")
 	private List<Funcionalidad> funcionalidad;
 	
 

@@ -12,7 +12,7 @@ import mx.nexsol.dto.catalogos.CatComplejidadDTO;
 import mx.nexsol.entity.catalogos.CatComplejidad;
 import mx.nexsol.service.catalogos.CatComplejidadService;
 
-@Service
+@Service("catComplejidadService")
 public class CatComplejidadServiceImpl implements CatComplejidadService, Serializable {
 	
 	@Autowired

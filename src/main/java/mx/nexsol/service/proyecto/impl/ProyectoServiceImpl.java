@@ -29,9 +29,6 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 	@Autowired
 	private FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl;
 
-	@Autowired
-	private UsuarioDAO usuarioDAO;
-
 	
 
 	//TODO revisar viabilidad de manejar mapeo o enviar el objeto entity directamente hasta la vista para no afectar el performance
@@ -61,7 +58,7 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		try {
 			proyecto = mapearDTOaEntity(proyectoDTO);
 			proyecto.setEstatus(ConstantesComunes.CODIGO_ESTATUS_PROYECTO_PENDIENTE);
-			proyecto.setUsuario(usuarioDAO.recuperarRegistro(proyectoDTO.getUsuarioDTO().getId()));
+			proyecto.setUsuario(UsuarioServiceImpl.mapearDtoAEntity(proyectoDTO.getUsuarioDTO()));
 			proyecto = proyectoDAO.guardarRegistro(proyecto);
 			proyectoDTO = mapearProyectoEntityADto(proyecto);
 			proyectoDTO.setResultado(ConstantesComunes.CODIGO_EXITO);
@@ -171,16 +168,5 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 			FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl) {
 		this.proyectoFuncionalidadServiceImpl = proyectoFuncionalidadServiceImpl;
 	}
-
-	public UsuarioDAO getUsuarioDAO() {
-		return usuarioDAO;
-	}
-
-	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
-		this.usuarioDAO = usuarioDAO;
-	}
-	
-	
-
 
 }

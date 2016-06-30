@@ -62,10 +62,10 @@ public class ProyectoBean implements Serializable {
 	@ManagedProperty(name = "proyectoService", value = "#{proyectoService}")
 	private ProyectoService proyectoService;
 
-	@ManagedProperty(value = "#{catComplejidadService}")
+	@ManagedProperty(name = "catComplejidadService", value = "#{catComplejidadService}")
 	private CatComplejidadService catComplejidadService;
 
-	@ManagedProperty(value = "#{usuarioService}")
+	@ManagedProperty(name = "usuarioService", value = "#{usuarioService}")
 	private UsuarioService usuarioService;
 	
 	@PostConstruct
