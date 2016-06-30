@@ -35,11 +35,15 @@
 			required="true" />
 
 		<h:outputLabel value="Lider de automatizaci&oacute;n *" for="lider" />
-		<p:selectOneMenu id="lider" disabled="disabled" value="1" style="width:125px">
-			<f:selectItem itemLabel="Seleccionar" itemValue="" />
-			<f:selectItem itemLabel="Carlos Gomez" itemValue="1" />
-			<f:selectItem itemLabel="Javier Hernandez" itemValue="2" />
-			<f:selectItem itemLabel="Ramiro Fernandez" itemValue="3" />
+		<p:selectOneMenu id="lider"
+						 value="#{proyectoBean.proyectoDTO.usuarioDTO}"
+						 style="width:125px"
+						 converter="#{usuarioConverter}">
+			<f:selectItems
+					value="#{proyectoBean.usuarioDTOs}"
+					var="usuario"
+					itemLabel="#{usuario.nombre}"
+					itemValue="#{usuario}"/>
 		</p:selectOneMenu>
 
 

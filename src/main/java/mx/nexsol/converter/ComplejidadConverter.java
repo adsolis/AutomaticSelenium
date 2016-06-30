@@ -1,4 +1,4 @@
-package mx.nexsol.converter.catalogos;
+package mx.nexsol.converter;
 
 import java.util.List;
 

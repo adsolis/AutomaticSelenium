@@ -11,7 +11,9 @@
 	<ui:composition template="/templates/layout.xhtml">
 		<ui:define name="content">
 			<h2>Proyectos</h2>
-			<h:link styleClass="btn btn-primary" value="Nuevo" outcome="/pages/registro/registro.xhtml" />
+			<h:link styleClass="btn btn-primary" value="Nuevo" outcome="/pages/registro/registro.xhtml" >
+				<f:param name="registro" value="true"/>
+			</h:link>
 			<p:dataTable styleClass="table" value="#{proyectosBean.proyectos}" rows="5"
 				style="text-align:center;" var="proyecto" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} 

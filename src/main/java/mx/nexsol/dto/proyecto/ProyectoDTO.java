@@ -3,6 +3,8 @@ package mx.nexsol.dto.proyecto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+
+import mx.nexsol.dto.comun.UsuarioDTO;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -30,6 +32,8 @@ public class ProyectoDTO implements Serializable {
 	private int resultado;
 	
 	private String estatus;
+
+	private UsuarioDTO usuarioDTO;
 
 	public long getId() {
 		return id;
@@ -86,8 +90,12 @@ public class ProyectoDTO implements Serializable {
 	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-	
-	
-	
 
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
+	}
+
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
+	}
 }

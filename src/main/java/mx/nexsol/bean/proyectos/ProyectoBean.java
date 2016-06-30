@@ -10,6 +10,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import mx.nexsol.dto.comun.UsuarioDTO;
+import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -47,14 +50,21 @@ public class ProyectoBean implements Serializable {
 	@Autowired
 	@ManagedProperty(value = "#{funcionalidadDTO}")
 	private FuncionalidadDTO funcionalidadDTO;
-	
+
+	@ManagedProperty(value = "#{listaCatalogoComplejidad}")
 	private List<CatComplejidadDTO> listaCatalogoComplejidad;
+
+	@ManagedProperty(value = "#{usuarioDTOs}")
+	private List<UsuarioDTO> usuarioDTOs;
 	
 	@Autowired
 	private ProyectoServiceImpl proyectoService;
 	
 	@Autowired
 	private CatComplejidadServiceImpl catComplejidadService;
+
+	@Autowired
+	private UsuarioServiceImpl usuarioService;
 	
 	@PostConstruct
 	public void init() {
@@ -70,8 +80,12 @@ public class ProyectoBean implements Serializable {
 				session.setAttribute("listaCatalogoComplejidad", listaCatalogoComplejidad);
 			}
 		}
+
+		if(request.getParameter("registro")!=null) {
+			usuarioDTOs = (usuarioService.recuperarUsuarios()).getUsuarios();
+		}
 		
-		
+		System.out.println("los usuarios: " + usuarioDTOs.size());
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
 			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");
@@ -100,7 +114,7 @@ public class ProyectoBean implements Serializable {
 			else {
 				FacesContext.getCurrentInstance().addMessage
                 (null, new FacesMessage
-                        (FacesMessage.SEVERITY_ERROR,"Error", "Ocurrio un problema al guardar el proyecto"));
+                        (FacesMessage.SEVERITY_ERROR,"Error", "Ocurrio un problema al g"));
         RequestContext.getCurrentInstance().execute("errorDialog.show()");
 			}
 			
@@ -218,4 +232,19 @@ public class ProyectoBean implements Serializable {
 		this.funcionalidadDTO = funcionalidadDTO;
 	}
 
+	public List<UsuarioDTO> getUsuarioDTOs() {
+		return usuarioDTOs;
+	}
+
+	public void setUsuarioDTOs(List<UsuarioDTO> usuarioDTOs) {
+		this.usuarioDTOs = usuarioDTOs;
+	}
+
+	public UsuarioServiceImpl getUsuarioService() {
+		return usuarioService;
+	}
+
+	public void setUsuarioService(UsuarioServiceImpl usuarioService) {
+		this.usuarioService = usuarioService;
+	}
 }
