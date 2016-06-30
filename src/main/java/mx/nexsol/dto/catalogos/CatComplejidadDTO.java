@@ -2,6 +2,8 @@ package mx.nexsol.dto.catalogos;
 
 import java.io.Serializable;
 
+import lombok.Data;
+
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -44,7 +46,4 @@ public class CatComplejidadDTO implements Serializable {
 	public void setLimiteTiempoMiutos(int limiteTiempoMiutos) {
 		this.limiteTiempoMiutos = limiteTiempoMiutos;
 	}
-	
-	
-
 }

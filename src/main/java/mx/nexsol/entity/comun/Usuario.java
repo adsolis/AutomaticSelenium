@@ -3,11 +3,12 @@ package mx.nexsol.entity.comun;
 import mx.nexsol.entity.catalogos.Empresa;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "USUARIO")
-public class Usuario extends SequenceGenerator {
+public class Usuario extends SequenceGenerator implements Serializable {
 
     public Usuario() {
 

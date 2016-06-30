@@ -12,25 +12,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import mx.nexsol.dto.comun.UsuarioDTO;
+import mx.nexsol.service.catalogos.CatComplejidadService;
+import mx.nexsol.service.comun.UsuarioService;
 import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
+import mx.nexsol.service.proyecto.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import mx.nexsol.dto.catalogos.CatComplejidadDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
-import mx.nexsol.service.catalogos.impl.CatComplejidadServiceImpl;
-import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
 import mx.nexsol.util.ConstantesComunes;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 import org.primefaces.context.RequestContext;
 
-@Controller
+
 @ManagedBean(name = "proyectoBean")
-@Scope(value = "request")
 @ViewScoped
 public class ProyectoBean implements Serializable {
 	
@@ -56,15 +58,15 @@ public class ProyectoBean implements Serializable {
 
 	@ManagedProperty(value = "#{usuarioDTOs}")
 	private List<UsuarioDTO> usuarioDTOs;
-	
-	@Autowired
-	private ProyectoServiceImpl proyectoService;
-	
-	@Autowired
-	private CatComplejidadServiceImpl catComplejidadService;
 
-	@Autowired
-	private UsuarioServiceImpl usuarioService;
+	@ManagedProperty(name = "proyectoService", value = "#{proyectoService}")
+	private ProyectoService proyectoService;
+
+	@ManagedProperty(value = "#{catComplejidadService}")
+	private CatComplejidadService catComplejidadService;
+
+	@ManagedProperty(value = "#{usuarioService}")
+	private UsuarioService usuarioService;
 	
 	@PostConstruct
 	public void init() {
@@ -85,7 +87,7 @@ public class ProyectoBean implements Serializable {
 			usuarioDTOs = (usuarioService.recuperarUsuarios()).getUsuarios();
 		}
 		
-		System.out.println("los usuarios: " + usuarioDTOs.size());
+		//System.out.println("los usuarios: " + usuarioDTOs.size());
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
 			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");
@@ -198,38 +200,20 @@ public class ProyectoBean implements Serializable {
 		this.funcionalidadesDTO = funcionalidadesDTO;
 	}
 
-	public ProyectoServiceImpl getProyectoService() {
-		return proyectoService;
-	}
-
-	public void setProyectoService(ProyectoServiceImpl proyectoService) {
-		this.proyectoService = proyectoService;
-	}
-
-	public List<CatComplejidadDTO> getListaCatalogoComplejidad() {
-		return listaCatalogoComplejidad;
-	}
-
-	public void setListaCatalogoComplejidad(
-			List<CatComplejidadDTO> listaCatalogoComplejidad) {
-		this.listaCatalogoComplejidad = listaCatalogoComplejidad;
-	}
-
-	public CatComplejidadServiceImpl getCatComplejidadService() {
-		return catComplejidadService;
-	}
-
-	public void setCatComplejidadService(
-			CatComplejidadServiceImpl catComplejidadService) {
-		this.catComplejidadService = catComplejidadService;
-	}
-
 	public FuncionalidadDTO getFuncionalidadDTO() {
 		return funcionalidadDTO;
 	}
 
 	public void setFuncionalidadDTO(FuncionalidadDTO funcionalidadDTO) {
 		this.funcionalidadDTO = funcionalidadDTO;
+	}
+
+	public List<CatComplejidadDTO> getListaCatalogoComplejidad() {
+		return listaCatalogoComplejidad;
+	}
+
+	public void setListaCatalogoComplejidad(List<CatComplejidadDTO> listaCatalogoComplejidad) {
+		this.listaCatalogoComplejidad = listaCatalogoComplejidad;
 	}
 
 	public List<UsuarioDTO> getUsuarioDTOs() {
@@ -240,11 +224,27 @@ public class ProyectoBean implements Serializable {
 		this.usuarioDTOs = usuarioDTOs;
 	}
 
-	public UsuarioServiceImpl getUsuarioService() {
+	public ProyectoService getProyectoService() {
+		return proyectoService;
+	}
+
+	public void setProyectoService(ProyectoService proyectoService) {
+		this.proyectoService = proyectoService;
+	}
+
+	public CatComplejidadService getCatComplejidadService() {
+		return catComplejidadService;
+	}
+
+	public void setCatComplejidadService(CatComplejidadService catComplejidadService) {
+		this.catComplejidadService = catComplejidadService;
+	}
+
+	public UsuarioService getUsuarioService() {
 		return usuarioService;
 	}
 
-	public void setUsuarioService(UsuarioServiceImpl usuarioService) {
+	public void setUsuarioService(UsuarioService usuarioService) {
 		this.usuarioService = usuarioService;
 	}
 }

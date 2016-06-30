@@ -5,7 +5,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:j="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:body>
 	<script type="text/javascript">
@@ -36,14 +35,13 @@
 
 		<h:outputLabel value="Lider de automatizaci&oacute;n *" for="lider" />
 		<p:selectOneMenu id="lider"
-						 value="#{proyectoBean.proyectoDTO.usuarioDTO}"
-						 style="width:125px"
-						 converter="#{usuarioConverter}">
+						 value="#{proyectoBean.proyectoDTO.usuarioDTO.id}"
+						 style="width:125px">
 			<f:selectItems
 					value="#{proyectoBean.usuarioDTOs}"
 					var="usuario"
 					itemLabel="#{usuario.nombre}"
-					itemValue="#{usuario}"/>
+					itemValue="#{usuario.id}"/>
 		</p:selectOneMenu>
 
 

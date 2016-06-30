@@ -4,11 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import lombok.Data;
 import mx.nexsol.dto.comun.UsuarioDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.context.annotation.Scope;
 import org.springframework.beans.factory.config.BeanDefinition;
-
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
@@ -33,6 +34,7 @@ public class ProyectoDTO implements Serializable {
 	
 	private String estatus;
 
+	@Autowired
 	private UsuarioDTO usuarioDTO;
 
 	public long getId() {

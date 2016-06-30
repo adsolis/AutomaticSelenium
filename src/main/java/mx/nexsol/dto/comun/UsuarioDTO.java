@@ -1,15 +1,24 @@
 package mx.nexsol.dto.comun;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by ironhide on 28/06/16.
  */
 
+@EqualsAndHashCode(callSuper = false, of = {"id"})
 @Component
-public class UsuarioDTO {
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
+public class UsuarioDTO implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private long id;
 

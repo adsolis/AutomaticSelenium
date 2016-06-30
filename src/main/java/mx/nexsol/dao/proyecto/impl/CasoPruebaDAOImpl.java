@@ -5,11 +5,13 @@ import mx.nexsol.dao.proyecto.CasoPruebaDAO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
+
 /**
  * Created by ironhide on 23/06/16.
  */
 
 @Repository
-public class CasoPruebaDAOImpl extends GenericDAOImpl<CasoPrueba> implements CasoPruebaDAO {
+public class CasoPruebaDAOImpl extends GenericDAOImpl<CasoPrueba> implements CasoPruebaDAO, Serializable {
 
 }

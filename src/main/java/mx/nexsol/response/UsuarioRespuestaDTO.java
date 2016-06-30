@@ -5,6 +5,7 @@ import mx.nexsol.entity.comun.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  */
 
 @Component
-public class UsuarioRespuestaDTO extends RespuestaDTO {
+public class UsuarioRespuestaDTO extends RespuestaDTO implements Serializable {
 
     @Autowired
     public UsuarioDTO usuarioDTO;

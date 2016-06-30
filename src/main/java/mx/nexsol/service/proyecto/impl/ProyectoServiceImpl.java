@@ -1,8 +1,12 @@
 package mx.nexsol.service.proyecto.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+import mx.nexsol.dao.comun.UsuarioDAO;
+import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +18,20 @@ import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.ProyectoService;
 import mx.nexsol.util.ConstantesComunes;
 
-@Service
-public class ProyectoServiceImpl implements ProyectoService {
+@Service("proyectoService")
+public class ProyectoServiceImpl implements ProyectoService, Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
 	@Autowired
 	private ProyectoDAO proyectoDAO;
 	
 	@Autowired
 	private FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl;
+
+	@Autowired
+	private UsuarioDAO usuarioDAO;
+
 	
 
 	//TODO revisar viabilidad de manejar mapeo o enviar el objeto entity directamente hasta la vista para no afectar el performance
@@ -51,6 +61,7 @@ public class ProyectoServiceImpl implements ProyectoService {
 		try {
 			proyecto = mapearDTOaEntity(proyectoDTO);
 			proyecto.setEstatus(ConstantesComunes.CODIGO_ESTATUS_PROYECTO_PENDIENTE);
+			proyecto.setUsuario(usuarioDAO.recuperarRegistro(proyectoDTO.getUsuarioDTO().getId()));
 			proyecto = proyectoDAO.guardarRegistro(proyecto);
 			proyectoDTO = mapearProyectoEntityADto(proyecto);
 			proyectoDTO.setResultado(ConstantesComunes.CODIGO_EXITO);
@@ -151,6 +162,25 @@ public class ProyectoServiceImpl implements ProyectoService {
 	public void setProyectoDAO(ProyectoDAO proyectoDAO) {
 		this.proyectoDAO = proyectoDAO;
 	}
+
+	public FuncionalidadServiceImpl getProyectoFuncionalidadServiceImpl() {
+		return proyectoFuncionalidadServiceImpl;
+	}
+
+	public void setProyectoFuncionalidadServiceImpl(
+			FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl) {
+		this.proyectoFuncionalidadServiceImpl = proyectoFuncionalidadServiceImpl;
+	}
+
+	public UsuarioDAO getUsuarioDAO() {
+		return usuarioDAO;
+	}
+
+	public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
+		this.usuarioDAO = usuarioDAO;
+	}
+	
+	
 
 
 }

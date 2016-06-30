@@ -5,10 +5,12 @@ import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+import javax.faces.convert.ConverterException;
 
 /**
  * Created by ironhide on 29/06/16.
@@ -24,7 +26,12 @@ public class UsuarioConverter implements Converter {
     @Override
     public Object getAsObject(FacesContext context, UIComponent component,
                               String value) {
-        return (usuarioService.recuperarUsuario(Long.parseLong(value))).usuarioDTO;
+        UsuarioDTO usuarioDTO = (usuarioService.recuperarUsuario(Long.parseLong(value))).usuarioDTO;
+
+        if(usuarioDTO==null)
+            throw new ConverterException(new FacesMessage(("ID de Usuario desconocido" + value)));
+
+        return usuarioDTO;
     }
 
     @Override

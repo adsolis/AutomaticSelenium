@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import java.io.Serializable;
 
 /**
  * Created by ironhide on 28/06/16.
@@ -17,7 +18,7 @@ import javax.faces.bean.ManagedProperty;
 @Controller
 @ManagedBean(name = "usuariosBean")
 @Scope(value = "request")
-public class UsuariosBean {
+public class UsuariosBean implements Serializable {
 
     @ManagedProperty(value = "#{usuarioRespuestaDTO}")
     private UsuarioRespuestaDTO usuarioRespuestaDTO;

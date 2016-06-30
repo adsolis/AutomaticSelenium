@@ -1,6 +1,7 @@
 package mx.nexsol.bean.seguridad;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -33,7 +34,7 @@ import org.springframework.security.web.WebAttributes;
 @RequestScoped
 @ManagedBean(name = "loginBean")
 @Component
-public class Login {
+public class Login implements Serializable {
 
     protected final Log logger = LogFactory.getLog(getClass());
 

@@ -7,7 +7,9 @@ import mx.nexsol.dao.comun.GenericDAO;
 import mx.nexsol.dao.comun.impl.GenericDAOImpl;
 import mx.nexsol.entity.catalogos.CatComplejidad;
 
+import java.io.Serializable;
+
 @Repository
-public class CatComplejidadDAOImpl extends GenericDAOImpl<CatComplejidad> implements CatComplejidadDAO {
+public class CatComplejidadDAOImpl extends GenericDAOImpl<CatComplejidad> implements CatComplejidadDAO, Serializable {
 
 }

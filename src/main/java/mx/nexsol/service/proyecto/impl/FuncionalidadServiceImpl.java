@@ -1,5 +1,6 @@
 package mx.nexsol.service.proyecto.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.FuncionalidadService;
 
 @Service
-public class FuncionalidadServiceImpl implements FuncionalidadService {
+public class FuncionalidadServiceImpl implements FuncionalidadService, Serializable {
 	
 	@Autowired
 	FuncionalidadDAO funcionalidadDAO;

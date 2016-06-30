@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ import java.util.Map;
  */
 
 @Repository
-public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO {
+public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO, Serializable {
 
     public List<Usuario> recuperarUsuariosPorEmpresa(Empresa empresa) throws Exception {
         List<Usuario> usuarios = null;

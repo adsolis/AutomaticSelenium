@@ -1,5 +1,6 @@
 package mx.nexsol.service.catalogos.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import mx.nexsol.entity.catalogos.CatComplejidad;
 import mx.nexsol.service.catalogos.CatComplejidadService;
 
 @Service
-public class CatComplejidadServiceImpl implements CatComplejidadService {
+public class CatComplejidadServiceImpl implements CatComplejidadService, Serializable {
 	
 	@Autowired
 	private CatComplejidadDAO catComplejidadDAO;

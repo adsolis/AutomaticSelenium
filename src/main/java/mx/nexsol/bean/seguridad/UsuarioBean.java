@@ -18,6 +18,7 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ import java.util.List;
 @ManagedBean(name = "usuarioBean")
 @Scope(value = "request")
 @ViewScoped
-public class UsuarioBean {
+public class UsuarioBean implements Serializable {
 
     @Autowired
     @ManagedProperty(value = "#{usuarioDTO}")

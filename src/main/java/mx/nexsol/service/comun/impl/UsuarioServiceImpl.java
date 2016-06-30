@@ -9,6 +9,7 @@ import mx.nexsol.util.ConstantesComunes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +17,8 @@ import java.util.List;
  * Created by ironhide on 28/06/16.
  */
 
-@Service
-public class UsuarioServiceImpl implements UsuarioService {
+@Service("usuarioService")
+public class UsuarioServiceImpl implements UsuarioService, Serializable {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
@@ -99,7 +100,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         this.usuarioDAO = usuarioDAO;
     }
 
-    private UsuarioDTO mapearEntityADto(Usuario usuario) {
+    public static UsuarioDTO mapearEntityADto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
         usuarioDTO.setId(usuario.getId());
@@ -115,7 +116,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioDTO;
     }
 
-    private Usuario mapearDtoAEntity(UsuarioDTO usuarioDTO) {
+    public static Usuario mapearDtoAEntity(UsuarioDTO usuarioDTO) {
         Usuario usuario = new Usuario();
 
         usuario.setUsername(usuarioDTO.getUsername());

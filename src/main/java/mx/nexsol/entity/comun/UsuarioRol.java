@@ -3,10 +3,11 @@ package mx.nexsol.entity.comun;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "USUARIO_ROL")
-public class UsuarioRol extends SequenceGenerator {
+public class UsuarioRol extends SequenceGenerator implements Serializable {
 	
 	@Column(name = "rol")
 	private String rol;

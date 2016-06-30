@@ -1,5 +1,7 @@
 package mx.nexsol.response;
 
+import java.io.Serializable;
+
 /**
  * Clase padre que funciona para definir las propiedades que se utilizar como
  * respuesta entre las capas
@@ -12,7 +14,7 @@ package mx.nexsol.response;
  * Created by ironhide on 28/06/16.
  */
 
-public class RespuestaDTO {
+public class RespuestaDTO implements Serializable {
 
     public int codigoRespuesta;
 
