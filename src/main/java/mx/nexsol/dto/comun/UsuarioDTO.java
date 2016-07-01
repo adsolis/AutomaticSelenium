@@ -40,6 +40,8 @@ public class UsuarioDTO implements Serializable {
 
     private String numeroTelefonico;
 
+    private String rol;
+
     public long getId() {
         return id;
     }
@@ -118,5 +120,13 @@ public class UsuarioDTO implements Serializable {
 
     public void setNumeroTelefonico(String numeroTelefonico) {
         this.numeroTelefonico = numeroTelefonico;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

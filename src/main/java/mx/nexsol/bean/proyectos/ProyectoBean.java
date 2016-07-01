@@ -8,20 +8,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import mx.nexsol.dto.comun.UsuarioDTO;
 import mx.nexsol.service.catalogos.CatComplejidadService;
 import mx.nexsol.service.comun.UsuarioService;
-import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import mx.nexsol.service.proyecto.ProyectoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
 import mx.nexsol.dto.catalogos.CatComplejidadDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
@@ -86,8 +80,7 @@ public class ProyectoBean implements Serializable {
 		if(request.getParameter("registro")!=null) {
 			usuarioDTOs = (usuarioService.recuperarUsuarios()).getUsuarios();
 		}
-		
-		//System.out.println("los usuarios: " + usuarioDTOs.size());
+
 		/**try {
 			System.out.println("va a intentar ejecutar el jar");
 			Runtime.getRuntime().exec("java -jar Users/ironhide/Desktop/EjecucionPrueba.jar");

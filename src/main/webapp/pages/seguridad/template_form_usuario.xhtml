@@ -3,6 +3,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:body>
 
@@ -36,7 +37,6 @@
                         pattern="dd/MM/yyyy"
                         yearRange="1900:c"
                         value="#{usuarioBean.usuarioDTO.fechaNacimiento}" />
-            <p:message for="fechaNacimiento" />
 
             <h:outputLabel value="Usuario: *" for="username" />
             <p:inputText id="username" value="#{usuarioBean.usuarioDTO.username}"
@@ -45,6 +45,14 @@
             <h:outputLabel value="Contrase&ntilde;a" for="contrasena" />
             <p:inputText id="contrasena" value="#{usuarioBean.usuarioDTO.contrasena}"
                              required="true" />
+
+
+            <h:outputLabel value="Rol *" for="rol" />
+            <p:selectOneMenu id="rol" value="#{usuarioBean.usuarioDTO.rol}" style="width:125px">
+                <f:selectItem itemLabel="Seleccionar" itemValue="" />
+                <f:selectItem itemLabel="L&iacute;der Automatizador" itemValue="ROLE_LIDER" />
+                <f:selectItem itemLabel="Core" itemValue="ROLE_CORE" />
+            </p:selectOneMenu>
 
 
         </h:panelGrid>

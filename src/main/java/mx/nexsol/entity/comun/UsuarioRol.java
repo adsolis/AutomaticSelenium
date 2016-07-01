@@ -8,6 +8,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "USUARIO_ROL")
 public class UsuarioRol extends SequenceGenerator implements Serializable {
+
+	public UsuarioRol() {
+
+	}
 	
 	@Column(name = "rol")
 	private String rol;

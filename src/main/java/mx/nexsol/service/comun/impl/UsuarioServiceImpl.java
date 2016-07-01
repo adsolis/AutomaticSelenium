@@ -1,8 +1,10 @@
 package mx.nexsol.service.comun.impl;
 
 import mx.nexsol.dao.comun.UsuarioDAO;
+import mx.nexsol.dao.comun.UsuarioRolDAO;
 import mx.nexsol.dto.comun.UsuarioDTO;
 import mx.nexsol.entity.comun.Usuario;
+import mx.nexsol.entity.comun.UsuarioRol;
 import mx.nexsol.response.UsuarioRespuestaDTO;
 import mx.nexsol.service.comun.UsuarioService;
 import mx.nexsol.util.ConstantesComunes;
@@ -22,6 +24,9 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
 
     @Autowired
     private UsuarioDAO usuarioDAO;
+
+    @Autowired
+    private UsuarioRolDAO usuarioRolDAO;
 
     public UsuarioRespuestaDTO recuperarUsuarios() {
         UsuarioRespuestaDTO usuarioRespuestaDTO = new UsuarioRespuestaDTO();
@@ -52,13 +57,21 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
 
     public UsuarioRespuestaDTO guardarUsuario(UsuarioDTO usuarioDTO) {
         Usuario usuario = mapearDtoAEntity(usuarioDTO);
+        UsuarioRol usuarioRol = null;
         UsuarioRespuestaDTO usuarioRespuestaDTO = new UsuarioRespuestaDTO();
-        usuarioDTO = null;
         try {
             usuario = usuarioDAO.guardarRegistro(usuario);
             usuarioRespuestaDTO.usuarioDTO = mapearEntityADto(usuario);
+            usuarioRol = new UsuarioRol();
+            usuarioRol.setRol(usuarioDTO.getRol());
+            usuarioRol.setUsuario(usuarioDTO.getUsername());
+            usuarioRol = usuarioRolDAO.guardarRegistro(usuarioRol);
+            usuarioRespuestaDTO.usuarioDTO.setRol(usuarioDTO.getRol());
             usuarioRespuestaDTO.codigoRespuesta = ConstantesComunes.CODIGO_EXITO;
             usuarioRespuestaDTO.mensajeRespuesta = ConstantesComunes.MENSAJE_EXITO;
+            usuarioRol = null;
+            usuario = null;
+            usuarioDTO = null;
         }catch (Exception e) {
             usuarioRespuestaDTO.excepcion = e;
             usuarioRespuestaDTO.codigoRespuesta = ConstantesComunes.CODIGO_ERROR;
@@ -73,6 +86,8 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
         try {
             Usuario usuario = usuarioDAO.recuperarRegistro(id);
             usuarioRespuestaDTO.usuarioDTO = mapearEntityADto(usuario);
+            usuarioRespuestaDTO.usuarioDTO
+                    .setRol(usuarioRolDAO.recuperarUsuarioRolPorUsuario(usuario.getUsername()).getRol());
             usuarioRespuestaDTO.codigoRespuesta = ConstantesComunes.CODIGO_EXITO;
             usuarioRespuestaDTO.mensajeRespuesta = ConstantesComunes.MENSAJE_EXITO;
             usuario = null;
