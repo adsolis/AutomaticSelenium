@@ -44,6 +44,20 @@
                     <f:selectItem itemLabel="Ramiro Fernandez" itemValue="3"/>
                 </p:selectOneMenu>
 
+                <h:outputLabel value="Complejidad *"
+                               for="complejidadSelectt"/>
+                <p:selectOneMenu id="complejidadSelectt"
+                                 value="#{proyectoBean.funcionalidadDTO.complejidad}"
+                                 style="width:125px"
+                                 converter="#{complejidadConverter}">
+                    <f:selectItem/>
+                    <f:selectItems
+                            value="#{proyectoBean.listaCatalogoComplejidad}"
+                            var="complejidad"
+                            itemLabel="#{complejidad.descripcionComplejidad}"
+                            itemValue="#{complejidad}"/>
+                </p:selectOneMenu>
+
 
             </h:panelGrid>
 

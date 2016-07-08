@@ -1,5 +1,8 @@
 package mx.nexsol.dto.proyecto;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
 /**
@@ -7,6 +10,9 @@ import java.io.Serializable;
  * @author ironhide
  *
  */
+
+@Data
+@Component
 public class PasoCasoPruebaDTO implements Serializable {
 
 	/**
@@ -21,40 +27,5 @@ public class PasoCasoPruebaDTO implements Serializable {
 	private String descripcionPaso;
 	
 	private String resultadoEsperado;
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public int getNumeroDePaso() {
-		return numeroDePaso;
-	}
-
-	public void setNumeroDePaso(int numeroDePaso) {
-		this.numeroDePaso = numeroDePaso;
-	}
-
-	public String getDescripcionPaso() {
-		return descripcionPaso;
-	}
-
-	public void setDescripcionPaso(String descripcionPaso) {
-		this.descripcionPaso = descripcionPaso;
-	}
-
-	public String getResultadoEsperado() {
-		return resultadoEsperado;
-	}
-
-	public void setResultadoEsperado(String resultadoEsperado) {
-		this.resultadoEsperado = resultadoEsperado;
-	}
-	
-	
-	
 
 }

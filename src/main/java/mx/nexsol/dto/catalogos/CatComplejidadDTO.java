@@ -4,12 +4,15 @@ import java.io.Serializable;
 
 import lombok.Data;
 
+import lombok.EqualsAndHashCode;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@EqualsAndHashCode(callSuper = false, of = {"id"})
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Data
 public class CatComplejidadDTO implements Serializable {
 	
 	/**
@@ -23,27 +26,4 @@ public class CatComplejidadDTO implements Serializable {
 	
 	private int limiteTiempoMiutos;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getDescripcionComplejidad() {
-		return descripcionComplejidad;
-	}
-
-	public void setDescripcionComplejidad(String descripcionComplejidad) {
-		this.descripcionComplejidad = descripcionComplejidad;
-	}
-
-	public int getLimiteTiempoMiutos() {
-		return limiteTiempoMiutos;
-	}
-
-	public void setLimiteTiempoMiutos(int limiteTiempoMiutos) {
-		this.limiteTiempoMiutos = limiteTiempoMiutos;
-	}
 }

@@ -8,6 +8,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,7 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 import org.primefaces.context.RequestContext;
 
-
+@Data
 @ManagedBean(name = "proyectoBean")
 @ViewScoped
 public class ProyectoBean implements Serializable {
@@ -72,7 +74,6 @@ public class ProyectoBean implements Serializable {
 			funcionalidadesDTO = proyectoDTO.getFuncionalidades();
 			if(request.getParameter("detalle")!=null) {
 				listaCatalogoComplejidad = catComplejidadService.listarCatalogoComplejidad();
-				listaCatalogoComplejidad = (List<CatComplejidadDTO>) session.getAttribute("listaCatalogoComplejidad");
 				session.setAttribute("listaCatalogoComplejidad", listaCatalogoComplejidad);
 			}
 		}
@@ -177,67 +178,4 @@ public class ProyectoBean implements Serializable {
 
 	}
 
-	public ProyectoDTO getProyectoDTO() {
-		return proyectoDTO;
-	}
-
-	public void setProyectoDTO(ProyectoDTO proyectoDTO) {
-		this.proyectoDTO = proyectoDTO;
-	}
-
-	public List<FuncionalidadDTO> getFuncionalidadesDTO() {
-		return funcionalidadesDTO;
-	}
-
-	public void setFuncionalidadesDTO(List<FuncionalidadDTO> funcionalidadesDTO) {
-		this.funcionalidadesDTO = funcionalidadesDTO;
-	}
-
-	public FuncionalidadDTO getFuncionalidadDTO() {
-		return funcionalidadDTO;
-	}
-
-	public void setFuncionalidadDTO(FuncionalidadDTO funcionalidadDTO) {
-		this.funcionalidadDTO = funcionalidadDTO;
-	}
-
-	public List<CatComplejidadDTO> getListaCatalogoComplejidad() {
-		return listaCatalogoComplejidad;
-	}
-
-	public void setListaCatalogoComplejidad(List<CatComplejidadDTO> listaCatalogoComplejidad) {
-		this.listaCatalogoComplejidad = listaCatalogoComplejidad;
-	}
-
-	public List<UsuarioDTO> getUsuarioDTOs() {
-		return usuarioDTOs;
-	}
-
-	public void setUsuarioDTOs(List<UsuarioDTO> usuarioDTOs) {
-		this.usuarioDTOs = usuarioDTOs;
-	}
-
-	public ProyectoService getProyectoService() {
-		return proyectoService;
-	}
-
-	public void setProyectoService(ProyectoService proyectoService) {
-		this.proyectoService = proyectoService;
-	}
-
-	public CatComplejidadService getCatComplejidadService() {
-		return catComplejidadService;
-	}
-
-	public void setCatComplejidadService(CatComplejidadService catComplejidadService) {
-		this.catComplejidadService = catComplejidadService;
-	}
-
-	public UsuarioService getUsuarioService() {
-		return usuarioService;
-	}
-
-	public void setUsuarioService(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
-	}
 }

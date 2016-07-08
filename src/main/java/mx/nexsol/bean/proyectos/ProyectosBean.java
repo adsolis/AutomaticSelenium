@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+
+import lombok.Data;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import javax.annotation.PostConstruct;
 @Controller
 @ManagedBean(name = "proyectosBean")
 @Scope(value = "request")
+@Data
 public class ProyectosBean implements Serializable{
 	
 	/**
@@ -33,22 +36,6 @@ public class ProyectosBean implements Serializable{
 	@PostConstruct
 	public void init() {
 		proyectos = proyectoService.consultarListaProyectos();
-	}
-
-	public List<ProyectoDTO> getProyectos() {
-		return proyectos;
-	}
-
-	public void setProyectos(List<ProyectoDTO> proyectos) {
-		this.proyectos = proyectos;
-	}
-
-	public ProyectoServiceImpl getProyectoService() {
-		return proyectoService;
-	}
-
-	public void setProyectoService(ProyectoServiceImpl proyectoService) {
-		this.proyectoService = proyectoService;
 	}
 
 }

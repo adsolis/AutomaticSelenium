@@ -1,5 +1,6 @@
 package mx.nexsol.dto.proyecto;
 
+import lombok.Data;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import java.util.Map;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@Data
 public class CasoPruebaDTO implements Serializable {
 
 	/**
@@ -30,60 +32,5 @@ public class CasoPruebaDTO implements Serializable {
 	private String postCondiciones;
 
 	private String preCondiciones;
-	
-	public long getId() {
-		return id;
-	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getNombreCasoPrueba() {
-		return nombreCasoPrueba;
-	}
-
-	public void setNombreCasoPrueba(String nombreCasoPrueba) {
-		this.nombreCasoPrueba = nombreCasoPrueba;
-	}
-
-	public List<PasoCasoPruebaDTO> getPasosCasoPrueba() {
-		return pasosCasoPrueba;
-	}
-
-	public void setPasosCasoPrueba(List<PasoCasoPruebaDTO> pasosCasoPrueba) {
-		this.pasosCasoPrueba = pasosCasoPrueba;
-	}
-
-	public List<Map<String, String>> getListaCampos() {
-		return listaCampos;
-	}
-
-	public void setListaCampos(List<Map<String, String>> listaCampos) {
-		this.listaCampos = listaCampos;
-	}
-
-	public String getIdentificador() {
-		return identificador;
-	}
-
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;
-	}
-
-	public String getPostCondiciones() {
-		return postCondiciones;
-	}
-
-	public void setPostCondiciones(String postCondiciones) {
-		this.postCondiciones = postCondiciones;
-	}
-
-	public String getPreCondiciones() {
-		return preCondiciones;
-	}
-
-	public void setPreCondiciones(String preCondiciones) {
-		this.preCondiciones = preCondiciones;
-	}
 }

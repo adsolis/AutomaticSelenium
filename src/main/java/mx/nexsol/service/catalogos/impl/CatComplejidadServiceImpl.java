@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ import mx.nexsol.entity.catalogos.CatComplejidad;
 import mx.nexsol.service.catalogos.CatComplejidadService;
 
 @Service("catComplejidadService")
+@Data
 public class CatComplejidadServiceImpl implements CatComplejidadService, Serializable {
 	
 	@Autowired
@@ -47,12 +49,5 @@ public class CatComplejidadServiceImpl implements CatComplejidadService, Seriali
 		return catComplejidadDTO;
 	}
 
-	public CatComplejidadDAO getCatComplejidadDAO() {
-		return catComplejidadDAO;
-	}
-
-	public void setCatComplejidadDAO(CatComplejidadDAO catComplejidadDAO) {
-		this.catComplejidadDAO = catComplejidadDAO;
-	}
 
 }

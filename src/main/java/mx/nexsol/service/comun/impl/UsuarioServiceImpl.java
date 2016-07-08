@@ -1,5 +1,6 @@
 package mx.nexsol.service.comun.impl;
 
+import lombok.Data;
 import mx.nexsol.dao.comun.UsuarioDAO;
 import mx.nexsol.dao.comun.UsuarioRolDAO;
 import mx.nexsol.dto.comun.UsuarioDTO;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 
 @Service("usuarioService")
+@Data
 public class UsuarioServiceImpl implements UsuarioService, Serializable {
 
     @Autowired
@@ -107,13 +109,6 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
         return null;
     }
 
-    public UsuarioDAO getUsuarioDAO() {
-        return usuarioDAO;
-    }
-
-    public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
-        this.usuarioDAO = usuarioDAO;
-    }
 
     public static UsuarioDTO mapearEntityADto(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();

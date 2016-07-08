@@ -43,6 +43,7 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 		funcionalidadesDTO.clear();
 		for(Funcionalidad funcionalidad: funcionalidades) {
 			try {
+				funcionalidad.setProyecto(proyecto);
 				funcionalidad = funcionalidadDAO.guardarRegistro(funcionalidad);
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -1,5 +1,6 @@
 package mx.nexsol.bean.seguridad;
 
+import lombok.Data;
 import mx.nexsol.response.UsuarioRespuestaDTO;
 import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import java.io.Serializable;
 @Controller
 @ManagedBean(name = "usuariosBean")
 @Scope(value = "request")
+@Data
 public class UsuariosBean implements Serializable {
 
     @ManagedProperty(value = "#{usuarioRespuestaDTO}")
@@ -31,19 +33,4 @@ public class UsuariosBean implements Serializable {
         usuarioRespuestaDTO = usuarioService.recuperarUsuarios();
     }
 
-    public UsuarioRespuestaDTO getUsuarioRespuestaDTO() {
-        return usuarioRespuestaDTO;
-    }
-
-    public void setUsuarioRespuestaDTO(UsuarioRespuestaDTO usuarioRespuestaDTO) {
-        this.usuarioRespuestaDTO = usuarioRespuestaDTO;
-    }
-
-    public UsuarioServiceImpl getUsuarioService() {
-        return usuarioService;
-    }
-
-    public void setUsuarioService(UsuarioServiceImpl usuarioService) {
-        this.usuarioService = usuarioService;
-    }
 }

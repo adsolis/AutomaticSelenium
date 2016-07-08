@@ -1,5 +1,6 @@
 package mx.nexsol.bean.seguridad;
 
+import lombok.Data;
 import mx.nexsol.dto.comun.UsuarioDTO;
 import mx.nexsol.response.UsuarioRespuestaDTO;
 import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
@@ -29,6 +30,7 @@ import java.util.List;
 @ManagedBean(name = "usuarioBean")
 @Scope(value = "request")
 @ViewScoped
+@Data
 public class UsuarioBean implements Serializable {
 
     @Autowired
@@ -76,20 +78,4 @@ public class UsuarioBean implements Serializable {
 
     }
 
-
-    public UsuarioDTO getUsuarioDTO() {
-        return usuarioDTO;
-    }
-
-    public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
-        this.usuarioDTO = usuarioDTO;
-    }
-
-    public UsuarioServiceImpl getUsuarioService() {
-        return usuarioService;
-    }
-
-    public void setUsuarioService(UsuarioServiceImpl usuarioService) {
-        this.usuarioService = usuarioService;
-    }
 }

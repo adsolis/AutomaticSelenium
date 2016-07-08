@@ -11,6 +11,10 @@ import mx.nexsol.entity.comun.SequenceGenerator;
 @Table(name = "CAT_COMPLEJIDAD")
 public class CatComplejidad extends SequenceGenerator implements Serializable {
 
+	public CatComplejidad() {
+
+	}
+
 	/**
 	 * Propiedad para mantener el estado del objeto
 	 */

@@ -13,6 +13,10 @@ import javax.persistence.Table;
 @Table(name = "PASO_CASO_PRUEBA")
 public class PasoCasoPrueba implements Serializable {
 
+	public PasoCasoPrueba() {
+
+	}
+
 	/**
 	 * 
 	 */

@@ -3,6 +3,7 @@ package mx.nexsol.bean.funcionalidades;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.service.proyecto.impl.CasoPruebaServiceImpl;
@@ -28,6 +29,7 @@ import java.io.Serializable;
 @ManagedBean(name = "funcionalidadBean")
 @Scope(value = "request")
 @ViewScoped
+@Data
 public class FuncionalidadBean implements Serializable {
 
     @Autowired
@@ -91,59 +93,4 @@ public class FuncionalidadBean implements Serializable {
         funcionalidadDTO = funcionalidadService.guardarCasosPrueba(casosPruebaDTO, funcionalidadDTO);
     }
 
-    public FuncionalidadDTO getFuncionalidadDTO() {
-        return funcionalidadDTO;
-    }
-
-    public void setFuncionalidadDTO(FuncionalidadDTO funcionalidadDTO) {
-        this.funcionalidadDTO = funcionalidadDTO;
-    }
-
-    public FuncionalidadServiceImpl getFuncionalidadService() {
-        return funcionalidadService;
-    }
-
-    public void setFuncionalidadService(FuncionalidadServiceImpl funcionalidadService) {
-        this.funcionalidadService = funcionalidadService;
-    }
-
-    public CasoPruebaServiceImpl getCasoPruebaService() {
-        return casoPruebaService;
-    }
-
-    public void setCasoPruebaService(CasoPruebaServiceImpl casoPruebaService) {
-        this.casoPruebaService = casoPruebaService;
-    }
-
-    public List<CasoPruebaDTO> getCasosPruebaDTO() {
-        return casosPruebaDTO;
-    }
-
-    public void setCasosPruebaDTO(List<CasoPruebaDTO> casosPruebaDTO) {
-        this.casosPruebaDTO = casosPruebaDTO;
-    }
-
-    public CasoPruebaDTO getCasoPruebaDTO() {
-        return casoPruebaDTO;
-    }
-
-    public void setCasoPruebaDTO(CasoPruebaDTO casoPruebaDTO) {
-        this.casoPruebaDTO = casoPruebaDTO;
-    }
-
-    public long getIdProyecto() {
-        return idProyecto;
-    }
-
-    public void setIdProyecto(long idProyecto) {
-        this.idProyecto = idProyecto;
-    }
-
-    public String getNombreProyecto() {
-        return nombreProyecto;
-    }
-
-    public void setNombreProyecto(String nombreProyecto) {
-        this.nombreProyecto = nombreProyecto;
-    }
 }

@@ -1,5 +1,6 @@
 package mx.nexsol.service.proyecto.impl;
 
+import lombok.Data;
 import mx.nexsol.dao.proyecto.CasoPruebaDAO;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 
 @Service
+@Data
 public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
 
     @Autowired
@@ -58,11 +60,4 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
         return casoPruebaDTO;
     }
 
-    public CasoPruebaDAO getCasoPruebaDAO() {
-        return casoPruebaDAO;
-    }
-
-    public void setCasoPruebaDAO(CasoPruebaDAO casoPruebaDAO) {
-        this.casoPruebaDAO = casoPruebaDAO;
-    }
 }

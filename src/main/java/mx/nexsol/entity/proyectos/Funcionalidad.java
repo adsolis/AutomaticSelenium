@@ -12,6 +12,10 @@ import mx.nexsol.entity.comun.SequenceGenerator;
 @Table(name = "FUNCIONALIDAD")
 public class Funcionalidad extends SequenceGenerator implements Serializable {
 
+	public Funcionalidad() {
+
+	}
+
 	/**
 	 * 
 	 */
@@ -31,7 +35,7 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	@JoinColumn(name = "PROYECTO")
 	private Proyecto proyecto;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "funcionalidad")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "funcionalidad")
 	private List<CasoPrueba> casosPrueba;
 
 	public String getNombre() {
@@ -64,5 +68,13 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 
 	public void setCasosPrueba(List<CasoPrueba> casosPrueba) {
 		this.casosPrueba = casosPrueba;
+	}
+
+	public Proyecto getProyecto() {
+		return proyecto;
+	}
+
+	public void setProyecto(Proyecto proyecto) {
+		this.proyecto = proyecto;
 	}
 }

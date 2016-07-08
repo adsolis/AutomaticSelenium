@@ -10,6 +10,10 @@ import javax.persistence.*;
 @Table(name = "CASO_PRUEBA")
 public class CasoPrueba extends SequenceGenerator implements Serializable {
 
+	public CasoPrueba() {
+
+	}
+
 	/**
 	 * PROPIEDAD PARA MANTENER EL ESTADO DEL OBJETO
 	 */

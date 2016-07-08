@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.Data;
-import mx.nexsol.dao.comun.UsuarioDAO;
 import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +18,7 @@ import mx.nexsol.service.proyecto.ProyectoService;
 import mx.nexsol.util.ConstantesComunes;
 
 @Service("proyectoService")
+@Data
 public class ProyectoServiceImpl implements ProyectoService, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -150,23 +150,6 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		proyecto.setEstrategia(proyectoDTO.getEstrategia());
 		proyecto.setFechaCreacion(proyectoDTO.getFechaCreacion());
 		return proyecto;
-	}
-
-	public ProyectoDAO getProyectoDAO() {
-		return proyectoDAO;
-	}
-
-	public void setProyectoDAO(ProyectoDAO proyectoDAO) {
-		this.proyectoDAO = proyectoDAO;
-	}
-
-	public FuncionalidadServiceImpl getProyectoFuncionalidadServiceImpl() {
-		return proyectoFuncionalidadServiceImpl;
-	}
-
-	public void setProyectoFuncionalidadServiceImpl(
-			FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl) {
-		this.proyectoFuncionalidadServiceImpl = proyectoFuncionalidadServiceImpl;
 	}
 
 }
