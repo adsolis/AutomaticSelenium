@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Data;
+import mx.nexsol.dao.catalogos.impl.CatComplejidadDAOImpl;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
+import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
+import mx.nexsol.service.catalogos.impl.CatComplejidadServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +20,7 @@ import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.FuncionalidadService;
 
 @Service
+@Data
 public class FuncionalidadServiceImpl implements FuncionalidadService, Serializable {
 	
 	@Autowired
@@ -27,10 +32,23 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 	@Autowired
 	private CasoPruebaServiceImpl casoPruebaService;
 
+	@Autowired
+	private CatComplejidadDAOImpl catComplejidadDAO;
+
 	@Override
 	public List<FuncionalidadDTO> listarFuncionalidades() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public FuncionalidadDTO guardarFuncionalidad(FuncionalidadDTO funcionalidadDTO, Proyecto proyecto)
+			throws Exception {
+
+		Funcionalidad funcionalidad = mapearDtoAEntity(funcionalidadDTO);
+		funcionalidad.setComplejidad(catComplejidadDAO.recuperarRegistro(funcionalidadDTO.getComplejidad().getId()));
+		funcionalidadDTO = mapearEntityADto(funcionalidadDAO.guardarRegistro(funcionalidad));
+
+		return funcionalidadDTO;
 	}
 
 	@Override
@@ -38,7 +56,9 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 			Proyecto proyecto) throws Exception {
 		List<Funcionalidad> funcionalidades = new ArrayList<Funcionalidad>();
 		for(FuncionalidadDTO funcionalidadDTO: funcionalidadesDTO) {
-			funcionalidades.add(mapearDtoAEntity(funcionalidadDTO));
+			Funcionalidad funcionalidad = mapearDtoAEntity(funcionalidadDTO);
+			funcionalidad.setComplejidad(catComplejidadDAO.recuperarRegistro(funcionalidadDTO.getComplejidad().getId()));
+			funcionalidades.add(funcionalidad);
 		}
 		funcionalidadesDTO.clear();
 		for(Funcionalidad funcionalidad: funcionalidades) {
@@ -56,8 +76,9 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 	@Override
 	public FuncionalidadDTO recuperarFuncionalidad(long id) throws Exception {
 		FuncionalidadDTO funcionalidadDTO = null;
-
-		funcionalidadDTO = mapearEntityADto(funcionalidadDAO.recuperarRegistro(id));
+		Funcionalidad funcionalidad = funcionalidadDAO.recuperarRegistro(id);
+		funcionalidadDTO = mapearEntityADto(funcionalidad);
+		funcionalidadDTO.setComplejidad(CatComplejidadServiceImpl.mapearEntityADto(funcionalidad.getComplejidad()));
 
 		return funcionalidadDTO;
 	}
@@ -79,8 +100,11 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 
 	@Override
 	public FuncionalidadDTO editarFuncionalidad(FuncionalidadDTO funcionalidad) {
-		// TODO Auto-generated method stub
-		return null;
+		FuncionalidadDTO funcionalidadDTO = null;
+
+
+
+		return funcionalidadDTO;
 	}
 
 	@Override
@@ -89,10 +113,43 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 		return 0;
 	}
 
+	/**
+	 * Motor que recibe la lista de funcionalidades que se modifico desde la vista
+	 * en dicha lista vienen funcionalidades editadas, eliminadas o funcionalidades
+	 * nuevas
+	 * @param listaFuncionalidades
+	 * @param proyecto
+	 * @return
+	 * @throws Exception
+	 */
+	public List<FuncionalidadDTO> guardarCambiosFuncionalidades(List<FuncionalidadDTO> listaFuncionalidades, Proyecto proyecto)
+			throws Exception {
+		List<Integer> funcionalidadesEliminadas = new ArrayList<Integer>();
+		for(FuncionalidadDTO funcionalidadDTO: listaFuncionalidades) {
+			if(funcionalidadDTO.getStatusVista()==1)
+				funcionalidadDTO = guardarFuncionalidad(funcionalidadDTO, proyecto);
+			else if(funcionalidadDTO.getStatusVista()==2)
+				funcionalidadDTO = editarFuncionalidad(funcionalidadDTO);
+			else if(funcionalidadDTO.getStatusVista()==4) {
+				funcionalidadesEliminadas.add(listaFuncionalidades.indexOf(funcionalidadDTO));
+				eliminarFuncionalidad(funcionalidadDTO.getId());
+			}
+
+			if(funcionalidadesEliminadas.size()>0) {
+				for(Integer funcionalidad: funcionalidadesEliminadas) {
+					listaFuncionalidades.remove(funcionalidad);
+				}
+			}
+			funcionalidadesEliminadas = null;
+		}
+		return listaFuncionalidades;
+	}
+
 	private Funcionalidad mapearDtoAEntity(FuncionalidadDTO funcionalidadDTO) {
 		Funcionalidad funcionalidad = new Funcionalidad();	
 		funcionalidad.setNombre(funcionalidadDTO.getNombreFuncionalidad());
 		funcionalidad.setIdentificador(funcionalidadDTO.getIdentificador());
+		funcionalidad.setEstatus(funcionalidadDTO.getEstatusRegistro());
 		return funcionalidad;
 	}
 	
@@ -109,27 +166,4 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 		return funcionalidadDTO;
 	}
 
-	public FuncionalidadDAO getFuncionalidadDAO() {
-		return funcionalidadDAO;
-	}
-
-	public void setFuncionalidadDAO(FuncionalidadDAO funcionalidadDAO) {
-		this.funcionalidadDAO = funcionalidadDAO;
-	}
-
-	public ProyectoServiceImpl getProyectoService() {
-		return proyectoService;
-	}
-
-	public void setProyectoService(ProyectoServiceImpl proyectoService) {
-		this.proyectoService = proyectoService;
-	}
-
-	public CasoPruebaServiceImpl getCasoPruebaService() {
-		return casoPruebaService;
-	}
-
-	public void setCasoPruebaService(CasoPruebaServiceImpl casoPruebaService) {
-		this.casoPruebaService = casoPruebaService;
-	}
 }

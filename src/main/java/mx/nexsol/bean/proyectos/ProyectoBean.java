@@ -72,6 +72,7 @@ public class ProyectoBean implements Serializable {
 			Long idProyecto = Long.parseLong(request.getParameter("id"));
 			proyectoDTO = proyectoService.consultarProyecto(idProyecto);
 			funcionalidadesDTO = proyectoDTO.getFuncionalidades();
+			session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 			if(request.getParameter("detalle")!=null) {
 				listaCatalogoComplejidad = catComplejidadService.listarCatalogoComplejidad();
 				session.setAttribute("listaCatalogoComplejidad", listaCatalogoComplejidad);
@@ -150,29 +151,43 @@ public class ProyectoBean implements Serializable {
 		listaCatalogoComplejidad = (List<CatComplejidadDTO>) session.getAttribute("listaCatalogoComplejidad");
 		if(funcionalidadesDTO==null)
 			funcionalidadesDTO = new ArrayList<FuncionalidadDTO>();
-		/*for(CatComplejidadDTO complejidad: listaCatalogoComplejidad) {
-			if(complejidad.getId() == Long.parseLong(idComplejidad)) {
-				funcionalidad.setComplejidad(complejidad);
-			}
-		}*/
+
 		funcionalidadesDTO.add(funcionalidadDTO);
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 
 	}
-	
-	public void quitarFuncionalidad(String nombre) {
+
+	public void editarFuncionalidad(int posicionFuncionalidad) {
+		HttpServletRequest request =
+				(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		HttpSession session = request.getSession();
+		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
+
+		for(FuncionalidadDTO fun: funcionalidadesDTO) {
+			if(funcionalidadesDTO.indexOf(fun)==posicionFuncionalidad)
+				fun = funcionalidadDTO;
+		}
+		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
+	}
+
+	//TODO verificar validaciones y literales
+	public void quitarFuncionalidad(int posicionFuncionalidad) {
 		HttpServletRequest request = 
 				(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		HttpSession session = request.getSession();
 		FuncionalidadDTO fun = null;
 		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
 		for(FuncionalidadDTO funcionalidad: funcionalidadesDTO) {
-			if(funcionalidad.getNombreFuncionalidad().equals(nombre)) {
-				fun = funcionalidad;
-				break;
+			if(funcionalidadesDTO.indexOf(funcionalidad)==posicionFuncionalidad) {
+				if(proyectoDTO.getEstatus().equals("creado") && funcionalidad.getId()==0L)
+					fun = funcionalidad;
+				else if(proyectoDTO.getEstatus().equals("creado") && funcionalidad.getId()!=0L)
+					funcionalidad.setEstatusRegistro(4);
 			}
 		}
-		funcionalidadesDTO.remove(fun);
+		if(fun!=null)
+			funcionalidadesDTO.remove(fun);
+
 		fun = null;
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 

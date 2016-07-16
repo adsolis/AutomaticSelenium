@@ -26,4 +26,6 @@ public class CatComplejidadDTO implements Serializable {
 	
 	private int limiteTiempoMiutos;
 
+	private String nombreComplejidad;
+
 }

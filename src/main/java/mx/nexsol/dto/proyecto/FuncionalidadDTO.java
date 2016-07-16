@@ -29,4 +29,8 @@ public class FuncionalidadDTO implements Serializable {
 
 	private ProyectoDTO proyectoDTO;
 
+	private int statusVista;
+
+	private int estatusRegistro;
+
 }

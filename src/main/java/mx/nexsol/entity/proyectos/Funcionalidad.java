@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import lombok.Data;
 import mx.nexsol.entity.catalogos.CatComplejidad;
 import mx.nexsol.entity.comun.SequenceGenerator;
 
 @Entity
+@Data
 @Table(name = "FUNCIONALIDAD")
 public class Funcionalidad extends SequenceGenerator implements Serializable {
 
@@ -31,6 +33,9 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	@Column(name = "COMPLEJIDAD_ID")
 	private CatComplejidad complejidad;
 
+	@Column(name = "ESTATUS", nullable = true)
+	private int estatus;
+
 	@ManyToOne
 	@JoinColumn(name = "PROYECTO")
 	private Proyecto proyecto;
@@ -38,43 +43,5 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "funcionalidad")
 	private List<CasoPrueba> casosPrueba;
 
-	public String getNombre() {
-		return nombre;
-	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	public String getIdentificador() {
-		return identificador;
-	}
-
-	public void setIdentificador(String identificador) {
-		this.identificador = identificador;
-	}
-
-	public CatComplejidad getComplejidad() {
-		return complejidad;
-	}
-
-	public void setComplejidad(CatComplejidad complejidad) {
-		this.complejidad = complejidad;
-	}
-
-	public List<CasoPrueba> getCasosPrueba() {
-		return casosPrueba;
-	}
-
-	public void setCasosPrueba(List<CasoPrueba> casosPrueba) {
-		this.casosPrueba = casosPrueba;
-	}
-
-	public Proyecto getProyecto() {
-		return proyecto;
-	}
-
-	public void setProyecto(Proyecto proyecto) {
-		this.proyecto = proyecto;
-	}
 }

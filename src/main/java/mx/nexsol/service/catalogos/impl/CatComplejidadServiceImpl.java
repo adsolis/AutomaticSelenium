@@ -39,12 +39,13 @@ public class CatComplejidadServiceImpl implements CatComplejidadService, Seriali
 		return catalogoComplejidadDTO;
 	}
 	
-	private CatComplejidadDTO mapearEntityADto(CatComplejidad complejidad) {
+	public static CatComplejidadDTO mapearEntityADto(CatComplejidad complejidad) {
 		CatComplejidadDTO catComplejidadDTO = new CatComplejidadDTO();
 		
 		catComplejidadDTO.setId(complejidad.getId());
 		catComplejidadDTO.setDescripcionComplejidad(complejidad.getCriterio());
 		catComplejidadDTO.setLimiteTiempoMiutos(complejidad.getMinutos());
+		catComplejidadDTO.setNombreComplejidad(complejidad.getNombreComplejidad());
 		
 		return catComplejidadDTO;
 	}
