@@ -18,7 +18,6 @@ import mx.nexsol.service.proyecto.ProyectoService;
 import mx.nexsol.util.ConstantesComunes;
 
 @Service("proyectoService")
-@Data
 public class ProyectoServiceImpl implements ProyectoService, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -103,7 +102,7 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		Proyecto proyecto = proyectoDAO.recuperarRegistro(proyectoDTO.getId());
 		try {
 			funcionalidades =
-					proyectoFuncionalidadServiceImpl.guardarFuncionalidades(funcionalidadesDTO, proyecto);
+					proyectoFuncionalidadServiceImpl.guardarCambiosFuncionalidades(funcionalidadesDTO, proyecto);
 			proyecto.setFuncionalidad(funcionalidades);
 			proyecto = proyectoDAO.editarRegistro(proyecto);
 			proyectoDTO = mapearProyectoEntityADto(proyecto);
@@ -152,4 +151,19 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		return proyecto;
 	}
 
+	public FuncionalidadServiceImpl getProyectoFuncionalidadServiceImpl() {
+		return proyectoFuncionalidadServiceImpl;
+	}
+
+	public void setProyectoFuncionalidadServiceImpl(FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl) {
+		this.proyectoFuncionalidadServiceImpl = proyectoFuncionalidadServiceImpl;
+	}
+
+	public ProyectoDAO getProyectoDAO() {
+		return proyectoDAO;
+	}
+
+	public void setProyectoDAO(ProyectoDAO proyectoDAO) {
+		this.proyectoDAO = proyectoDAO;
+	}
 }

@@ -17,7 +17,6 @@ import java.util.List;
  */
 
 @Service
-@Data
 public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
 
     @Autowired
@@ -60,4 +59,11 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
         return casoPruebaDTO;
     }
 
+    public CasoPruebaDAO getCasoPruebaDAO() {
+        return casoPruebaDAO;
+    }
+
+    public void setCasoPruebaDAO(CasoPruebaDAO casoPruebaDAO) {
+        this.casoPruebaDAO = casoPruebaDAO;
+    }
 }

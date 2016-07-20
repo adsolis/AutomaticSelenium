@@ -4,10 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
 import mx.nexsol.dao.catalogos.impl.CatComplejidadDAOImpl;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
-import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
 import mx.nexsol.service.catalogos.impl.CatComplejidadServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,6 @@ import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.FuncionalidadService;
 
 @Service
-@Data
 public class FuncionalidadServiceImpl implements FuncionalidadService, Serializable {
 	
 	@Autowired
@@ -122,7 +119,7 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 	 * @return
 	 * @throws Exception
 	 */
-	public List<FuncionalidadDTO> guardarCambiosFuncionalidades(List<FuncionalidadDTO> listaFuncionalidades, Proyecto proyecto)
+	public List<Funcionalidad guardarCambiosFuncionalidades(List<FuncionalidadDTO> listaFuncionalidades, Proyecto proyecto)
 			throws Exception {
 		List<Integer> funcionalidadesEliminadas = new ArrayList<Integer>();
 		for(FuncionalidadDTO funcionalidadDTO: listaFuncionalidades) {
@@ -166,4 +163,35 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 		return funcionalidadDTO;
 	}
 
+	public FuncionalidadDAO getFuncionalidadDAO() {
+		return funcionalidadDAO;
+	}
+
+	public void setFuncionalidadDAO(FuncionalidadDAO funcionalidadDAO) {
+		this.funcionalidadDAO = funcionalidadDAO;
+	}
+
+	public ProyectoServiceImpl getProyectoService() {
+		return proyectoService;
+	}
+
+	public void setProyectoService(ProyectoServiceImpl proyectoService) {
+		this.proyectoService = proyectoService;
+	}
+
+	public CasoPruebaServiceImpl getCasoPruebaService() {
+		return casoPruebaService;
+	}
+
+	public void setCasoPruebaService(CasoPruebaServiceImpl casoPruebaService) {
+		this.casoPruebaService = casoPruebaService;
+	}
+
+	public CatComplejidadDAOImpl getCatComplejidadDAO() {
+		return catComplejidadDAO;
+	}
+
+	public void setCatComplejidadDAO(CatComplejidadDAOImpl catComplejidadDAO) {
+		this.catComplejidadDAO = catComplejidadDAO;
+	}
 }

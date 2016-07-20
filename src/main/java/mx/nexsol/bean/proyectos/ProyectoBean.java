@@ -40,8 +40,10 @@ public class ProyectoBean implements Serializable {
 	@Autowired
 	@ManagedProperty(value="#{proyectoDTO}")
 	private ProyectoDTO proyectoDTO;
-	
-	
+
+	@ManagedProperty(value = "#{banderaFuncionalidadesModificadas}")
+	private boolean banderaFuncionalidadesModificadas;
+
 	@ManagedProperty(value="#{funcionalidadesDTO}")
 	private List<FuncionalidadDTO> funcionalidadesDTO;
 	
@@ -130,6 +132,10 @@ public class ProyectoBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
+
+	public void guardarCambios() {
+
+	}
 	
 	public void guardarFuncionalidades() {
 		HttpSession session = 
@@ -153,6 +159,7 @@ public class ProyectoBean implements Serializable {
 			funcionalidadesDTO = new ArrayList<FuncionalidadDTO>();
 
 		funcionalidadesDTO.add(funcionalidadDTO);
+		banderaFuncionalidadesModificadas = true;
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 
 	}
@@ -167,6 +174,7 @@ public class ProyectoBean implements Serializable {
 			if(funcionalidadesDTO.indexOf(fun)==posicionFuncionalidad)
 				fun = funcionalidadDTO;
 		}
+		banderaFuncionalidadesModificadas = true;
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 	}
 
@@ -189,6 +197,7 @@ public class ProyectoBean implements Serializable {
 			funcionalidadesDTO.remove(fun);
 
 		fun = null;
+		banderaFuncionalidadesModificadas = true;
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 
 	}
