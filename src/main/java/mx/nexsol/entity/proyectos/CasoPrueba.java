@@ -32,6 +32,18 @@ public class CasoPrueba extends SequenceGenerator implements Serializable {
 	@JoinColumn(name = "FUNCIONALIDAD")
 	private Funcionalidad funcionalidad;
 
+	@Column(name = "TIEMPO_ESTIMACION")
+	private int tiempoEstimacion;
+
+	@Column(name = "TIEMPO_REAL")
+	private int tiempoReal;
+
+	@Column(name = "TIEMPO_ESTIMACION_ENTRADA")
+	private int tiempoEstimadoEntrada;
+
+	@Column(name = "TIEMPO_ESTIMACION_SALIDA")
+	private int tiempoEstimadoSalida;
+
 	public String getNombre() {
 		return nombre;
 	}
@@ -54,5 +66,45 @@ public class CasoPrueba extends SequenceGenerator implements Serializable {
 
 	public void setIdCasoPrueba(String idCasoPrueba) {
 		this.idCasoPrueba = idCasoPrueba;
+	}
+
+	public Funcionalidad getFuncionalidad() {
+		return funcionalidad;
+	}
+
+	public void setFuncionalidad(Funcionalidad funcionalidad) {
+		this.funcionalidad = funcionalidad;
+	}
+
+	public int getTiempoEstimacion() {
+		return tiempoEstimacion;
+	}
+
+	public void setTiempoEstimacion(int tiempoEstimacion) {
+		this.tiempoEstimacion = tiempoEstimacion;
+	}
+
+	public int getTiempoReal() {
+		return tiempoReal;
+	}
+
+	public void setTiempoReal(int tiempoReal) {
+		this.tiempoReal = tiempoReal;
+	}
+
+	public int getTiempoEstimadoEntrada() {
+		return tiempoEstimadoEntrada;
+	}
+
+	public void setTiempoEstimadoEntrada(int tiempoEstimadoEntrada) {
+		this.tiempoEstimadoEntrada = tiempoEstimadoEntrada;
+	}
+
+	public int getTiempoEstimadoSalida() {
+		return tiempoEstimadoSalida;
+	}
+
+	public void setTiempoEstimadoSalida(int tiempoEstimadoSalida) {
+		this.tiempoEstimadoSalida = tiempoEstimadoSalida;
 	}
 }

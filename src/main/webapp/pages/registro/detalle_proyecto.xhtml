@@ -103,7 +103,8 @@
                 <p:panel id="panelListaFuncionalidades">
                     <p:dataTable styleClass="table" id="tableFuncionalidades"
                                  value="#{proyectoBean.funcionalidadesDTO}"
-                                 var="funcionalidad">
+                                 var="funcionalidad"
+                                 rowIndexVar="index">
                         <p:column headerText="Funcionalidad">
                             <h:link styleClass="btn btn-link" value="#{funcionalidad.nombreFuncionalidad}"
                                     outcome="/pages/funcionalidad/template_funcionalidad.xhtml">
@@ -120,7 +121,7 @@
                             <p:commandButton
                                     icon="ui-icon-search" value="Ver"/>
                             <p:commandButton
-                                    actionListener="#{proyectoBean.quitarFuncionalidad(funcionalidad.nombreFuncionalidad)}"
+                                    actionListener="#{proyectoBean.quitarFuncionalidad(index)}"
                                     value="Quitar"
                                     update="tableFuncionalidades"/>
 

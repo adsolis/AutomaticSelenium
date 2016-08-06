@@ -18,11 +18,8 @@ public interface FuncionalidadService {
 	
 	FuncionalidadDTO editarFuncionalidad(FuncionalidadDTO funcionalidad) throws Exception;
 	
-	int eliminarFuncionalidad(long idFuncionalidad);
+	int eliminarFuncionalidad(Funcionalidad funcionalidad);
 
 	FuncionalidadDTO recuperarFuncionalidad(long id) throws Exception;
-
-	List<FuncionalidadDTO> guardarCambiosFuncionalidades(List<FuncionalidadDTO> listaFuncionalidades, Proyecto proyecto)
-			throws Exception;
 
 }

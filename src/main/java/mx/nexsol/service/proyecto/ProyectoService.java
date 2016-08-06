@@ -4,6 +4,7 @@ import java.util.List;
 
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
+import mx.nexsol.request.FuncionalidadRequestDTO;
 
 public interface ProyectoService {
 	
@@ -19,6 +20,8 @@ public interface ProyectoService {
 	
 	ProyectoDTO agregarFuncionalidades(List<FuncionalidadDTO> funcionalidades,
 			ProyectoDTO proyecto) throws Exception;
-	
+
+	ProyectoDTO quitarFuncionalidad(FuncionalidadDTO funcionalidadDTO,
+									ProyectoDTO proyectoDTO);
 
 }

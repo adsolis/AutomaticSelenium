@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
 import lombok.Data;
+import mx.nexsol.request.FuncionalidadRequestDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -65,6 +66,10 @@ public class ProyectoBean implements Serializable {
 
 	@ManagedProperty(name = "usuarioService", value = "#{usuarioService}")
 	private UsuarioService usuarioService;
+
+	@Autowired
+	@ManagedProperty(value = "#{funcionalidadRequestDTO}")
+	private FuncionalidadRequestDTO funcionalidadRequestDTO;
 	
 	@PostConstruct
 	public void init() {
@@ -74,7 +79,7 @@ public class ProyectoBean implements Serializable {
 			Long idProyecto = Long.parseLong(request.getParameter("id"));
 			proyectoDTO = proyectoService.consultarProyecto(idProyecto);
 			funcionalidadesDTO = proyectoDTO.getFuncionalidades();
-			session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
+			session.setAttribute("listaFuncionalidadesExistentes", funcionalidadesDTO);
 			if(request.getParameter("detalle")!=null) {
 				listaCatalogoComplejidad = catComplejidadService.listarCatalogoComplejidad();
 				session.setAttribute("listaCatalogoComplejidad", listaCatalogoComplejidad);
@@ -132,10 +137,6 @@ public class ProyectoBean implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
-	public void guardarCambios() {
-
-	}
 	
 	public void guardarFuncionalidades() {
 		HttpSession session = 
@@ -144,7 +145,6 @@ public class ProyectoBean implements Serializable {
 		try {
 			proyectoDTO = proyectoService.agregarFuncionalidades(funcionalidades, proyectoDTO);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -158,8 +158,10 @@ public class ProyectoBean implements Serializable {
 		if(funcionalidadesDTO==null)
 			funcionalidadesDTO = new ArrayList<FuncionalidadDTO>();
 
+		funcionalidadDTO.setEstatusRegistro(1);
 		funcionalidadesDTO.add(funcionalidadDTO);
 		banderaFuncionalidadesModificadas = true;
+
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 
 	}
@@ -173,6 +175,7 @@ public class ProyectoBean implements Serializable {
 		for(FuncionalidadDTO fun: funcionalidadesDTO) {
 			if(funcionalidadesDTO.indexOf(fun)==posicionFuncionalidad)
 				fun = funcionalidadDTO;
+			fun.setEstatusRegistro(2);
 		}
 		banderaFuncionalidadesModificadas = true;
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
@@ -183,23 +186,28 @@ public class ProyectoBean implements Serializable {
 		HttpServletRequest request = 
 				(HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		HttpSession session = request.getSession();
-		FuncionalidadDTO fun = null;
 		funcionalidadesDTO = (List<FuncionalidadDTO>) session.getAttribute("listaFuncionalidades");
+		FuncionalidadDTO fun = null;
 		for(FuncionalidadDTO funcionalidad: funcionalidadesDTO) {
 			if(funcionalidadesDTO.indexOf(funcionalidad)==posicionFuncionalidad) {
-				if(proyectoDTO.getEstatus().equals("creado") && funcionalidad.getId()==0L)
-					fun = funcionalidad;
-				else if(proyectoDTO.getEstatus().equals("creado") && funcionalidad.getId()!=0L)
+				if(proyectoDTO.getEstatus().equals("creado") && funcionalidad.getId()!=0L) {
 					funcionalidad.setEstatusRegistro(4);
+					fun = funcionalidad;
+				}
 			}
 		}
-		if(fun!=null)
-			funcionalidadesDTO.remove(fun);
 
+		if(fun!=null)
+			eliminarFuncionalidadExistente(fun);
+
+		funcionalidadesDTO.remove(fun);
 		fun = null;
-		banderaFuncionalidadesModificadas = true;
 		session.setAttribute("listaFuncionalidades", funcionalidadesDTO);
 
+	}
+
+	private void eliminarFuncionalidadExistente(FuncionalidadDTO funcionalidadDTO) {
+		proyectoService.quitarFuncionalidad(funcionalidadDTO, proyectoDTO);
 	}
 
 }

@@ -33,7 +33,7 @@
 
             <p:commandButton value="Agregar caso de prueba" type="button" onclick="PF('dialogCasoPrueba').show();" />
 
-            <p:commandButton id="btnGuardarCaso" value="Guardar funcionalidades"
+            <p:commandButton id="btnGuardarCaso" value="Guardar casos de prueba"
                              type="button"
                              onclick="PF('dialogConfirmacionCasos').show();"/>
 
@@ -80,6 +80,15 @@
                         <h:outputLabel value="ID *" for="idCasoPrueba" />
                         <p:inputText id="idCasoPrueba" value="#{funcionalidadBean.casoPruebaDTO.identificador}"
                                      required="true" />
+
+                        <h:outputLabel value="Estimacion entrada *" for="estimacionEntrada" />
+                        <p:inputText id="estimacionEntrada" value="#{funcionalidadBean.casoPruebaDTO.estimacionEntrada}"
+                                     required="true" />
+
+                        <h:outputLabel value="Estimacion salida *" for="estimacionSalida" />
+                        <p:inputText id="estimacionSalida" value="#{funcionalidadBean.casoPruebaDTO.estimacionSalida}"
+                                     required="true" />
+
                     </h:panelGrid>
                     <button type="button" class="btn btn-default" onclick="PF('dialogCasoPrueba').hide();">
                         Cancelar</button>

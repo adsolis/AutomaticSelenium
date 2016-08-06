@@ -13,7 +13,6 @@ import org.springframework.beans.factory.config.BeanDefinition;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Data
 public class ProyectoDTO implements Serializable {
 	
 	/**
@@ -38,4 +37,67 @@ public class ProyectoDTO implements Serializable {
 	@Autowired
 	private UsuarioDTO usuarioDTO;
 
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
+	}
+
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
+	}
+
+	public String getEstatus() {
+		return estatus;
+	}
+
+	public void setEstatus(String estatus) {
+		this.estatus = estatus;
+	}
+
+	public int getResultado() {
+		return resultado;
+	}
+
+	public void setResultado(int resultado) {
+		this.resultado = resultado;
+	}
+
+	public String getEstrategia() {
+		return estrategia;
+	}
+
+	public void setEstrategia(String estrategia) {
+		this.estrategia = estrategia;
+	}
+
+	public List<FuncionalidadDTO> getFuncionalidades() {
+		return funcionalidades;
+	}
+
+	public void setFuncionalidades(List<FuncionalidadDTO> funcionalidades) {
+		this.funcionalidades = funcionalidades;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 }

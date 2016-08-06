@@ -99,48 +99,19 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 	public FuncionalidadDTO editarFuncionalidad(FuncionalidadDTO funcionalidad) {
 		FuncionalidadDTO funcionalidadDTO = null;
 
-
-
 		return funcionalidadDTO;
 	}
 
 	@Override
-	public int eliminarFuncionalidad(long idFuncionalidad) {
-		// TODO Auto-generated method stub
+	public int eliminarFuncionalidad(Funcionalidad funcionalidad) {
+		try {
+			boolean resultado = funcionalidadDAO.borrarRegistro(funcionalidad);
+		} catch (Exception e) {
+
+		}
 		return 0;
 	}
 
-	/**
-	 * Motor que recibe la lista de funcionalidades que se modifico desde la vista
-	 * en dicha lista vienen funcionalidades editadas, eliminadas o funcionalidades
-	 * nuevas
-	 * @param listaFuncionalidades
-	 * @param proyecto
-	 * @return
-	 * @throws Exception
-	 */
-	public List<Funcionalidad guardarCambiosFuncionalidades(List<FuncionalidadDTO> listaFuncionalidades, Proyecto proyecto)
-			throws Exception {
-		List<Integer> funcionalidadesEliminadas = new ArrayList<Integer>();
-		for(FuncionalidadDTO funcionalidadDTO: listaFuncionalidades) {
-			if(funcionalidadDTO.getStatusVista()==1)
-				funcionalidadDTO = guardarFuncionalidad(funcionalidadDTO, proyecto);
-			else if(funcionalidadDTO.getStatusVista()==2)
-				funcionalidadDTO = editarFuncionalidad(funcionalidadDTO);
-			else if(funcionalidadDTO.getStatusVista()==4) {
-				funcionalidadesEliminadas.add(listaFuncionalidades.indexOf(funcionalidadDTO));
-				eliminarFuncionalidad(funcionalidadDTO.getId());
-			}
-
-			if(funcionalidadesEliminadas.size()>0) {
-				for(Integer funcionalidad: funcionalidadesEliminadas) {
-					listaFuncionalidades.remove(funcionalidad);
-				}
-			}
-			funcionalidadesEliminadas = null;
-		}
-		return listaFuncionalidades;
-	}
 
 	private Funcionalidad mapearDtoAEntity(FuncionalidadDTO funcionalidadDTO) {
 		Funcionalidad funcionalidad = new Funcionalidad();	

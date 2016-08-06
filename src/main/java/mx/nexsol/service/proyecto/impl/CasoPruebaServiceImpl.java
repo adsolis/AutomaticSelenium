@@ -32,7 +32,6 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
             casosPrueba.add(mapearDtoAEntity(casoPruebaDTO));
         }
         casosPruebaDTO.clear();
-
         for(CasoPrueba casoPrueba: casosPrueba) {
             casoPrueba = casoPruebaDAO.guardarRegistro(casoPrueba);
         }
@@ -41,10 +40,10 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
 
     private CasoPrueba mapearDtoAEntity(CasoPruebaDTO casoPruebaDTO) {
         CasoPrueba casoPrueba = new CasoPrueba();
-
         casoPrueba.setNombre(casoPruebaDTO.getNombreCasoPrueba());
         casoPrueba.setIdCasoPrueba(casoPruebaDTO.getIdentificador());
-
+        casoPrueba.setTiempoEstimadoEntrada(casoPruebaDTO.getEstimacionEntrada());
+        casoPrueba.setTiempoEstimadoSalida(casoPruebaDTO.getEstimacionSalida());
         return casoPrueba;
     }
 

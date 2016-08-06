@@ -11,7 +11,6 @@ import mx.nexsol.dto.catalogos.CatComplejidadDTO;
 
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@Data
 public class FuncionalidadDTO implements Serializable {
 	
 	/**
@@ -33,4 +32,60 @@ public class FuncionalidadDTO implements Serializable {
 
 	private int estatusRegistro;
 
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getNombreFuncionalidad() {
+		return nombreFuncionalidad;
+	}
+
+	public void setNombreFuncionalidad(String nombreFuncionalidad) {
+		this.nombreFuncionalidad = nombreFuncionalidad;
+	}
+
+	public String getIdentificador() {
+		return identificador;
+	}
+
+	public void setIdentificador(String identificador) {
+		this.identificador = identificador;
+	}
+
+	public CatComplejidadDTO getComplejidad() {
+		return complejidad;
+	}
+
+	public void setComplejidad(CatComplejidadDTO complejidad) {
+		this.complejidad = complejidad;
+	}
+
+	public ProyectoDTO getProyectoDTO() {
+		return proyectoDTO;
+	}
+
+	public void setProyectoDTO(ProyectoDTO proyectoDTO) {
+		this.proyectoDTO = proyectoDTO;
+	}
+
+	public int getStatusVista() {
+		return statusVista;
+	}
+
+	public void setStatusVista(int statusVista) {
+		this.statusVista = statusVista;
+	}
+
+	public int getEstatusRegistro() {
+		return estatusRegistro;
+	}
+
+	public void setEstatusRegistro(int estatusRegistro) {
+		this.estatusRegistro = estatusRegistro;
+	}
 }

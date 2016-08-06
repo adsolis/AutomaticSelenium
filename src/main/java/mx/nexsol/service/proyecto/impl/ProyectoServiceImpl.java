@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
+import mx.nexsol.dao.proyecto.FuncionalidadDAO;
 import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +24,9 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 	
 	@Autowired
 	private ProyectoDAO proyectoDAO;
+
+	@Autowired
+	FuncionalidadDAO funcionalidadDAO;
 	
 	@Autowired
 	private FuncionalidadServiceImpl proyectoFuncionalidadServiceImpl;
@@ -102,7 +105,7 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		Proyecto proyecto = proyectoDAO.recuperarRegistro(proyectoDTO.getId());
 		try {
 			funcionalidades =
-					proyectoFuncionalidadServiceImpl.guardarCambiosFuncionalidades(funcionalidadesDTO, proyecto);
+					proyectoFuncionalidadServiceImpl.guardarFuncionalidades(funcionalidadesDTO, proyecto);
 			proyecto.setFuncionalidad(funcionalidades);
 			proyecto = proyectoDAO.editarRegistro(proyecto);
 			proyectoDTO = mapearProyectoEntityADto(proyecto);
@@ -116,6 +119,34 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		}
 		
 		return proyectoDTO;
+	}
+
+	public ProyectoDTO quitarFuncionalidad(FuncionalidadDTO funcionalidadDTO, ProyectoDTO proyectoDTO) {
+
+		if(funcionalidadDTO.getEstatusRegistro()==4)
+			eliminarFuncionalidad(funcionalidadDTO, proyectoDTO);
+		else if(funcionalidadDTO.getEstatusRegistro()==3)
+			modificarFuncionalidad(funcionalidadDTO);
+
+		return proyectoDTO;
+	}
+
+	private void eliminarFuncionalidad(FuncionalidadDTO funcionalidadDTO, ProyectoDTO proyectoDTO) {
+		Funcionalidad funcionalidad = null;
+		boolean resultado = true;
+		try {
+			Proyecto proyecto = proyectoDAO.recuperarRegistro(proyectoDTO.getId());
+			funcionalidad = funcionalidadDAO.recuperarRegistro(funcionalidadDTO.getId());
+			proyecto.getFuncionalidad().remove(funcionalidad);
+			proyectoDAO.editarRegistro(proyecto);
+			resultado = funcionalidadDAO.borrarRegistro(funcionalidad);
+		} catch(Exception e) {
+
+		}
+	}
+
+	private void modificarFuncionalidad(FuncionalidadDTO funcionalidadDTO) {
+		funcionalidadDTO = proyectoFuncionalidadServiceImpl.editarFuncionalidad(funcionalidadDTO);
 	}
 	
 	public ProyectoDTO mapearProyectoEntityADto(Proyecto proyecto) {
@@ -165,5 +196,13 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 
 	public void setProyectoDAO(ProyectoDAO proyectoDAO) {
 		this.proyectoDAO = proyectoDAO;
+	}
+
+	public FuncionalidadDAO getFuncionalidadDAO() {
+		return funcionalidadDAO;
+	}
+
+	public void setFuncionalidadDAO(FuncionalidadDAO funcionalidadDAO) {
+		this.funcionalidadDAO = funcionalidadDAO;
 	}
 }

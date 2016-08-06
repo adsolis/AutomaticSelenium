@@ -107,7 +107,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
 	@Override
 	@Transactional
-	public T borrarRegistro(T entity) throws Exception {
+	public boolean borrarRegistro(T entity) throws Exception {
 		Session session = getSession();
         try {
             session.getTransaction().begin();
@@ -123,7 +123,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 			session.clear();
 			session.close();
 		}
-        return entity;
+        return true;
 	}
 
 	@Override

@@ -8,11 +8,13 @@ import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.service.proyecto.impl.CasoPruebaServiceImpl;
 import mx.nexsol.service.proyecto.impl.FuncionalidadServiceImpl;
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -59,13 +61,14 @@ public class FuncionalidadBean implements Serializable {
     public void init() {
         HttpServletRequest request =
                 (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
-
+        HttpSession session = request.getSession();
         if(request.getParameter("id")!=null) {
             Long id = Long.parseLong(request.getParameter("id"));
             try {
                 funcionalidadDTO = funcionalidadService.recuperarFuncionalidad(id);
                 idProyecto = Long.parseLong(request.getParameter("idProyecto"));
                 nombreProyecto = request.getParameter("nombreProyecto");
+                session.setAttribute("funcionalidadDTO", funcionalidadDTO);
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -76,12 +79,23 @@ public class FuncionalidadBean implements Serializable {
         HttpServletRequest request =
                 (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session = request.getSession();
+
         casosPruebaDTO = (List<CasoPruebaDTO>)session.getAttribute("listaCasosPrueba");
 
-        if(casosPruebaDTO==null)
-            casosPruebaDTO = new ArrayList<CasoPruebaDTO>();
+        if((casoPruebaDTO.getEstimacionEntrada()+casoPruebaDTO.getEstimacionSalida())<=
+                ((FuncionalidadDTO)session.getAttribute("funcionalidadDTO")).getComplejidad().getLimiteTiempoMiutos()) {
+            if(casosPruebaDTO==null)
+                casosPruebaDTO = new ArrayList<CasoPruebaDTO>();
 
-        casosPruebaDTO.add(casoPruebaDTO);
+            casosPruebaDTO.add(casoPruebaDTO);
+        } else {
+            FacesContext.getCurrentInstance().addMessage
+                    (null, new FacesMessage
+                            (FacesMessage.SEVERITY_ERROR,"Error",
+                                    "El tiempo estimacion del caso de prueba supera el tiempo establecido para complejidad de esta funcionalidad"));
+            RequestContext.getCurrentInstance().execute("errorDialog.show()");
+        }
+
         session.setAttribute("listaCasosPrueba", casosPruebaDTO);
     }
 
@@ -90,7 +104,7 @@ public class FuncionalidadBean implements Serializable {
                 (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session = request.getSession();
         casosPruebaDTO = (List<CasoPruebaDTO>)session.getAttribute("listaCasosPrueba");
-        funcionalidadDTO = funcionalidadService.guardarCasosPrueba(casosPruebaDTO, funcionalidadDTO);
+        funcionalidadDTO = funcionalidadService.guardarCasosPrueba(casosPruebaDTO, (FuncionalidadDTO)session.getAttribute("funcionalidadDTO"));
     }
 
 }
