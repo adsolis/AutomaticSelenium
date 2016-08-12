@@ -57,7 +57,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         finally {
 			session.clear();
-			session.close();
+			//session.close();
 		}
         return entity;
 	}
@@ -77,7 +77,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 		}
 		finally {
 			session.clear();
-			session.close();
+			//session.close();
 		}
 		return entity;
 	}
@@ -100,7 +100,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         finally {
 			session.clear();
-			session.close();
+			//session.close();
 		}
         return entity;
 	}
@@ -121,7 +121,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         finally {
 			session.clear();
-			session.close();
+			//session.close();
 		}
         return true;
 	}
@@ -145,7 +145,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         finally {
 			session.clear();
-			session.close();
+			//session.close();
 		}
         return list;
 	}

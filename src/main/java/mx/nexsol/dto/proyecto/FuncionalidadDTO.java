@@ -1,12 +1,11 @@
 package mx.nexsol.dto.proyecto;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import lombok.Data;
 import mx.nexsol.dto.catalogos.CatComplejidadDTO;
 
 @Component
@@ -31,6 +30,8 @@ public class FuncionalidadDTO implements Serializable {
 	private int statusVista;
 
 	private int estatusRegistro;
+
+	private List<CasoPruebaDTO> casosPrueba;
 
 
 	public long getId() {
@@ -87,5 +88,13 @@ public class FuncionalidadDTO implements Serializable {
 
 	public void setEstatusRegistro(int estatusRegistro) {
 		this.estatusRegistro = estatusRegistro;
+	}
+
+	public List<CasoPruebaDTO> getCasosPrueba() {
+		return casosPrueba;
+	}
+
+	public void setCasosPrueba(List<CasoPruebaDTO> casosPrueba) {
+		this.casosPrueba = casosPrueba;
 	}
 }

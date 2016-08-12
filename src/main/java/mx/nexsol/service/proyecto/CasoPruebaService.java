@@ -4,6 +4,7 @@ import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ironhide on 22/06/16.
@@ -12,6 +13,6 @@ public interface CasoPruebaService {
 
     List<CasoPruebaDTO> recuperarCasosPrueba();
 
-    List<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO) throws Exception;
+    Set<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO) throws Exception;
 
 }

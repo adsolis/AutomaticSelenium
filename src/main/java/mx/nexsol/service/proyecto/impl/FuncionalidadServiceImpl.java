@@ -3,6 +3,7 @@ package mx.nexsol.service.proyecto.impl;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import mx.nexsol.dao.catalogos.impl.CatComplejidadDAOImpl;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
@@ -16,6 +17,8 @@ import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.entity.proyectos.Funcionalidad;
 import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.FuncionalidadService;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FuncionalidadServiceImpl implements FuncionalidadService, Serializable {
@@ -71,17 +74,23 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 	}
 
 	@Override
+	//@Transactional(propagation = Propagation.REQUIRED)
 	public FuncionalidadDTO recuperarFuncionalidad(long id) throws Exception {
 		FuncionalidadDTO funcionalidadDTO = null;
 		Funcionalidad funcionalidad = funcionalidadDAO.recuperarRegistro(id);
 		funcionalidadDTO = mapearEntityADto(funcionalidad);
 		funcionalidadDTO.setComplejidad(CatComplejidadServiceImpl.mapearEntityADto(funcionalidad.getComplejidad()));
-
+		if(funcionalidad.getCasosPrueba()!=null && !funcionalidad.getCasosPrueba().isEmpty()) {
+			funcionalidadDTO.setCasosPrueba(new ArrayList<CasoPruebaDTO>());
+			for(CasoPrueba casoPrueba: funcionalidad.getCasosPrueba()) {
+				funcionalidadDTO.getCasosPrueba().add(CasoPruebaServiceImpl.mapearEntityADto(casoPrueba));
+			}
+		}
 		return funcionalidadDTO;
 	}
 
 	public FuncionalidadDTO guardarCasosPrueba(List<CasoPruebaDTO> casosPruebaDTO, FuncionalidadDTO funcionalidadDTO) {
-		List<CasoPrueba> casosPrueba = null;
+		Set<CasoPrueba> casosPrueba = null;
 		try {
 			Funcionalidad funcionalidad = funcionalidadDAO.recuperarRegistro(funcionalidadDTO.getId());
 			casosPrueba = casoPruebaService.guardarCasoPrueba(casosPruebaDTO);
@@ -127,6 +136,12 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 		funcionalidadDTO.setId(funcionalidad.getId());
 		funcionalidadDTO.setNombreFuncionalidad(funcionalidad.getNombre());
 		funcionalidadDTO.setIdentificador(funcionalidad.getIdentificador());
+		/*if(funcionalidad.getCasosPrueba()!=null && !funcionalidad.getCasosPrueba().isEmpty()) {
+			funcionalidadDTO.setCasosPrueba(new ArrayList<CasoPruebaDTO>());
+			for (CasoPrueba casoPrueba: funcionalidad.getCasosPrueba()) {
+				funcionalidadDTO.getCasosPrueba().add(CasoPruebaServiceImpl.mapearEntityADto(casoPrueba));
+			}
+		}*/
 		//funcionalidadDTO.setProyectoDTO(proyectoService.mapearProyectoEntityADto(funcionalidad.getProyecto()));
 
 		funcionalidad = null;

@@ -69,6 +69,8 @@ public class FuncionalidadBean implements Serializable {
                 idProyecto = Long.parseLong(request.getParameter("idProyecto"));
                 nombreProyecto = request.getParameter("nombreProyecto");
                 session.setAttribute("funcionalidadDTO", funcionalidadDTO);
+                if(funcionalidadDTO.getCasosPrueba()!=null && !funcionalidadDTO.getCasosPrueba().isEmpty())
+                    casosPruebaDTO = funcionalidadDTO.getCasosPrueba();
             }catch (Exception e) {
                 e.printStackTrace();
             }

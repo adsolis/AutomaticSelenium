@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by ironhide on 23/06/16.
@@ -26,8 +28,8 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
         return null;
     }
 
-    public List<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO) throws Exception {
-        List<CasoPrueba> casosPrueba = new ArrayList<CasoPrueba>();
+    public Set<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO) throws Exception {
+        Set<CasoPrueba> casosPrueba = new HashSet<CasoPrueba>();
         for(CasoPruebaDTO casoPruebaDTO: casosPruebaDTO) {
             casosPrueba.add(mapearDtoAEntity(casoPruebaDTO));
         }
@@ -47,7 +49,7 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
         return casoPrueba;
     }
 
-    public CasoPruebaDTO mapearEntityADto(CasoPrueba casoPrueba) {
+    public static CasoPruebaDTO mapearEntityADto(CasoPrueba casoPrueba) {
         CasoPruebaDTO casoPruebaDTO = new CasoPruebaDTO();
 
         casoPruebaDTO.setId(casoPrueba.getId());

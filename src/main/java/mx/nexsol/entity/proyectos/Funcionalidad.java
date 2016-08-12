@@ -2,6 +2,7 @@ package mx.nexsol.entity.proyectos;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -40,8 +41,8 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 	@JoinColumn(name = "PROYECTO")
 	private Proyecto proyecto;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "funcionalidad")
-	private List<CasoPrueba> casosPrueba;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "funcionalidad")
+	private Set<CasoPrueba> casosPrueba;
 
 	public String getNombre() {
 		return nombre;
@@ -83,11 +84,11 @@ public class Funcionalidad extends SequenceGenerator implements Serializable {
 		this.proyecto = proyecto;
 	}
 
-	public List<CasoPrueba> getCasosPrueba() {
+	public Set<CasoPrueba> getCasosPrueba() {
 		return casosPrueba;
 	}
 
-	public void setCasosPrueba(List<CasoPrueba> casosPrueba) {
+	public void setCasosPrueba(Set<CasoPrueba> casosPrueba) {
 		this.casosPrueba = casosPrueba;
 	}
 }
