@@ -62,6 +62,7 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
         UsuarioRol usuarioRol = null;
         UsuarioRespuestaDTO usuarioRespuestaDTO = new UsuarioRespuestaDTO();
         try {
+            usuario.setEnabled(true);
             usuario = usuarioDAO.guardarRegistro(usuario);
             usuarioRespuestaDTO.usuarioDTO = mapearEntityADto(usuario);
             usuarioRol = new UsuarioRol();

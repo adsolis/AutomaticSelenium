@@ -17,8 +17,6 @@ import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.entity.proyectos.Funcionalidad;
 import mx.nexsol.entity.proyectos.Proyecto;
 import mx.nexsol.service.proyecto.FuncionalidadService;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class FuncionalidadServiceImpl implements FuncionalidadService, Serializable {

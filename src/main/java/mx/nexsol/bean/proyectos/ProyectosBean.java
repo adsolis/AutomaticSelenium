@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @ManagedBean(name = "proyectosBean")
@@ -35,7 +37,12 @@ public class ProyectosBean implements Serializable{
 
 	@PostConstruct
 	public void init() {
+		HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+		if(request.isUserInRole("ROLE_LIDER"))
+
+
 		proyectos = proyectoService.consultarListaProyectos();
+
 	}
 
 }
