@@ -7,6 +7,7 @@ import java.util.List;
 import mx.nexsol.dao.comun.UsuarioDAO;
 import mx.nexsol.dao.proyecto.FuncionalidadDAO;
 import mx.nexsol.dto.comun.UsuarioDTO;
+import mx.nexsol.entity.comun.Usuario;
 import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,11 +60,11 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 		return proyectos;
 	}
 
-	public List<ProyectoDTO> listarProyectosUsuario(UsuarioDTO usuarioDTO) {
+	public List<ProyectoDTO> listarProyectosUsuario(String usuario) {
 		List<Proyecto> proyectosEntity = null;
 		List<ProyectoDTO> proyectos = null;
 		try {
-			proyectosEntity = proyectoDAO.recuperarProyectosUsuario(usuarioDAO.recuperarRegistro(usuarioDTO.getId()));
+			proyectosEntity = proyectoDAO.recuperarProyectosUsuario(usuarioDAO.recuperarUsuarioPorUserName(usuario));
 			if(proyectosEntity != null && !proyectosEntity.isEmpty()) {
 				proyectos = new ArrayList<ProyectoDTO>();
 				for (Proyecto proyecto: proyectosEntity) {

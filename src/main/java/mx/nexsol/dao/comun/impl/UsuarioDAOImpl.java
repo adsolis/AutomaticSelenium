@@ -20,6 +20,24 @@ import java.util.Map;
 @Repository
 public class UsuarioDAOImpl extends GenericDAOImpl<Usuario> implements UsuarioDAO, Serializable {
 
+    public Usuario recuperarUsuarioPorUserName(String userName) throws Exception {
+        Usuario usuario = null;
+        Session session = getSession();
+        Criteria criteria = null;
+        Map<String, String> restricciones = new HashMap<String, String>();
+        try {
+            restricciones.put("username", userName);
+            criteria = session.createCriteria(Usuario.class);
+            session.getTransaction();
+            criteria.add(Restrictions.allEq(restricciones));
+            usuario = (Usuario)criteria.list().get(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return usuario;
+    }
+
     public List<Usuario> recuperarUsuariosPorEmpresa(Empresa empresa) throws Exception {
         List<Usuario> usuarios = null;
         Session session = getSession();

@@ -12,4 +12,6 @@ public interface UsuarioDAO extends GenericDAO<Usuario> {
 
     List<Usuario> recuperarUsuariosPorEmpresa(Empresa empresa) throws Exception;
 
+    Usuario recuperarUsuarioPorUserName(String userName) throws Exception;
+
 }

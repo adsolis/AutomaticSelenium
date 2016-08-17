@@ -2,7 +2,6 @@ package mx.nexsol.bean.seguridad;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,10 +12,7 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.servlet.ServletException;
 
-import mx.nexsol.dto.comun.UsuarioDTO;
-import mx.nexsol.response.UsuarioRespuestaDTO;
-import mx.nexsol.service.comun.impl.UsuarioServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

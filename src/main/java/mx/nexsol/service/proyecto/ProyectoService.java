@@ -5,13 +5,14 @@ import java.util.List;
 import mx.nexsol.dto.comun.UsuarioDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
+import mx.nexsol.entity.comun.Usuario;
 import mx.nexsol.request.FuncionalidadRequestDTO;
 
 public interface ProyectoService {
 	
 	List<ProyectoDTO> consultarListaProyectos();
 
-	List<ProyectoDTO> listarProyectosUsuario(UsuarioDTO usuarioDTO);
+	List<ProyectoDTO> listarProyectosUsuario(String usuarioName);
 	
 	ProyectoDTO guardarProyecto(ProyectoDTO proyecto);
 	

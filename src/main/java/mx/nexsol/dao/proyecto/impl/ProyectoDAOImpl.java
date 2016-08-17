@@ -29,7 +29,7 @@ public class ProyectoDAOImpl extends GenericDAOImpl<Proyecto> implements Proyect
             session.getTransaction().begin();
             criteria= session.createCriteria(Proyecto.class);
             criteria.addOrder(Order.asc("id"));
-            filtro.put("USUARIO", usuario);
+            filtro.put("usuario", usuario);
             criteria.add(Restrictions.allEq(filtro));
             listaProyectos = criteria.list();
         } catch (Exception e) {
