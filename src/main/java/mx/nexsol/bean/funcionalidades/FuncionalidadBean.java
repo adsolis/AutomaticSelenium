@@ -31,7 +31,6 @@ import java.io.Serializable;
 @ManagedBean(name = "funcionalidadBean")
 @Scope(value = "request")
 @ViewScoped
-@Data
 public class FuncionalidadBean implements Serializable {
 
     @Autowired
@@ -109,4 +108,59 @@ public class FuncionalidadBean implements Serializable {
         funcionalidadDTO = funcionalidadService.guardarCasosPrueba(casosPruebaDTO, (FuncionalidadDTO)session.getAttribute("funcionalidadDTO"));
     }
 
+    public FuncionalidadDTO getFuncionalidadDTO() {
+        return funcionalidadDTO;
+    }
+
+    public void setFuncionalidadDTO(FuncionalidadDTO funcionalidadDTO) {
+        this.funcionalidadDTO = funcionalidadDTO;
+    }
+
+    public List<CasoPruebaDTO> getCasosPruebaDTO() {
+        return casosPruebaDTO;
+    }
+
+    public void setCasosPruebaDTO(List<CasoPruebaDTO> casosPruebaDTO) {
+        this.casosPruebaDTO = casosPruebaDTO;
+    }
+
+    public CasoPruebaDTO getCasoPruebaDTO() {
+        return casoPruebaDTO;
+    }
+
+    public void setCasoPruebaDTO(CasoPruebaDTO casoPruebaDTO) {
+        this.casoPruebaDTO = casoPruebaDTO;
+    }
+
+    public FuncionalidadServiceImpl getFuncionalidadService() {
+        return funcionalidadService;
+    }
+
+    public void setFuncionalidadService(FuncionalidadServiceImpl funcionalidadService) {
+        this.funcionalidadService = funcionalidadService;
+    }
+
+    public CasoPruebaServiceImpl getCasoPruebaService() {
+        return casoPruebaService;
+    }
+
+    public void setCasoPruebaService(CasoPruebaServiceImpl casoPruebaService) {
+        this.casoPruebaService = casoPruebaService;
+    }
+
+    public long getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(long idProyecto) {
+        this.idProyecto = idProyecto;
+    }
+
+    public String getNombreProyecto() {
+        return nombreProyecto;
+    }
+
+    public void setNombreProyecto(String nombreProyecto) {
+        this.nombreProyecto = nombreProyecto;
+    }
 }

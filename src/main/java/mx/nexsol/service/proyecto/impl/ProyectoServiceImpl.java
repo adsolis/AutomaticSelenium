@@ -44,6 +44,7 @@ public class ProyectoServiceImpl implements ProyectoService, Serializable {
 	public List<ProyectoDTO> consultarListaProyectos() {
 		List<Proyecto> proyectosEntity = null;
 		List<ProyectoDTO> proyectos = null;
+
 		try {
 			proyectosEntity = proyectoDAO.listarRegistros();
 			

@@ -7,6 +7,8 @@ import javax.persistence.*;
 
 import mx.nexsol.entity.comun.SequenceGenerator;
 import mx.nexsol.entity.comun.Usuario;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "PROYECTO")
@@ -41,7 +43,8 @@ public class Proyecto extends SequenceGenerator implements Serializable {
 	@JoinColumn(name = "USUARIO")
 	private Usuario usuario;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "proyecto")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "proyecto", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	private List<Funcionalidad> funcionalidad;
 	
 
