@@ -10,6 +10,7 @@ import mx.nexsol.response.UsuarioRespuestaDTO;
 import mx.nexsol.service.comun.UsuarioService;
 import mx.nexsol.util.ConstantesComunes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -62,6 +63,7 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
         UsuarioRol usuarioRol = null;
         UsuarioRespuestaDTO usuarioRespuestaDTO = new UsuarioRespuestaDTO();
         try {
+            usuario.setContrasenia(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
             usuario.setEnabled(true);
             usuario = usuarioDAO.guardarRegistro(usuario);
             usuarioRespuestaDTO.usuarioDTO = mapearEntityADto(usuario);

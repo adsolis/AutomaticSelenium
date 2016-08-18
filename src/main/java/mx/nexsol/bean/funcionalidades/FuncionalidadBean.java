@@ -3,7 +3,6 @@ package mx.nexsol.bean.funcionalidades;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.Data;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.dto.proyecto.FuncionalidadDTO;
 import mx.nexsol.service.proyecto.impl.CasoPruebaServiceImpl;
