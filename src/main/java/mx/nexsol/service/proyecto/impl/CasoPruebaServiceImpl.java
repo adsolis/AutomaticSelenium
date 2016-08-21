@@ -4,6 +4,7 @@ import lombok.Data;
 import mx.nexsol.dao.proyecto.CasoPruebaDAO;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
+import mx.nexsol.entity.proyectos.Funcionalidad;
 import mx.nexsol.service.proyecto.CasoPruebaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,13 +29,14 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
         return null;
     }
 
-    public Set<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO) throws Exception {
+    public Set<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO, Funcionalidad funcionalidad) throws Exception {
         Set<CasoPrueba> casosPrueba = new HashSet<CasoPrueba>();
         for(CasoPruebaDTO casoPruebaDTO: casosPruebaDTO) {
             casosPrueba.add(mapearDtoAEntity(casoPruebaDTO));
         }
         casosPruebaDTO.clear();
         for(CasoPrueba casoPrueba: casosPrueba) {
+            casoPrueba.setFuncionalidad(funcionalidad);
             casoPrueba = casoPruebaDAO.guardarRegistro(casoPrueba);
         }
         return casosPrueba;

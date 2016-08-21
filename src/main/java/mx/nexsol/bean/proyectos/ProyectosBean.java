@@ -6,9 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 
-import lombok.Data;
 import mx.nexsol.dto.proyecto.ProyectoDTO;
-import mx.nexsol.entity.comun.Usuario;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -22,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @ManagedBean(name = "proyectosBean")
 @Scope(value = "request")
-@Data
 public class ProyectosBean implements Serializable{
 	
 	/**
@@ -35,7 +32,6 @@ public class ProyectosBean implements Serializable{
 	
 	@Autowired
 	private ProyectoServiceImpl proyectoService;
-	
 	@ManagedProperty(value="#{contexto}")
 	private String contexto;
 
@@ -51,4 +47,27 @@ public class ProyectosBean implements Serializable{
 
 	}
 
+	public List<ProyectoDTO> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(List<ProyectoDTO> proyectos) {
+		this.proyectos = proyectos;
+	}
+
+	public ProyectoServiceImpl getProyectoService() {
+		return proyectoService;
+	}
+
+	public void setProyectoService(ProyectoServiceImpl proyectoService) {
+		this.proyectoService = proyectoService;
+	}
+
+	public String getContexto() {
+		return contexto;
+	}
+
+	public void setContexto(String contexto) {
+		this.contexto = contexto;
+	}
 }

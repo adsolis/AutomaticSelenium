@@ -96,6 +96,7 @@
                     <p:commandButton value="Agregar"
                                      update=":panelCasosPrueba"
                                      oncomplete="PF('dialogCasoPrueba').hide();"
+                                     onerror="alert('El tiempo de estimacion no puede superar los '#{funcionalidadBean.funcionalidadDTO.complejidad.limiteTiempoMiutos}' minutos)"
                                      action="#{funcionalidadBean.generarListaCasosPrueba}"
                                      icon="ui-icon-check"
                                      styleClass="btn btn-primary"/>

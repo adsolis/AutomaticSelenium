@@ -91,7 +91,7 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 		Set<CasoPrueba> casosPrueba = null;
 		try {
 			Funcionalidad funcionalidad = funcionalidadDAO.recuperarRegistro(funcionalidadDTO.getId());
-			casosPrueba = casoPruebaService.guardarCasoPrueba(casosPruebaDTO);
+			casosPrueba = casoPruebaService.guardarCasoPrueba(casosPruebaDTO, funcionalidad);
 			funcionalidad.setCasosPrueba(casosPrueba);
 			funcionalidad = funcionalidadDAO.editarRegistro(funcionalidad);
 			funcionalidadDTO = mapearEntityADto(funcionalidad);

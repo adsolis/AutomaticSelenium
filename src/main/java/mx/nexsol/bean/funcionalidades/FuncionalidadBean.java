@@ -19,6 +19,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 
@@ -80,6 +81,8 @@ public class FuncionalidadBean implements Serializable {
                 (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
         HttpSession session = request.getSession();
 
+        HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
         casosPruebaDTO = (List<CasoPruebaDTO>)session.getAttribute("listaCasosPrueba");
 
         if((casoPruebaDTO.getEstimacionEntrada()+casoPruebaDTO.getEstimacionSalida())<=
@@ -89,11 +92,7 @@ public class FuncionalidadBean implements Serializable {
 
             casosPruebaDTO.add(casoPruebaDTO);
         } else {
-            FacesContext.getCurrentInstance().addMessage
-                    (null, new FacesMessage
-                            (FacesMessage.SEVERITY_ERROR,"Error",
-                                    "El tiempo estimacion del caso de prueba supera el tiempo establecido para complejidad de esta funcionalidad"));
-            RequestContext.getCurrentInstance().execute("errorDialog.show()");
+            response.setStatus(500);
         }
 
         session.setAttribute("listaCasosPrueba", casosPruebaDTO);
