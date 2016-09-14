@@ -72,7 +72,6 @@ public class FuncionalidadServiceImpl implements FuncionalidadService, Serializa
 	}
 
 	@Override
-	//@Transactional(propagation = Propagation.REQUIRED)
 	public FuncionalidadDTO recuperarFuncionalidad(long id) throws Exception {
 		FuncionalidadDTO funcionalidadDTO = null;
 		Funcionalidad funcionalidad = funcionalidadDAO.recuperarRegistro(id);

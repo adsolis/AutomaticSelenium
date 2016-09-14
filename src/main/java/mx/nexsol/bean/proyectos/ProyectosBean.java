@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedProperty;
 
 import mx.nexsol.dto.proyecto.ProyectoDTO;
 import mx.nexsol.service.proyecto.impl.ProyectoServiceImpl;
+import mx.nexsol.util.CorreoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
@@ -44,6 +45,8 @@ public class ProyectosBean implements Serializable{
 			proyectos = proyectoService.listarProyectosUsuario(usuario.getName());
 		else
 			proyectos = proyectoService.consultarListaProyectos();
+		CorreoService correoService = new CorreoService();
+		correoService.enviaCorreoContrasenia();
 
 	}
 
