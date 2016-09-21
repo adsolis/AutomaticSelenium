@@ -1,21 +1,23 @@
 package mx.nexsol.util;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Properties;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
  * Created by ironhide on 24/08/16.
  */
+
+@Service
 public class CorreoService {
 
-
-    public boolean enviaCorreoContrasenia() {
+    public boolean enviaCorreoContrasenia(String contrasena, String usuario) {
+        System.out.println("Entro al service de correo");
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host","smtp.gmail.com");
         properties.put("mail.transport.protocol", "smtp");
@@ -31,18 +33,17 @@ public class CorreoService {
             mensaje.setSubject("Nuevo usuario");
             mensaje.setFrom(new InternetAddress("alexalbiazulra@gmail.com", "Alejandro Diaz"));
             mensaje.addRecipients(Message.RecipientType.TO, new InternetAddress[]{new InternetAddress("alexalbiazulra@gmail.com")});
-            String mensageCuerpo = "se envia correo de prueba";
+            String mensageCuerpo = "Se ha generado una nueva cuenta. Usuario: " + usuario + " Contrasena: " + contrasena;
             mensaje.setText(mensageCuerpo);
 
             Transport transport = session.getTransport("smtp");
             transport.connect("smtp.gmail.com", "alexalbiazulra@gmail.com", "adsolis7");
             transport.sendMessage(mensaje, mensaje.getAllRecipients());
             transport.close();
-
+            System.out.println("Se supone que ya lo mando");
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return false;
     }
 

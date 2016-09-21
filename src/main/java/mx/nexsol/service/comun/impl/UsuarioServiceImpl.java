@@ -9,6 +9,8 @@ import mx.nexsol.entity.comun.UsuarioRol;
 import mx.nexsol.response.UsuarioRespuestaDTO;
 import mx.nexsol.service.comun.UsuarioService;
 import mx.nexsol.util.ConstantesComunes;
+import mx.nexsol.util.CorreoService;
+import mx.nexsol.util.CriptoUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,12 @@ import java.util.List;
 @Service("usuarioService")
 @Data
 public class UsuarioServiceImpl implements UsuarioService, Serializable {
+
+    @Autowired
+    private CriptoUtils criptoUtils;
+
+    @Autowired
+    private CorreoService correoService;
 
     @Autowired
     private UsuarioDAO usuarioDAO;
@@ -63,17 +71,20 @@ public class UsuarioServiceImpl implements UsuarioService, Serializable {
         UsuarioRol usuarioRol = null;
         UsuarioRespuestaDTO usuarioRespuestaDTO = new UsuarioRespuestaDTO();
         try {
-            usuario.setContrasenia(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
+            String contrasena = criptoUtils.generarContrasenia(8);
+            usuario.setContrasenia(new BCryptPasswordEncoder().encode(contrasena));
             usuario.setEnabled(true);
             usuario = usuarioDAO.guardarRegistro(usuario);
             usuarioRespuestaDTO.usuarioDTO = mapearEntityADto(usuario);
             usuarioRol = new UsuarioRol();
             usuarioRol.setRol(usuarioDTO.getRol());
             usuarioRol.setUsuario(usuarioDTO.getUsername());
-            usuarioRol = usuarioRolDAO.guardarRegistro(usuarioRol);
+            usuarioRolDAO.guardarRegistro(usuarioRol);
             usuarioRespuestaDTO.usuarioDTO.setRol(usuarioDTO.getRol());
             usuarioRespuestaDTO.codigoRespuesta = ConstantesComunes.CODIGO_EXITO;
             usuarioRespuestaDTO.mensajeRespuesta = ConstantesComunes.MENSAJE_EXITO;
+            System.out.println("El servicio de correo: " + correoService);
+            correoService.enviaCorreoContrasenia(contrasena,usuarioDTO.getUsername());
             usuarioRol = null;
             usuario = null;
             usuarioDTO = null;

@@ -45,8 +45,6 @@ public class ProyectosBean implements Serializable{
 			proyectos = proyectoService.listarProyectosUsuario(usuario.getName());
 		else
 			proyectos = proyectoService.consultarListaProyectos();
-		CorreoService correoService = new CorreoService();
-		correoService.enviaCorreoContrasenia();
 
 	}
 
