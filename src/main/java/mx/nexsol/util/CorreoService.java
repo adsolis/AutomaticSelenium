@@ -2,6 +2,7 @@ package mx.nexsol.util;
 
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.Session;
@@ -14,7 +15,7 @@ import javax.mail.internet.MimeMessage;
  */
 
 @Service
-public class CorreoService {
+public class CorreoService implements Serializable {
 
     public boolean enviaCorreoContrasenia(String contrasena, String usuario) {
         System.out.println("Entro al service de correo");
@@ -24,7 +25,7 @@ public class CorreoService {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        properties.put("mail.smtp.socketFactory.fallback", "false");
+        properties.put("mail.smtp.socketFacto   ry.fallback", "false");
 
         Session session = Session.getInstance(properties, null);
         Message mensaje = new MimeMessage(session);

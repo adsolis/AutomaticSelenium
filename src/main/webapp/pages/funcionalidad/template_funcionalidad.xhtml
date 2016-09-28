@@ -70,7 +70,8 @@
                       styleClass="dialog dialog2"
                       draggable="false" resizable="false" showEffect="fade"
                       hideEffect="fade">
-                <h:form>
+                <p:messages id="errorCasoPrueba" showDetail="true" autoUpdate="true" closable="true"/>
+                <h:form>º
                     <h:panelGrid columns="4" width="100%">
                         <h:outputLabel value="Nombre del Caso de Prueba *"
                                        for="nombreFuncionalidad" />
@@ -95,8 +96,6 @@
 
                     <p:commandButton value="Agregar"
                                      update=":panelCasosPrueba"
-                                     oncomplete="PF('dialogCasoPrueba').hide();"
-                                     onerror="alert('El tiempo de estimacion no puede superar los '#{funcionalidadBean.funcionalidadDTO.complejidad.limiteTiempoMiutos}' minutos)"
                                      action="#{funcionalidadBean.generarListaCasosPrueba}"
                                      icon="ui-icon-check"
                                      styleClass="btn btn-primary"/>

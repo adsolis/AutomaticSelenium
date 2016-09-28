@@ -1,5 +1,6 @@
 package mx.nexsol.util;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 
 import java.util.regex.Pattern;
@@ -7,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Created by ironhide on 14/09/16.
  */
-public class Validador {
+public class Validador implements Serializable {
 
     String isValidaContrasenia(String contrasenia) {
         String mensajeError = null;

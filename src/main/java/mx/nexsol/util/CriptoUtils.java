@@ -2,6 +2,7 @@ package mx.nexsol.util;
 
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Random;
  */
 
 @Service
-public class CriptoUtils {
+public class CriptoUtils implements Serializable {
 
     private Validador validador = new Validador();
 

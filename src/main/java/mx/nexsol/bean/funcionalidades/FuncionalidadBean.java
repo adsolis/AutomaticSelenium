@@ -91,8 +91,10 @@ public class FuncionalidadBean implements Serializable {
                 casosPruebaDTO = new ArrayList<CasoPruebaDTO>();
 
             casosPruebaDTO.add(casoPruebaDTO);
+            RequestContext context = RequestContext.getCurrentInstance();
+            context.execute("PF('dialogCasoPrueba').hide();");
         } else {
-            response.setStatus(500);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "El tiempo de estimacion no puede superar los" + String.valueOf(((FuncionalidadDTO) session.getAttribute("funcionalidadDTO")).getComplejidad().getLimiteTiempoMiutos()) + " ."));
         }
 
         session.setAttribute("listaCasosPrueba", casosPruebaDTO);
