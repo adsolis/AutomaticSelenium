@@ -36,6 +36,8 @@ public class CasoPruebaDTO implements Serializable {
 
 	private int estimacionSalida;
 
+	private boolean casoPruebaNuevo;
+
 	public long getId() {
 		return id;
 	}
@@ -106,5 +108,13 @@ public class CasoPruebaDTO implements Serializable {
 
 	public void setEstimacionSalida(int estimacionSalida) {
 		this.estimacionSalida = estimacionSalida;
+	}
+
+	public boolean isCasoPruebaNuevo() {
+		return casoPruebaNuevo;
+	}
+
+	public void setCasoPruebaNuevo(boolean casoPruebaNuevo) {
+		this.casoPruebaNuevo = casoPruebaNuevo;
 	}
 }

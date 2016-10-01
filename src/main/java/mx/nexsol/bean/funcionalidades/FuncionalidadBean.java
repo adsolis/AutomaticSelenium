@@ -70,6 +70,7 @@ public class FuncionalidadBean implements Serializable {
                 session.setAttribute("funcionalidadDTO", funcionalidadDTO);
                 if(funcionalidadDTO.getCasosPrueba()!=null && !funcionalidadDTO.getCasosPrueba().isEmpty())
                     casosPruebaDTO = funcionalidadDTO.getCasosPrueba();
+                    session.setAttribute("listaCasosPrueba", casosPruebaDTO);
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -90,6 +91,7 @@ public class FuncionalidadBean implements Serializable {
             if(casosPruebaDTO==null)
                 casosPruebaDTO = new ArrayList<CasoPruebaDTO>();
 
+            casoPruebaDTO.setCasoPruebaNuevo(true);
             casosPruebaDTO.add(casoPruebaDTO);
             RequestContext context = RequestContext.getCurrentInstance();
             context.execute("PF('dialogCasoPrueba').hide();");

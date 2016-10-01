@@ -32,7 +32,8 @@ public class CasoPruebaServiceImpl implements CasoPruebaService, Serializable {
     public Set<CasoPrueba> guardarCasoPrueba(List<CasoPruebaDTO> casosPruebaDTO, Funcionalidad funcionalidad) throws Exception {
         Set<CasoPrueba> casosPrueba = new HashSet<CasoPrueba>();
         for(CasoPruebaDTO casoPruebaDTO: casosPruebaDTO) {
-            casosPrueba.add(mapearDtoAEntity(casoPruebaDTO));
+            if(casoPruebaDTO.isCasoPruebaNuevo())
+                casosPrueba.add(mapearDtoAEntity(casoPruebaDTO));
         }
         casosPruebaDTO.clear();
         for(CasoPrueba casoPrueba: casosPrueba) {
