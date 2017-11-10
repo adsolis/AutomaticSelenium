@@ -39,7 +39,7 @@ public class ProyectoBean implements Serializable {
 
 	@Autowired
 	@ManagedProperty(value="#{proyectoDTO}")
-	private ProyectoDTO proyectoDTO;
+	private ProysctoDTO proyectoDTO;
 
 	@ManagedProperty(value = "#{banderaFuncionalidadesModificadas}")
 	private boolean banderaFuncionalidadesModificadas;

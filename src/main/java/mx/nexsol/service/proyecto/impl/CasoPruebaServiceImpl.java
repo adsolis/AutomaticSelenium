@@ -1,6 +1,5 @@
 package mx.nexsol.service.proyecto.impl;
 
-import lombok.Data;
 import mx.nexsol.dao.proyecto.CasoPruebaDAO;
 import mx.nexsol.dto.proyecto.CasoPruebaDTO;
 import mx.nexsol.entity.proyectos.CasoPrueba;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
